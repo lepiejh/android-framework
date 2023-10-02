@@ -1,0 +1,14 @@
+<resources>
+    <declare-styleable name="LargeTouchableAreaView">
+        <attr name="addition" format="dimension" />
+        <attr name="additionBottom" format="dimension" />
+        <attr name="additionLeft" format="dimension" />
+        <attr name="additionRight" format="dimension" />
+        <attr name="additionTop" format="dimension" />
+    </declare-styleable>
+
+    <!-- 自定义控制事件分发的LinearLayout -->
+    <declare-styleable name="ControlDistributeLinearLayout">
+        <attr name="distribute_event" format="boolean" />
+    </declare-styleable>
+</resources>

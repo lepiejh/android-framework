@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/work/MVVM/app/src/main/res/layout/activity_main.xml" value="0.1334510595358224" />
+        <entry key="..\:/work/MVVM/app/src/main/res/layout/activity_main2.xml" value="0.1334510595358224" />
+        <entry key="..\:/work/MVVM/mvvm-framework/src/main/res/layout/aa.xml" value="0.1334510595358224" />
+        <entry key="..\:/work/MVVM/mvvm-framework/src/main/res/layout/ab.xml" value="0.1334510595358224" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android API 30 Platform" project-jdk-type="Android SDK" />
+</project>

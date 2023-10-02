@@ -1,0 +1,70 @@
+ext {
+    //android开发版本配置
+    android = [
+            compileSdkVersion: 33,
+            buildToolsVersion: "33.0.0",
+            applicationId    : "com.ved.mvvm",
+            minSdkVersion    : 19,
+            targetSdkVersion : 33,
+            versionCode      : 1,
+            versionName      : "2.0.3",
+    ]
+    //version配置
+    versions = [
+            "support-version": "28.0.0",
+            "junit-version"  : "4.12",
+    ]
+    //support配置
+    support = [
+            "constraint-layout"       : "1.0.0-beta2",
+            'support-v4'              : 'androidx.legacy:legacy-support-v4:1.0.0',
+            'appcompat-v7'            : 'androidx.appcompat:appcompat:1.0.0',
+            'recyclerview-v7'         : 'androidx.recyclerview:recyclerview:1.0.0',
+            'support-v13'             : "com.android.support:support-v13:${versions["support-version"]}",
+            'support-fragment'        : "com.android.support:support-fragment:${versions["support-version"]}",
+            'design'                  : "com.android.support:design:${versions["support-version"]}",
+            'animated-vector-drawable': "com.android.support:animated-vector-drawable:${versions["support-version"]}",
+            'junit'                   : "junit:junit:${versions["junit-version"]}",
+    ]
+    //依赖第三方配置
+    dependencies = [
+            "junit"                       : "junit:junit:4.12",
+            // androidTestImplementation
+            "testRunner"                  : 'androidx.test.ext:junit:1.1.1',
+            // androidTestImplementation
+            "espresso-core"               : 'androidx.test.espresso:espresso-core:3.1.0',
+            //rxjava
+            "rxjava"                               : "io.reactivex.rxjava3:rxjava:3.0.6",
+            "rxandroid"                            : "io.reactivex.rxjava3:rxandroid:3.0.0",
+            //rx系列与View生命周期同步
+            "rxlifecycle"                          : "com.trello.rxlifecycle4:rxlifecycle:4.0.0",
+            "rxlifecycle-components"               : "com.trello.rxlifecycle4:rxlifecycle-components:4.0.0",
+            //rxbinding
+            "rxbinding"                            : "com.jakewharton.rxbinding4:rxbinding:4.0.0",
+            //rx 6.0权限请求
+            "rxpermissions"                        : "com.github.tbruyelle:rxpermissions:0.12",
+            //network
+            "okhttp"                               : "com.squareup.okhttp3:okhttp:5.0.0-alpha.10",
+            "retrofit"                             : "com.squareup.retrofit2:retrofit:2.9.0",
+            "converter-gson"                       : "com.squareup.retrofit2:converter-gson:2.9.0",
+            "adapter-rxjava"                       : "com.squareup.retrofit2:adapter-rxjava3:2.9.0",
+            //glide图片加载
+            "glide"                                : "com.github.bumptech.glide:glide:4.14.2",
+            "glide-compiler"                       : "com.github.bumptech.glide:compiler:4.14.2",
+            //json解析
+            "gson"                                 : "com.google.code.gson:gson:2.9.1",
+            //material-dialogs
+            "material-dialogs-core"                : "com.afollestad.material-dialogs:core:0.9.4.5",
+            "material-dialogs-commons"             : "com.afollestad.material-dialogs:commons:0.9.4.5",
+            //recyclerview的databinding套装
+            "bindingcollectionadapter"             : "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:4.0.0",
+            "bindingcollectionadapter-recyclerview": "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:4.0.0",
+            //Google AAC
+            "lifecycle-extensions"                 : 'androidx.lifecycle:lifecycle-extensions:2.2.0',
+            "lifecycle-compiler"                 : 'androidx.lifecycle:lifecycle-compiler:2.2.0',
+            "XUpdate"                 : "com.teprinciple:updateapputilsx:2.3.0",
+            "smartrefresh"                 : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-15"
+    ]
+}
+
+

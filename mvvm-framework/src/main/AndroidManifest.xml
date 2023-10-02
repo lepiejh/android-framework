@@ -1,0 +1,87 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    package="com.ved.framework">
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+        </intent>
+    </queries>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+
+    <application
+        android:usesCleartextTraffic="true"
+        android:hardwareAccelerated="true"
+        android:requestLegacyExternalStorage="true">
+
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" />
+
+        <!--适配华为（huawei）刘海屏-->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true"/>
+        <!--适配小米（xiaomi）刘海屏-->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+
+        <activity
+            android:name="com.ved.framework.base.ContainerActivity"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity
+            android:name="com.ved.framework.crash.DefaultErrorActivity"
+            android:process=":error_activity" />
+
+        <provider
+            android:name="com.ved.framework.crash.CaocInitProvider"
+            android:authorities="${applicationId}.customactivityoncrashinitprovider"
+            android:exported="false"
+            android:initOrder="101" />
+
+        <activity
+            android:name="com.ved.framework.utils.bland.code.UtilsTransActivity4MainProcess"
+            android:exported="false"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/ActivityTranslucent"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+
+        <activity
+            android:name="com.ved.framework.utils.bland.code.UtilsTransActivity"
+            android:exported="false"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:multiprocess="true"
+            android:theme="@style/ActivityTranslucent"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+
+        <provider
+            android:name="com.ved.framework.utils.bland.code.UtilsFileProvider"
+            android:authorities="${applicationId}.utilcode.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/util_code_provider_paths" />
+        </provider>
+
+        <service
+            android:name="com.ved.framework.utils.bland.code.MessengerUtils$ServerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="${applicationId}.messenger" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

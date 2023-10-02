@@ -1,0 +1,17 @@
+package com.ved.framework.base;
+
+
+import androidx.annotation.NonNull;
+
+/**
+ * ItemViewModel
+ * Created by ved on 2018/10/3.
+ */
+
+public class ItemViewModel<VM extends BaseViewModel> {
+    protected VM viewModel;
+
+    public ItemViewModel(@NonNull VM viewModel) {
+        this.viewModel = viewModel;
+    }
+}

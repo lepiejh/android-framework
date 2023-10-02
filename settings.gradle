@@ -1,0 +1,3 @@
+include ':mvvm-framework'
+include ':app'
+rootProject.name = "framework"
