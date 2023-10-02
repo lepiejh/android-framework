@@ -44,12 +44,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation project(path: ':mvvm-framework')
-//    implementation(name:'mvvm-framework-1.0', ext:'aar')
-//    implementation 'com.github.SmithSpring:mvvm-framework-android:11.17.473'
-//    implementation 'com.github.SmithSpring:mvvm-framework-android:11.18.12-SNAPSHOT'
-//    implementation 'com.github.lebenv:mvvm:v1.5.6'
+    implementation 'com.github.lepiejh:framework:v1.0.0'
     implementation 'com.google.android.material:material:1.4.+'
-//    implementation 'com.github.lebenv:mvvm:1.1.8-SNAPSHOT'
     testImplementation 'junit:junit:4.13'
     implementation "org.jetbrains.anko:anko-commons:0.10.8"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
