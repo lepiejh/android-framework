@@ -1,9 +1,7 @@
 package com.ved.framework.base;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -17,7 +15,6 @@ import com.ved.framework.bus.event.eventbus.MessageEvent;
 import com.ved.framework.entity.ParameterField;
 import com.ved.framework.permission.IPermission;
 import com.ved.framework.permission.RxPermission;
-import com.ved.framework.receiver.VedReceiver;
 import com.ved.framework.utils.Constant;
 import com.ved.framework.utils.DpiUtils;
 import com.ved.framework.utils.SoftKeyboardUtil;
@@ -43,7 +40,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     private int viewModelId;
 //    private MaterialDialog dialog;
     private MMLoading mmLoading;
-    private VedReceiver mVedReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +55,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         initSwipeBack();
         if (isRegisterEventBus()) {
             EventBusUtil.register(this);
-        }
-        if (isReceiver()){
-            mVedReceiver = new VedReceiver();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-                registerReceiver(mVedReceiver, new IntentFilter(Constant.RECEIVER_ACTION), Context.RECEIVER_VISIBLE_TO_INSTANT_APPS);
-            }else {
-                registerReceiver(mVedReceiver,new IntentFilter(Constant.RECEIVER_ACTION));
-            }
         }
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
         initViewObservable();
@@ -147,11 +135,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
             }
             if (isRegisterEventBus()) {
                 EventBusUtil.unregister(this);
-            }
-            if (isReceiver()){
-                if (mVedReceiver != null) {
-                    unregisterReceiver(mVedReceiver);
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
