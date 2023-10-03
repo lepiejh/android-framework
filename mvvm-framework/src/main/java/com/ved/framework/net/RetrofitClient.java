@@ -1,7 +1,5 @@
 package com.ved.framework.net;
 
-import com.ved.framework.R;
-import com.ved.framework.http.FoodInterceptor;
 import com.ved.framework.http.cookie.CookieJarImpl;
 import com.ved.framework.http.cookie.store.PersistentCookieStore;
 import com.ved.framework.http.interceptor.CacheInterceptor;
@@ -9,8 +7,6 @@ import com.ved.framework.utils.Configure;
 import com.ved.framework.utils.Constant;
 import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.MyGson;
-import com.ved.framework.utils.FoodUtils;
-import com.ved.framework.utils.UIUtils;
 import com.ved.framework.utils.Utils;
 
 import java.io.File;
@@ -43,13 +39,6 @@ class RetrofitClient {
         return SingletonHolder.INSTANCE;
     }
 
-    private RetrofitClient() {
-        // 防止反射获取多个对象的漏洞
-        if (null != SingletonHolder.INSTANCE) {
-            throw new RuntimeException(UIUtils.getString(R.string.singleton_hook_hint));
-        }
-    }
-
     //防止反序列化产生多个对象
     private Object readResolve() throws ObjectStreamException {
         return RetrofitClient.getInstance();
@@ -66,7 +55,6 @@ class RetrofitClient {
                         .cookieJar(new CookieJarImpl(new PersistentCookieStore(Utils.getContext())))
                         .addInterceptor(new MyInterceptor(headers))
                         .addInterceptor(new CacheInterceptor(Utils.getContext()))
-                        .addInterceptor(new FoodInterceptor())
                         .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
                         .addInterceptor(chain -> {
                             Request request = chain.request();
@@ -81,7 +69,6 @@ class RetrofitClient {
                             KLog.e("Interceptor", "请求地址：| " + request);
                             KLog.e("Interceptor", "请求体返回：| Response:" + content);
                             KLog.e("Interceptor", "----------请求耗时:" + duration + "毫秒----------");
-                            FoodUtils.Companion.getInstance().parseHeaders(response.headers());
                             return response.newBuilder().body(okhttp3.ResponseBody.create(mediaType, content)).build();
                         }).addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
                         .connectTimeout(Constant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
