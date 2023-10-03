@@ -15,8 +15,6 @@ class FirstActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first)
 
-        val tv = findViewById<TextView>(R.id.tv_01)
-
         mOrderSubscription = RxBus.getDefault().toObservable(String::class.java).subscribe({
 
         },
