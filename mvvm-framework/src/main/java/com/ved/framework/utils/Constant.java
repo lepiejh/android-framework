@@ -13,4 +13,6 @@ public class Constant {
     public static final int CLICK_INTERVAL = 1;
     //缓存时间
     public static final int CACHE_TIMEOUT = 10 * 1024 * 1024;
+    public static final int ITEM_FOOT = 1;
+    public static final int ITEM_LAYOUT = 2;
 }
