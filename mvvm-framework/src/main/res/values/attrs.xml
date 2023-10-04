@@ -11,4 +11,344 @@
     <declare-styleable name="ControlDistributeLinearLayout">
         <attr name="distribute_event" format="boolean" />
     </declare-styleable>
+
+    <attr format="reference" name="adapter"/>
+    <attr format="integer" name="addSurcharge"/>
+    <attr format="reference" name="currentView"/>
+    <attr format="string" name="decimal_tow"/>
+    <attr format="string" name="time_format"/>
+    <attr format="integer" name="view_visible"/>
+    <attr format="integer" name="format_type"/>
+    <attr format="boolean" name="isThrottleFirst"/>
+    <attr format="boolean" name="isVisible"/>
+    <attr format="reference" name="itemView"/>
+    <attr format="reference" name="items"/>
+    <attr format="reference" name="onClickCommand"/>
+    <attr format="reference" name="onFocusChangeCommand"/>
+    <attr format="reference" name="onLongClickCommand"/>
+    <attr format="reference" name="onScrollChangeCommand"/>
+    <attr format="reference" name="onScrollStateChangedCommand"/>
+    <attr format="reference" name="onTouchCommand"/>
+    <attr format="boolean" name="requestFocus"/>
+    <attr format="string" name="url"/>
+    <attr format="integer" name="drawable_shapeMode"/>
+    <attr format="integer" name="drawable_solidColor"/>
+    <attr format="integer" name="drawable_strokeColor"/>
+    <attr format="float" name="drawable_strokeWidth"/>
+    <attr format="float" name="drawable_strokeDash"/>
+    <attr format="float" name="drawable_strokeDashGap"/>
+    <attr format="float" name="drawable_radius"/>
+    <attr format="float" name="drawable_radiusLT"/>
+    <attr format="float" name="drawable_radiusLB"/>
+    <attr format="float" name="drawable_radiusRT"/>
+    <attr format="float" name="drawable_radiusRB"/>
+    <attr format="integer" name="drawable_startColor"/>
+    <attr format="integer" name="drawable_centerColor"/>
+    <attr format="integer" name="drawable_endColor"/>
+    <attr format="integer" name="drawable_orientation"/>
+    <attr format="integer" name="drawable_gradientType"/>
+    <attr format="float" name="drawable_radialCenterX"/>
+    <attr format="float" name="drawable_radialCenterY"/>
+    <attr format="float" name="drawable_radialRadius"/>
+    <attr format="float" name="drawable_width"/>
+    <attr format="float" name="drawable_height"/>
+    <attr format="float" name="drawable_marginLeft"/>
+    <attr format="float" name="drawable_marginTop"/>
+    <attr format="float" name="drawable_marginRight"/>
+    <attr format="float" name="drawable_marginBottom"/>
+    <attr format="float" name="drawable_ringThickness"/>
+    <attr format="float" name="drawable_ringThicknessRatio"/>
+    <attr format="float" name="drawable_ringInnerRadius"/>
+    <attr format="float" name="drawable_ringInnerRadiusRatio"/>
+    <attr format="integer" name="drawable_checked_shapeMode"/>
+    <attr format="integer" name="drawable_checked_solidColor"/>
+    <attr format="integer" name="drawable_checked_strokeColor"/>
+    <attr format="float" name="drawable_checked_strokeWidth"/>
+    <attr format="float" name="drawable_checked_strokeDash"/>
+    <attr format="float" name="drawable_checked_strokeDashGap"/>
+    <attr format="float" name="drawable_checked_radius"/>
+    <attr format="float" name="drawable_checked_radiusLT"/>
+    <attr format="float" name="drawable_checked_radiusLB"/>
+    <attr format="float" name="drawable_checked_radiusRT"/>
+    <attr format="float" name="drawable_checked_radiusRB"/>
+    <attr format="integer" name="drawable_checked_startColor"/>
+    <attr format="integer" name="drawable_checked_centerColor"/>
+    <attr format="integer" name="drawable_checked_endColor"/>
+    <attr format="integer" name="drawable_checked_orientation"/>
+    <attr format="integer" name="drawable_checked_gradientType"/>
+    <attr format="float" name="drawable_checked_radialCenterX"/>
+    <attr format="float" name="drawable_checked_radialCenterY"/>
+    <attr format="float" name="drawable_checked_radialRadius"/>
+    <attr format="float" name="drawable_checked_width"/>
+    <attr format="float" name="drawable_checked_height"/>
+    <attr format="float" name="drawable_checked_marginLeft"/>
+    <attr format="float" name="drawable_checked_marginTop"/>
+    <attr format="float" name="drawable_checked_marginRight"/>
+    <attr format="float" name="drawable_checked_marginBottom"/>
+    <attr format="float" name="drawable_checked_ringThickness"/>
+    <attr format="float" name="drawable_checked_ringThicknessRatio"/>
+    <attr format="float" name="drawable_checked_ringInnerRadius"/>
+    <attr format="float" name="drawable_checked_ringInnerRadiusRatio"/>
+    <attr format="integer" name="drawable_checkable_shapeMode"/>
+    <attr format="integer" name="drawable_checkable_solidColor"/>
+    <attr format="integer" name="drawable_checkable_strokeColor"/>
+    <attr format="float" name="drawable_checkable_strokeWidth"/>
+    <attr format="float" name="drawable_checkable_strokeDash"/>
+    <attr format="float" name="drawable_checkable_strokeDashGap"/>
+    <attr format="float" name="drawable_checkable_radius"/>
+    <attr format="float" name="drawable_checkable_radiusLT"/>
+    <attr format="float" name="drawable_checkable_radiusLB"/>
+    <attr format="float" name="drawable_checkable_radiusRT"/>
+    <attr format="float" name="drawable_checkable_radiusRB"/>
+    <attr format="integer" name="drawable_checkable_startColor"/>
+    <attr format="integer" name="drawable_checkable_centerColor"/>
+    <attr format="integer" name="drawable_checkable_endColor"/>
+    <attr format="integer" name="drawable_checkable_orientation"/>
+    <attr format="integer" name="drawable_checkable_gradientType"/>
+    <attr format="float" name="drawable_checkable_radialCenterX"/>
+    <attr format="float" name="drawable_checkable_radialCenterY"/>
+    <attr format="float" name="drawable_checkable_radialRadius"/>
+    <attr format="float" name="drawable_checkable_width"/>
+    <attr format="float" name="drawable_checkable_height"/>
+    <attr format="float" name="drawable_checkable_marginLeft"/>
+    <attr format="float" name="drawable_checkable_marginTop"/>
+    <attr format="float" name="drawable_checkable_marginRight"/>
+    <attr format="float" name="drawable_checkable_marginBottom"/>
+    <attr format="float" name="drawable_checkable_ringThickness"/>
+    <attr format="float" name="drawable_checkable_ringThicknessRatio"/>
+    <attr format="float" name="drawable_checkable_ringInnerRadius"/>
+    <attr format="float" name="drawable_checkable_ringInnerRadiusRatio"/>
+    <attr format="integer" name="drawable_enabled_shapeMode"/>
+    <attr format="integer" name="drawable_enabled_solidColor"/>
+    <attr format="integer" name="drawable_enabled_strokeColor"/>
+    <attr format="float" name="drawable_enabled_strokeWidth"/>
+    <attr format="float" name="drawable_enabled_strokeDash"/>
+    <attr format="float" name="drawable_enabled_strokeDashGap"/>
+    <attr format="float" name="drawable_enabled_radius"/>
+    <attr format="float" name="drawable_enabled_radiusLT"/>
+    <attr format="float" name="drawable_enabled_radiusLB"/>
+    <attr format="float" name="drawable_enabled_radiusRT"/>
+    <attr format="float" name="drawable_enabled_radiusRB"/>
+    <attr format="integer" name="drawable_enabled_startColor"/>
+    <attr format="integer" name="drawable_enabled_centerColor"/>
+    <attr format="integer" name="drawable_enabled_endColor"/>
+    <attr format="integer" name="drawable_enabled_orientation"/>
+    <attr format="integer" name="drawable_enabled_gradientType"/>
+    <attr format="float" name="drawable_enabled_radialCenterX"/>
+    <attr format="float" name="drawable_enabled_radialCenterY"/>
+    <attr format="float" name="drawable_enabled_radialRadius"/>
+    <attr format="float" name="drawable_enabled_width"/>
+    <attr format="float" name="drawable_enabled_height"/>
+    <attr format="float" name="drawable_enabled_marginLeft"/>
+    <attr format="float" name="drawable_enabled_marginTop"/>
+    <attr format="float" name="drawable_enabled_marginRight"/>
+    <attr format="float" name="drawable_enabled_marginBottom"/>
+    <attr format="float" name="drawable_enabled_ringThickness"/>
+    <attr format="float" name="drawable_enabled_ringThicknessRatio"/>
+    <attr format="float" name="drawable_enabled_ringInnerRadius"/>
+    <attr format="float" name="drawable_enabled_ringInnerRadiusRatio"/>
+    <attr format="integer" name="drawable_focused_shapeMode"/>
+    <attr format="integer" name="drawable_focused_solidColor"/>
+    <attr format="integer" name="drawable_focused_strokeColor"/>
+    <attr format="float" name="drawable_focused_strokeWidth"/>
+    <attr format="float" name="drawable_focused_strokeDash"/>
+    <attr format="float" name="drawable_focused_strokeDashGap"/>
+    <attr format="float" name="drawable_focused_radius"/>
+    <attr format="float" name="drawable_focused_radiusLT"/>
+    <attr format="float" name="drawable_focused_radiusLB"/>
+    <attr format="float" name="drawable_focused_radiusRT"/>
+    <attr format="float" name="drawable_focused_radiusRB"/>
+    <attr format="integer" name="drawable_focused_startColor"/>
+    <attr format="integer" name="drawable_focused_centerColor"/>
+    <attr format="integer" name="drawable_focused_endColor"/>
+    <attr format="integer" name="drawable_focused_orientation"/>
+    <attr format="integer" name="drawable_focused_gradientType"/>
+    <attr format="float" name="drawable_focused_radialCenterX"/>
+    <attr format="float" name="drawable_focused_radialCenterY"/>
+    <attr format="float" name="drawable_focused_radialRadius"/>
+    <attr format="float" name="drawable_focused_width"/>
+    <attr format="float" name="drawable_focused_height"/>
+    <attr format="float" name="drawable_focused_marginLeft"/>
+    <attr format="float" name="drawable_focused_marginTop"/>
+    <attr format="float" name="drawable_focused_marginRight"/>
+    <attr format="float" name="drawable_focused_marginBottom"/>
+    <attr format="float" name="drawable_focused_ringThickness"/>
+    <attr format="float" name="drawable_focused_ringThicknessRatio"/>
+    <attr format="float" name="drawable_focused_ringInnerRadius"/>
+    <attr format="float" name="drawable_focused_ringInnerRadiusRatio"/>
+    <attr format="integer" name="drawable_pressed_shapeMode"/>
+    <attr format="integer" name="drawable_pressed_solidColor"/>
+    <attr format="integer" name="drawable_pressed_strokeColor"/>
+    <attr format="float" name="drawable_pressed_strokeWidth"/>
+    <attr format="float" name="drawable_pressed_strokeDash"/>
+    <attr format="float" name="drawable_pressed_strokeDashGap"/>
+    <attr format="float" name="drawable_pressed_radius"/>
+    <attr format="float" name="drawable_pressed_radiusLT"/>
+    <attr format="float" name="drawable_pressed_radiusLB"/>
+    <attr format="float" name="drawable_pressed_radiusRT"/>
+    <attr format="float" name="drawable_pressed_radiusRB"/>
+    <attr format="integer" name="drawable_pressed_startColor"/>
+    <attr format="integer" name="drawable_pressed_centerColor"/>
+    <attr format="integer" name="drawable_pressed_endColor"/>
+    <attr format="integer" name="drawable_pressed_orientation"/>
+    <attr format="integer" name="drawable_pressed_gradientType"/>
+    <attr format="float" name="drawable_pressed_radialCenterX"/>
+    <attr format="float" name="drawable_pressed_radialCenterY"/>
+    <attr format="float" name="drawable_pressed_radialRadius"/>
+    <attr format="float" name="drawable_pressed_width"/>
+    <attr format="float" name="drawable_pressed_height"/>
+    <attr format="float" name="drawable_pressed_marginLeft"/>
+    <attr format="float" name="drawable_pressed_marginTop"/>
+    <attr format="float" name="drawable_pressed_marginRight"/>
+    <attr format="float" name="drawable_pressed_marginBottom"/>
+    <attr format="float" name="drawable_pressed_ringThickness"/>
+    <attr format="float" name="drawable_pressed_ringThicknessRatio"/>
+    <attr format="float" name="drawable_pressed_ringInnerRadius"/>
+    <attr format="float" name="drawable_pressed_ringInnerRadiusRatio"/>
+    <attr format="integer" name="drawable_selected_shapeMode"/>
+    <attr format="integer" name="drawable_selected_solidColor"/>
+    <attr format="integer" name="drawable_selected_strokeColor"/>
+    <attr format="float" name="drawable_selected_strokeWidth"/>
+    <attr format="float" name="drawable_selected_strokeDash"/>
+    <attr format="float" name="drawable_selected_strokeDashGap"/>
+    <attr format="float" name="drawable_selected_radius"/>
+    <attr format="float" name="drawable_selected_radiusLT"/>
+    <attr format="float" name="drawable_selected_radiusLB"/>
+    <attr format="float" name="drawable_selected_radiusRT"/>
+    <attr format="float" name="drawable_selected_radiusRB"/>
+    <attr format="integer" name="drawable_selected_startColor"/>
+    <attr format="integer" name="drawable_selected_centerColor"/>
+    <attr format="integer" name="drawable_selected_endColor"/>
+    <attr format="integer" name="drawable_selected_orientation"/>
+    <attr format="integer" name="drawable_selected_gradientType"/>
+    <attr format="float" name="drawable_selected_radialCenterX"/>
+    <attr format="float" name="drawable_selected_radialCenterY"/>
+    <attr format="float" name="drawable_selected_radialRadius"/>
+    <attr format="float" name="drawable_selected_width"/>
+    <attr format="float" name="drawable_selected_height"/>
+    <attr format="float" name="drawable_selected_marginLeft"/>
+    <attr format="float" name="drawable_selected_marginTop"/>
+    <attr format="float" name="drawable_selected_marginRight"/>
+    <attr format="float" name="drawable_selected_marginBottom"/>
+    <attr format="float" name="drawable_selected_ringThickness"/>
+    <attr format="float" name="drawable_selected_ringThicknessRatio"/>
+    <attr format="float" name="drawable_selected_ringInnerRadius"/>
+    <attr format="float" name="drawable_selected_ringInnerRadiusRatio"/>
+    <declare-styleable name="AdapterView">
+
+        <attr name="itemView"/>
+
+        <attr name="items"/>
+
+        <attr name="adapter"/>
+        <attr format="reference" name="dropDownItemView"/>
+        <attr format="reference" name="itemIds"/>
+        <attr format="reference" name="itemIsEnabled"/>
+
+        <attr name="onScrollStateChangedCommand"/>
+
+        <attr name="onScrollChangeCommand"/>
+
+        <attr format="reference" name="onLoadMoreCommand"/>
+    </declare-styleable>
+    <declare-styleable name="ImageView">
+
+        <attr name="url"/>
+
+        <attr format="integer" name="request_width"/>
+
+        <attr format="integer" name="request_height"/>
+        <attr format="reference|color" name="placeholderRes"/>
+
+        <attr format="reference" name="onSuccessCommand"/>
+
+        <attr format="reference" name="onFailureCommand"/>
+
+    </declare-styleable>
+    <declare-styleable name="ListView" parent="AdapterView">
+
+        <attr format="reference" name="onItemClickCommand"/>
+    </declare-styleable>
+    <declare-styleable name="NestedScrollView">
+
+        <attr name="onScrollChangeCommand"/>
+    </declare-styleable>
+    <declare-styleable name="RadioGroup">
+        <attr format="reference" name="onCheckedChangedCommand"/>
+    </declare-styleable>
+    <declare-styleable name="RecyclerView" parent="AdapterView">
+        <attr format="reference" name="lineManager"/>
+        <attr format="reference" name="itemBinding"/>
+        <attr format="reference" name="layoutManager"/>
+        <attr format="reference" name="itemAnimator"/>
+        <attr format="reference" name="rvManager"/>
+    </declare-styleable>
+    <declare-styleable name="ScrollView">
+
+        <attr name="onScrollChangeCommand"/>
+    </declare-styleable>
+    <declare-styleable name="SimpleDraweeView">
+
+        <attr name="url"/>
+    </declare-styleable>
+    <declare-styleable name="Spinner">
+        <attr format="reference" name="itemDatas"/>
+        <attr format="string" name="valueReply"/>
+        <attr format="integer" name="resource"/>
+        <attr format="integer" name="dropDownResource"/>
+        <attr format="reference" name="onItemSelectedCommand"/>
+    </declare-styleable>
+    <declare-styleable name="SwipeRefreshLayout">
+
+        <attr format="reference" name="onRefreshCommand"/>
+        <attr format="boolean" name="refreshing"/>
+    </declare-styleable>
+    <declare-styleable name="Switch">
+        <attr format="reference" name="onCheckedChangeCommand"/>
+        <attr format="boolean" name="switchState"/>
+    </declare-styleable>
+    <declare-styleable name="TextView">
+
+        <attr format="reference" name="beforeTextChangedCommand"/>
+
+        <attr format="reference" name="onTextChangedCommand"/>
+
+        <attr format="reference" name="afterTextChangedCommand"/>
+        <attr format="reference" name="textChanged"/>
+    </declare-styleable>
+    <declare-styleable name="View">
+
+        <attr name="onClickCommand"/>
+        <attr name="onLongClickCommand"/>
+
+        <attr name="onFocusChangeCommand"/>
+
+        <attr name="onTouchCommand"/>
+        <attr name="isThrottleFirst"/>
+        <attr name="currentView"/>
+    </declare-styleable>
+    <declare-styleable name="ViewGroup">
+
+        <attr name="itemView"/>
+
+        <attr format="reference" name="observableList"/>
+
+    </declare-styleable>
+    <declare-styleable name="ViewPager">
+
+        <attr name="itemView"/>
+
+        <attr name="items"/>
+
+        <attr name="adapter"/>
+
+        <attr format="reference" name="pageTitles"/>
+
+        <attr format="reference" name="onPageScrolledCommand"/>
+
+        <attr format="reference" name="onPageSelectedCommand"/>
+
+        <attr format="reference" name="onPageScrollStateChangedCommand"/>
+
+    </declare-styleable>
 </resources>
