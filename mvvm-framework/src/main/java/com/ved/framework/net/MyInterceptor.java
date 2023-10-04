@@ -54,6 +54,8 @@ class MyInterceptor implements Interceptor {
             }
         }
         request = builder.build();
-        return chain.proceed(request);
+        Response r = chain.proceed(request);
+        r.close();
+        return r;
     }
 }
