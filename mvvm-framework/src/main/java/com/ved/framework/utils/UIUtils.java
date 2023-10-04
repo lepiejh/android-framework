@@ -32,15 +32,11 @@ public class UIUtils {
         return Utils.getContext().getResources().getString(id);
     }
 
-    public static String getString(@StringRes int id,Object... formatArgs){
-        return Utils.getContext().getResources().getString(id,formatArgs);
-    }
-
     public static boolean equals(Drawable drawable,@DrawableRes int id){
         return Objects.equals(drawable.getConstantState(), Objects.requireNonNull(ContextCompat.getDrawable(Utils.getContext(), id)).getConstantState());
     }
 
-    public static boolean equals(String s1,String s2){
+    public static boolean equals(Object s1,Object s2){
         return Objects.equals(s1,s2);
     }
 }
