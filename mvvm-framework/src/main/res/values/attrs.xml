@@ -13,7 +13,7 @@
     </declare-styleable>
 
     <attr format="reference" name="adapter"/>
-    <attr format="integer" name="addSurcharge"/>
+    <attr format="integer" name="inputType"/>
     <attr format="reference" name="currentView"/>
     <attr format="string" name="decimal_tow"/>
     <attr format="string" name="time_format"/>
