@@ -315,6 +315,7 @@
 
         <attr format="reference" name="afterTextChangedCommand"/>
         <attr format="reference" name="textChanged"/>
+        <attr format="reference" name="onEditorActionListener"/>
     </declare-styleable>
     <declare-styleable name="View">
 

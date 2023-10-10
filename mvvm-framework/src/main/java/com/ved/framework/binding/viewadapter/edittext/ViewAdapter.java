@@ -4,8 +4,11 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.ved.framework.binding.command.BindingCommand;
 
@@ -58,6 +61,25 @@ public class ViewAdapter {
                     afterTextChanged.execute(editable);
                 }
             }
+        });
+    }
+
+    /**
+     * EditText imeOptions的事件绑定
+     * 设置：android:inputType="text|textVisiblePassword"
+     *     android:imeOptions="actionSearch"
+     */
+    @BindingAdapter(value = {"onEditorActionListener"}, requireAll = false)
+    public static void setOnEditorActionListener(EditText editText, final BindingCommand<String> onEditorActionListener) {
+        editText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                // 执行搜索操作
+                if (onEditorActionListener != null) {
+                    onEditorActionListener.execute(editText.getText().toString());
+                }
+                return true;
+            }
+            return false;
         });
     }
 
