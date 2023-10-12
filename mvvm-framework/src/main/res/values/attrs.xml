@@ -13,6 +13,9 @@
     </declare-styleable>
 
     <attr format="reference" name="adapter"/>
+    <attr format="reference" name="onProgressChanged"/>
+    <attr format="reference" name="onStartTrackingTouch"/>
+    <attr format="reference" name="onStopTrackingTouch"/>
     <attr format="integer" name="inputType"/>
     <attr format="reference" name="currentView"/>
     <attr format="string" name="decimal_tow"/>
