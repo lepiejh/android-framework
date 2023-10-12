@@ -10,8 +10,8 @@ public class ViewAdapter {
 
     @BindingAdapter(value = {"onProgressChanged","onStartTrackingTouch","onStopTrackingTouch"}, requireAll = false)
     public static void onSeekBarChangeListener(SeekBar seekBar, final BindingCommand<Integer> onProgressChanged,
-                                              final BindingCommand<Void> onStartTrackingTouch,
-                                              final BindingCommand<Void> onStopTrackingTouch) {
+                                              final BindingCommand<SeekBar> onStartTrackingTouch,
+                                              final BindingCommand<SeekBar> onStopTrackingTouch) {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -23,14 +23,14 @@ public class ViewAdapter {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 if (onStartTrackingTouch != null){
-                    onStartTrackingTouch.execute();
+                    onStartTrackingTouch.execute(seekBar);
                 }
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (onStopTrackingTouch != null){
-                    onStopTrackingTouch.execute();
+                    onStopTrackingTouch.execute(seekBar);
                 }
             }
         });
