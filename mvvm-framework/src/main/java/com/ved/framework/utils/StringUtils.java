@@ -423,7 +423,7 @@ public final class StringUtils {
         }
     }
 
-    public String calculateTime(int time) {
+    public static String calculateTime(int time) {
         int minute;
         int second;
         if (time >= 60) {
