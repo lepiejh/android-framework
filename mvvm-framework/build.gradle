@@ -90,7 +90,7 @@ dependencies {
     //Google LiveData和ViewModel组件
     api rootProject.ext.dependencies["lifecycle-extensions"]
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
-    api rootProject.ext.dependencies["XUpdate"]
+//    api rootProject.ext.dependencies["XUpdate"]
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     implementation 'com.github.mamumu:mmDialog:1.2.0'
     api rootProject.ext.dependencies["smartrefresh"]
@@ -111,4 +111,5 @@ dependencies {
     api 'com.github.lepiejh:android-dialog:v1.0.1'
     api 'com.github.lepiejh:android-tablayout:v1.0.4'
     api 'com.github.lepiejh:android-play:v1.0.2'
+    implementation 'com.github.lepiejh:android-update:v1.0.0'
 }
