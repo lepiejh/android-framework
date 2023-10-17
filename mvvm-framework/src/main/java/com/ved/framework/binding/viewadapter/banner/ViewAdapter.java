@@ -8,6 +8,7 @@ import com.stx.xhb.xbanner.entity.LocalImageInfo;
 import com.ved.framework.binding.command.BindingCommand;
 import com.ved.framework.entity.OnPageScrolled;
 import com.ved.framework.entity.XBannerDataWrapper;
+import com.ved.framework.entity.XBannerInfo;
 
 import java.util.List;
 
@@ -32,6 +33,11 @@ public class ViewAdapter {
 
     @BindingAdapter("setBannerData")
     public static void setBannerData(final XBanner xBanner, List<LocalImageInfo> localImageInfoList) {
+        xBanner.setBannerData(localImageInfoList);
+    }
+
+    @BindingAdapter("setBannerInfo")
+    public static void setBannerInfo(final XBanner xBanner, List<XBannerInfo> localImageInfoList) {
         xBanner.setBannerData(localImageInfoList);
     }
 }

@@ -355,4 +355,8 @@
         <attr format="reference" name="onPageScrollStateChangedCommand"/>
 
     </declare-styleable>
+    <attr format="reference" name="loadImageCommand"/>
+    <attr format="reference" name="onPageChangeCommand"/>
+    <attr format="reference" name="setBannerData"/>
+    <attr format="reference" name="setBannerInfo"/>
 </resources>
