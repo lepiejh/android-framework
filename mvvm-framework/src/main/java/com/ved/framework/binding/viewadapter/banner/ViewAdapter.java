@@ -37,7 +37,7 @@ public class ViewAdapter {
     }
 
     @BindingAdapter("setBannerInfo")
-    public static void setBannerInfo(final XBanner xBanner, List<XBannerInfo> localImageInfoList) {
-        xBanner.setBannerData(localImageInfoList);
+    public static void setBannerInfo(final XBanner xBanner, List<XBannerInfo> xBannerInfoList) {
+        xBanner.setBannerData(xBannerInfoList);
     }
 }
