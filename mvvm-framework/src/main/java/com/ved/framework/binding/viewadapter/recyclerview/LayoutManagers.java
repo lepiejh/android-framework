@@ -24,6 +24,15 @@ public class LayoutManagers {
         return recyclerView -> new LinearLayoutManager(recyclerView.getContext());
     }
 
+    public static LayoutManagerFactory linear(final boolean canScrollVertically) {
+        return recyclerView -> new LinearLayoutManager(recyclerView.getContext()){
+            @Override
+            public boolean canScrollVertically() {
+                return canScrollVertically;
+            }
+        };
+    }
+
     public static LayoutManagerFactory linearNoScroll(@Orientation final int orientation, final boolean reverseLayout) {
         return recyclerView -> new LinearLayoutManager(recyclerView.getContext(),orientation,reverseLayout){
             @Override
@@ -50,6 +59,15 @@ public class LayoutManagers {
      */
     public static LayoutManagerFactory grid(final int spanCount) {
         return recyclerView -> new GridLayoutManager(recyclerView.getContext(), spanCount);
+    }
+
+    public static LayoutManagerFactory grid(final int spanCount,final boolean canScrollVertically) {
+        return recyclerView -> new GridLayoutManager(recyclerView.getContext(), spanCount){
+            @Override
+            public boolean canScrollVertically() {
+                return canScrollVertically;
+            }
+        };
     }
 
     /**
