@@ -359,4 +359,6 @@
     <attr format="reference" name="onPageChangeCommand"/>
     <attr format="reference" name="setBannerData"/>
     <attr format="reference" name="setBannerInfo"/>
+    <attr format="integer" name="layoutWidth"/>
+    <attr format="integer" name="layoutHeight"/>
 </resources>

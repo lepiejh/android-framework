@@ -256,14 +256,14 @@ public class ViewAdapter {
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,textSize);
     }
 
-    @BindingAdapter("android:layout_width")
+    @BindingAdapter("layoutWidth")
     public static void setLayoutWidth(View textView,int layoutWidth){
         ViewGroup.LayoutParams lp = textView.getLayoutParams();
         lp.width=DpiUtils.dip2px(textView.getContext(),layoutWidth);
         textView.setLayoutParams(lp);
     }
 
-    @BindingAdapter("android:layout_height")
+    @BindingAdapter("layoutHeight")
     public static void setLayoutHeight(View textView,int layoutHeight){
         ViewGroup.LayoutParams lp = textView.getLayoutParams();
         lp.height=DpiUtils.dip2px(textView.getContext(),layoutHeight);
