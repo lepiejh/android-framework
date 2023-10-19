@@ -38,15 +38,36 @@ public abstract class ARequest<T, K> {
     }
 
     public void request(@Nullable Activity activity, @Nullable BaseViewModel viewModel, @Nullable Class<? extends T> service, @Nullable IMethod<T, K> method, int index, @Nullable IResponse<K> iResponse) {
-        request(activity, viewModel, method, false, RetrofitClient.getInstance().create(service, index, null), iResponse);
+        request(activity, viewModel, method, service,index,false,iResponse);
     }
 
     public void request(@Nullable Activity activity, @Nullable BaseViewModel viewModel, @Nullable Class<? extends T> service, @Nullable IMethod<T, K> method, int index, boolean isLoading, @Nullable IResponse<K> iResponse) {
-        request(activity, viewModel, method, isLoading, RetrofitClient.getInstance().create(service, index, null), iResponse);
+        request(activity, viewModel, method, service,index,isLoading,iResponse);
     }
 
     @SuppressLint("CheckResult")
-    public void request(@Nullable Activity activity, @Nullable BaseViewModel viewModel, @Nullable IMethod<T, K> method, boolean isLoading, @Nullable T t, @Nullable IResponse<K> iResponse) {
+    public void request(@Nullable Activity activity, @Nullable BaseViewModel viewModel, @Nullable IMethod<T, K> method,@Nullable Class<? extends T> service,int index,@NonNull Observer<? super T> observer) {
+        if (NetUtil.getNetWorkStart(Utils.getContext()) == 1) {
+            exceptionHandling(activity, "网络异常", -1);
+        } else {
+            try {
+                if (method != null) {
+                    Observable o = method.method(RetrofitClient.getInstance().create(service, index, null));
+                    if (viewModel != null) {
+                        o.compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider())); // 请求与View周期同步
+                    }
+                    o.compose(RxUtils.schedulersTransformer())
+                            .compose(RxUtils.exceptionTransformer())
+                            .subscribe(observer);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    public void request(@Nullable Activity activity, @Nullable BaseViewModel viewModel, @Nullable IMethod<T, K> method,@Nullable Class<? extends T> service,int index,boolean isLoading, @Nullable IResponse<K> iResponse) {
         if (isLoading && viewModel != null) {
             viewModel.showDialog();
         }
@@ -61,38 +82,13 @@ public abstract class ARequest<T, K> {
         } else {
             try {
                 if (method != null) {
-                    Observable o = method.method(t);
+                    Observable o = method.method(RetrofitClient.getInstance().create(service, index, null));
                     if (viewModel != null) {
                         o.compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider())); // 请求与View周期同步
                     }
-                   /* o.compose(RxUtils.schedulersTransformer())
-                            .compose(RxUtils.exceptionTransformer())
-                            .subscribe((Consumer<K>) response -> parseSuccess(viewModel, isLoading, iResponse, response),
-                                    (Consumer<ResponseThrowable>) throwable -> parseError(viewModel, isLoading, iResponse, throwable, activity));
-*/
                     o.compose(RxUtils.schedulersTransformer())
                             .compose(RxUtils.exceptionTransformer())
-                            .subscribe(new Observer() {
-                                @Override
-                                public void onSubscribe(@NonNull Disposable d) {
-
-                                }
-
-                                @Override
-                                public void onNext(Object o) {
-                                    parseSuccess(viewModel, isLoading, iResponse, (K) o);
-                                }
-
-                                @Override
-                                public void onError(@NonNull Throwable e) {
-                                    parseError(viewModel, isLoading, iResponse, (ResponseThrowable) e, activity);
-                                }
-
-                                @Override
-                                public void onComplete() {
-
-                                }
-                            });
+                            .subscribe((Consumer<K>) response -> parseSuccess(viewModel, isLoading, iResponse, response),(Consumer<ResponseThrowable>) throwable -> parseError(viewModel, isLoading, iResponse, throwable, activity));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
