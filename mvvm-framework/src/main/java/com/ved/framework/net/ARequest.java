@@ -12,7 +12,10 @@ import com.ved.framework.utils.NetUtil;
 import com.ved.framework.utils.RxUtils;
 import com.ved.framework.utils.Utils;
 
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 
 /**
@@ -62,9 +65,34 @@ public abstract class ARequest<T, K> {
                     if (viewModel != null) {
                         o.compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider())); // 请求与View周期同步
                     }
+                   /* o.compose(RxUtils.schedulersTransformer())
+                            .compose(RxUtils.exceptionTransformer())
+                            .subscribe((Consumer<K>) response -> parseSuccess(viewModel, isLoading, iResponse, response),
+                                    (Consumer<ResponseThrowable>) throwable -> parseError(viewModel, isLoading, iResponse, throwable, activity));
+*/
                     o.compose(RxUtils.schedulersTransformer())
                             .compose(RxUtils.exceptionTransformer())
-                            .subscribe((Consumer<K>) response -> parseSuccess(viewModel, isLoading, iResponse, response), (Consumer<ResponseThrowable>) throwable -> parseError(viewModel, isLoading, iResponse, throwable, activity));
+                            .subscribe(new Observer() {
+                                @Override
+                                public void onSubscribe(@NonNull Disposable d) {
+
+                                }
+
+                                @Override
+                                public void onNext(Object o) {
+                                    parseSuccess(viewModel, isLoading, iResponse, (K) o);
+                                }
+
+                                @Override
+                                public void onError(@NonNull Throwable e) {
+                                    parseError(viewModel, isLoading, iResponse, (ResponseThrowable) e, activity);
+                                }
+
+                                @Override
+                                public void onComplete() {
+
+                                }
+                            });
                 }
             } catch (Exception e) {
                 e.printStackTrace();
