@@ -19,6 +19,7 @@ import com.ved.framework.utils.Constant;
 import com.ved.framework.utils.DpiUtils;
 import com.ved.framework.utils.StringUtils;
 import com.ved.framework.utils.TimeUtils;
+import com.ved.framework.utils.Utils;
 
 import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
@@ -252,8 +253,8 @@ public class ViewAdapter {
     }
 
     @BindingAdapter("android:textSize")
-    public static void setTextSize(TextView textView,float textSize){
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,textSize);
+    public static void setTextSize(TextView textView,int textSize){
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, Utils.getContext().getResources().getDimensionPixelSize(textSize));
     }
 
     @BindingAdapter("layoutWidth")
