@@ -252,9 +252,9 @@ public class ViewAdapter {
                 DpiUtils.dip2px(view.getContext(),padding));
     }
 
-    @BindingAdapter("android:textSize")
+    @BindingAdapter("text_size")
     public static void setTextSize(TextView textView,int textSize){
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, Utils.getContext().getResources().getDimensionPixelSize(textSize));
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
     }
 
     @BindingAdapter("layoutWidth")

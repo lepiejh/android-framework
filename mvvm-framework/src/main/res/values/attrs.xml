@@ -361,4 +361,5 @@
     <attr format="reference" name="setBannerInfo"/>
     <attr format="integer" name="layoutWidth"/>
     <attr format="integer" name="layoutHeight"/>
+    <attr format="integer" name="text_size"/>
 </resources>
