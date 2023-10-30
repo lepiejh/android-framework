@@ -1,5 +1,7 @@
 package com.ved.framework.net;
 
+import com.ved.framework.utils.SPUtils;
+
 import androidx.annotation.NonNull;
 
 import java.io.IOException;
@@ -32,6 +34,7 @@ class MyInterceptor implements Interceptor {
                 builder.addHeader(headerKey, Objects.requireNonNull(headers.get(headerKey))).build();
             }
         }
+        builder.addHeader("userId", SPUtils.getInstance("user_sp").getString("user_id","0"));
 
         List<String> headerValues = request.headers("url_name");
         if (headerValues.size() > 0) {
