@@ -97,6 +97,8 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         //注册RxBus
         viewModel.registerRxBus();
         KLog.i("BaseFragment onViewCreated");
+        //页面数据初始化方法
+        initData();
     }
 
     @Override
@@ -105,10 +107,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         if(!isLoadData &&isVisibleToUser)
         {   isLoadData=true;
             KLog.i("BaseFragment setUserVisibleHint");
-            //页面数据初始化方法
-            initData();
             loadData();
-
         }
     }
 
