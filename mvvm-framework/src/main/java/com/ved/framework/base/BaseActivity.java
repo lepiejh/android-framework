@@ -259,7 +259,11 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected void requestCallPhone(boolean denied){}
 
     public void showDialog(){
-        showDialog("加载中...",true);
+        if (customDialog()) {
+            showCustomDialog();
+        } else {
+            showDialog("加载中...",true);
+        }
     }
 
     public void showDialog(String title){
