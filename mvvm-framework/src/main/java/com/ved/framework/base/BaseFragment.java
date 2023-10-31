@@ -46,11 +46,28 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
 //    private MaterialDialog dialog;
     private MMLoading mmLoading;
     protected boolean isLoadData =false;
+    protected boolean menuVisibleTag =false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initParam();
+    }
+
+    @Override
+    public void setMenuVisibility(boolean menuVisible) {
+        super.setMenuVisibility(menuVisible);
+        menuVisibleTag = menuVisible;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (menuVisibleTag&&!isLoadData)
+        {
+            isLoadData=true;
+            loadData();
+        }
     }
 
     @Override
@@ -99,16 +116,6 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         KLog.i("BaseFragment onViewCreated");
         //页面数据初始化方法
         initData();
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if(!isLoadData &&isVisibleToUser)
-        {   isLoadData=true;
-            KLog.i("BaseFragment setUserVisibleHint");
-            loadData();
-        }
     }
 
 
