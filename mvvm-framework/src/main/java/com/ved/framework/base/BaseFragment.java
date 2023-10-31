@@ -45,7 +45,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     private int viewModelId;
 //    private MaterialDialog dialog;
     private MMLoading mmLoading;
-    private boolean isLoadData =false;
+    protected boolean isLoadData =false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,6 +110,8 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
             loadData();
         }
     }
+
+
 
     public abstract void loadData();
 
