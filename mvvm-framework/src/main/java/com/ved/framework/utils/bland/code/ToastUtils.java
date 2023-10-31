@@ -479,6 +479,7 @@ public final class ToastUtils {
         String error = SPUtils.getInstance().getString("error","");
         if (Objects.equals(error, StringUtils.parseStr(text)))return;
         if (Objects.equals("Forbidden",StringUtils.parseStr(text)))return;
+        if (Objects.equals("未知错误",StringUtils.parseStr(text)))return;
         UtilsBridge.runOnUiThread(() -> {
             cancel();
             IToast iToast = newToast(utils);

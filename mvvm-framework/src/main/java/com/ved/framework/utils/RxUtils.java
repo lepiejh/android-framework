@@ -82,7 +82,7 @@ public class RxUtils {
     private static class HttpResponseFunc<T> implements Function<Throwable, Observable<T>> {
         @Override
         public Observable<T> apply(Throwable t) {
-            return Observable.error(t);
+            return Observable.error(ExceptionHandle.handleException(t));
         }
     }
 
