@@ -66,6 +66,8 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         if (menuVisibleTag&&!isLoadData)
         {
             isLoadData=true;
+            //页面数据初始化方法
+            initData();
             loadData();
         }
     }
@@ -114,8 +116,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         //注册RxBus
         viewModel.registerRxBus();
         KLog.i("BaseFragment onViewCreated");
-        //页面数据初始化方法
-        initData();
+
     }
 
 
