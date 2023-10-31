@@ -18,6 +18,7 @@ import com.ved.framework.entity.ParameterField;
 import com.ved.framework.permission.IPermission;
 import com.ved.framework.permission.RxPermission;
 import com.ved.framework.utils.Constant;
+import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.phone.PhoneUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -44,6 +45,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     private int viewModelId;
 //    private MaterialDialog dialog;
     private MMLoading mmLoading;
+    private boolean isLoadData =false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,8 +88,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         initViewDataBinding();
         //私有的ViewModel与View的契约事件回调逻辑
         registorUIChangeLiveDataCallBack();
-        //页面数据初始化方法
-        initData();
+
         if (isRegisterEventBus()) {
             EventBusUtil.register(this);
         }
@@ -95,7 +96,23 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         initViewObservable();
         //注册RxBus
         viewModel.registerRxBus();
+        KLog.i("BaseFragment onViewCreated");
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(!isLoadData &&isVisibleToUser)
+        {   isLoadData=true;
+            KLog.i("BaseFragment setUserVisibleHint");
+            //页面数据初始化方法
+            initData();
+            loadData();
+
+        }
+    }
+
+    public abstract void loadData();
 
     /**
      * 是否注册事件分发
