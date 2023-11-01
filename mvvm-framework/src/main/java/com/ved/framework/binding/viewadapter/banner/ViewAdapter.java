@@ -1,8 +1,5 @@
 package com.ved.framework.binding.viewadapter.banner;
 
-import androidx.databinding.BindingAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import com.stx.xhb.xbanner.XBanner;
 import com.stx.xhb.xbanner.entity.LocalImageInfo;
 import com.ved.framework.binding.command.BindingCommand;
@@ -11,6 +8,9 @@ import com.ved.framework.entity.XBannerDataWrapper;
 import com.ved.framework.entity.XBannerInfo;
 
 import java.util.List;
+
+import androidx.databinding.BindingAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by ved on 2017/6/16.

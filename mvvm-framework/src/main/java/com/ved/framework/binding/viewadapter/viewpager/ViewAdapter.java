@@ -4,18 +4,18 @@ import com.ved.framework.binding.command.BindingCommand;
 import com.ved.framework.entity.ViewPagerDataWrapper;
 
 import androidx.databinding.BindingAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 /**
  * Created by ved on 2017/6/18.
  */
 public class ViewAdapter {
     @BindingAdapter(value = {"onPageScrolledCommand", "onPageSelectedCommand", "onPageScrollStateChangedCommand"}, requireAll = false)
-    public static void onScrollChangeCommand(final ViewPager viewPager,
+    public static void onScrollChangeCommand(final ViewPager2 viewPager,
                                              final BindingCommand<ViewPagerDataWrapper> onPageScrolledCommand,
                                              final BindingCommand<Integer> onPageSelectedCommand,
                                              final BindingCommand<Integer> onPageScrollStateChangedCommand) {
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             private int state;
 
             @Override
@@ -40,6 +40,5 @@ public class ViewAdapter {
                 }
             }
         });
-
     }
 }
