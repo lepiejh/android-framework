@@ -2,7 +2,7 @@ package com.ved.framework.net;
 
 import java.io.IOException;
 
-class ResultException extends IOException {
+public class ResultException extends IOException {
 
     private String errMsg;
     private int errCode;

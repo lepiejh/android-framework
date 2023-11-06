@@ -29,7 +29,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 
-class RetrofitClient {
+public class RetrofitClient {
 
     private static class SingletonHolder {
         private static final RetrofitClient INSTANCE = new RetrofitClient();
