@@ -35,4 +35,13 @@ public class ViewAdapter {
         });
     }
 
+    @BindingAdapter({"onEnableRefresh"})
+    public static void onEnableRefreshCommand(SmartRefreshLayout swipeRefreshLayout,boolean isEnableRefresh) {
+        swipeRefreshLayout.setEnableRefresh(isEnableRefresh);
+    }
+
+    @BindingAdapter({"onEnableLoadMore"})
+    public static void onEnableLoadMoreCommand(SmartRefreshLayout swipeRefreshLayout,boolean isEnableLoadMore) {
+        swipeRefreshLayout.setEnableLoadMore(isEnableLoadMore);
+    }
 }

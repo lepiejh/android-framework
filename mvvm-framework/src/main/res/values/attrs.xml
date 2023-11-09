@@ -83,6 +83,8 @@
     <attr format="float" name="drawable_checked_radialCenterY"/>
     <attr format="float" name="drawable_checked_radialRadius"/>
     <attr format="float" name="drawable_checked_width"/>
+    <attr format="boolean" name="onEnableRefresh"/>
+    <attr format="boolean" name="onEnableLoadMore"/>
     <attr format="float" name="drawable_checked_height"/>
     <attr format="float" name="drawable_checked_marginLeft"/>
     <attr format="float" name="drawable_checked_marginTop"/>
