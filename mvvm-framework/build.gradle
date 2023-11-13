@@ -109,7 +109,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'org.apache.commons:commons-lang3:3.6'
     api 'com.github.lepiejh:android-dialog:v1.0.1'
-    api 'com.github.lepiejh:android-tablayout:v1.0.12'
+    api 'com.github.lepiejh:android-tablayout:v1.1.0'
     api 'com.github.lepiejh:android-play:v1.0.4'
     implementation 'com.github.lepiejh:android-update:v1.0.0'
     api 'com.github.lepiejh:html:v1.0.4'
