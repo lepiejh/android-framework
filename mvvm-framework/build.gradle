@@ -112,5 +112,5 @@ dependencies {
     api 'com.github.lepiejh:android-tablayout:v1.0.12'
     api 'com.github.lepiejh:android-play:v1.0.3'
     implementation 'com.github.lepiejh:android-update:v1.0.0'
-    api 'com.github.lepiejh:html:v1.0.3'
+    api 'com.github.lepiejh:html:v1.0.4'
 }
