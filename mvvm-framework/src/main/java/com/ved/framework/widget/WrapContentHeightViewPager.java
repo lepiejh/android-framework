@@ -4,7 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class WrapContentHeightViewPager extends NoScrollViewPager{
+import androidx.viewpager.widget.ViewPager;
+
+public class WrapContentHeightViewPager extends ViewPager {
     public WrapContentHeightViewPager(Context context) {
         super(context);
     }
