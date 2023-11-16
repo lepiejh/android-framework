@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 
 import java.lang.reflect.Field;
 import java.util.LinkedList;
@@ -37,6 +38,11 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
 
     void init(Application app) {
         app.registerActivityLifecycleCallbacks(this);
+        if (RxJavaPlugins.getErrorHandler() != null || RxJavaPlugins.isLockdown()) {
+            return;
+        }
+        RxJavaPlugins.setErrorHandler(e -> {
+        });
     }
 
     void unInit(Application app) {

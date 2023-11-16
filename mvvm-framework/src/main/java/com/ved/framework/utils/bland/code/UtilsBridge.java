@@ -1,7 +1,5 @@
 package com.ved.framework.utils.bland.code;
 
-import static android.Manifest.permission.CALL_PHONE;
-
 import android.app.Activity;
 import android.app.Application;
 import android.app.Notification;
@@ -15,13 +13,6 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.View;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.annotation.RequiresPermission;
-import androidx.annotation.StringRes;
-import androidx.core.app.NotificationCompat;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -35,6 +26,16 @@ import java.lang.reflect.Type;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.annotation.RequiresPermission;
+import androidx.annotation.StringRes;
+import androidx.core.app.NotificationCompat;
+
+import static android.Manifest.permission.CALL_PHONE;
 
 class UtilsBridge {
 
