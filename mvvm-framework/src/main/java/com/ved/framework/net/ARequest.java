@@ -14,9 +14,12 @@ import com.ved.framework.utils.Utils;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableSource;
+import io.reactivex.rxjava3.core.ObservableTransformer;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.functions.Function;
 
 /**
  * 网络请求
@@ -87,7 +90,19 @@ public abstract class ARequest<T, K> {
                         o.compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider())); // 请求与View周期同步
                     }
                     o.compose(RxUtils.schedulersTransformer())
-                            .compose(RxUtils.exceptionTransformer())
+                            .compose(new ObservableTransformer() {
+                                @Override
+                                public ObservableSource apply(Observable observable) {
+                                    return observable
+                                            .onErrorResumeNext(new Function<Throwable, ObservableSource>() {
+                                                @Override
+                                                public ObservableSource apply(Throwable throwable) throws Throwable {
+                                                    parseError(viewModel, isLoading, iResponse, throwable, activity);
+                                                    return Observable.error(throwable);
+                                                }
+                                            });
+                                }
+                            })
                             .subscribe((Consumer<K>) response -> parseSuccess(viewModel, isLoading, iResponse, response),(Consumer<ResponseThrowable>) throwable -> parseError(viewModel, isLoading, iResponse, throwable, activity));
                 }
             } catch (Exception e) {
@@ -101,6 +116,13 @@ public abstract class ARequest<T, K> {
             viewModel.dismissDialog();
         }
         iResponse.onSuccess(response);
+    }
+
+    private void parseError(@Nullable BaseViewModel viewModel, boolean isLoading, IResponse<K> iResponse, Throwable throwable, Activity activity) {
+        if (isLoading && viewModel != null) {
+            viewModel.dismissDialog();
+        }
+        iResponse.onError(throwable.getMessage());
     }
 
     private void parseError(@Nullable BaseViewModel viewModel, boolean isLoading, IResponse<K> iResponse, ResponseThrowable throwable, Activity activity) {
