@@ -1,6 +1,7 @@
 package com.ved.framework.utils.bland.code;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Build;
@@ -8,6 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.hjq.toast.Toaster;
+import com.tencent.mmkv.MMKV;
+import com.ved.framework.base.AppManager;
+import com.ved.framework.utils.KLog;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +44,9 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
 
     void init(Application app) {
         app.registerActivityLifecycleCallbacks(this);
+        KLog.init(true);
+        MMKV.initialize(app);
+        Toaster.init(app);
         if (RxJavaPlugins.getErrorHandler() != null || RxJavaPlugins.isLockdown()) {
             return;
         }
@@ -192,6 +201,7 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
 
     @Override
     public void onActivityCreated(@NonNull Activity activity, Bundle savedInstanceState) {
+        AppManager.getAppManager().addActivity(activity);
         if (mActivityList.size() == 0) {
             postStatus(activity, true);
         }
@@ -286,6 +296,7 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
 
     @Override
     public void onActivityDestroyed(@NonNull Activity activity) {
+        AppManager.getAppManager().removeActivity(activity);
         mActivityList.remove(activity);
         UtilsBridge.fixSoftInputLeaks(activity);
         consumeActivityLifecycleCallbacks(activity, Lifecycle.Event.ON_DESTROY);
@@ -431,7 +442,7 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
         }
         try {
             //noinspection JavaReflectionMemberAccess
-            Field sDurationScaleField = ValueAnimator.class.getDeclaredField("sDurationScale");
+            @SuppressLint("SoonBlockedPrivateApi") Field sDurationScaleField = ValueAnimator.class.getDeclaredField("sDurationScale");
             sDurationScaleField.setAccessible(true);
             //noinspection ConstantConditions
             float sDurationScale = (Float) sDurationScaleField.get(null);
