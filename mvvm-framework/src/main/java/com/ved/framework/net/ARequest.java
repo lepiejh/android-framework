@@ -47,7 +47,7 @@ public abstract class ARequest<T, K> {
         request(activity, viewModel, method, service,index,isLoading,iResponse);
     }
 
-    public void Request(boolean isLoading,@Nullable BaseViewModel viewModel, @Nullable Class<? extends T> service, @Nullable IMethod<T, K> method,  View view,ISeatSuccess seatSuccess,ISeatError seatError, @Nullable IResponse<K> iResponse) {
+    public void request(boolean isLoading,@Nullable BaseViewModel viewModel, @Nullable Class<? extends T> service, @Nullable IMethod<T, K> method,  View view,ISeatSuccess seatSuccess,ISeatError seatError, @Nullable IResponse<K> iResponse) {
         request(isLoading,viewModel, method, service,view,seatSuccess,seatError,iResponse);
     }
 
