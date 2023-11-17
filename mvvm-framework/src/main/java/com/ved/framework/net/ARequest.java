@@ -101,7 +101,7 @@ public abstract class ARequest<T, K> {
                                             });
                                 }
                             })
-                            .subscribe((Consumer<K>) response -> parseError(isLoading,viewModel,view, iResponse, response),(Consumer<ResponseThrowable>) throwable -> parseError( isLoading,viewModel,view,seatError, iResponse, throwable));
+                            .subscribe((Consumer<K>) response -> parseSuccess(isLoading,viewModel,view, iResponse, response),(Consumer<ResponseThrowable>) throwable -> parseError( isLoading,viewModel,view,seatError, iResponse, throwable));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -110,7 +110,7 @@ public abstract class ARequest<T, K> {
     }
 
 
-    private void parseError(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState, IResponse<K> iResponse, K response) {
+    private void parseSuccess(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState, IResponse<K> iResponse, K response) {
         if (viewState!= null) {
             viewState.setVisibility(View.GONE);
         }
