@@ -95,13 +95,13 @@ public abstract class ARequest<T, K> {
                                             .onErrorResumeNext(new Function<Throwable, ObservableSource>() {
                                                 @Override
                                                 public ObservableSource apply(Throwable throwable) throws Throwable {
-                                                    parseError1( isLoading,viewModel,view,seatError, iResponse, throwable);
+                                                    parseError( isLoading,viewModel,view,seatError, iResponse, throwable);
                                                     return Observable.error(throwable);
                                                 }
                                             });
                                 }
                             })
-                            .subscribe((Consumer<K>) response -> parseSuccess1(isLoading,viewModel,view, iResponse, response),(Consumer<ResponseThrowable>) throwable -> parseError1( isLoading,viewModel,view,seatError, iResponse, throwable));
+                            .subscribe((Consumer<K>) response -> parseError(isLoading,viewModel,view, iResponse, response),(Consumer<ResponseThrowable>) throwable -> parseError( isLoading,viewModel,view,seatError, iResponse, throwable));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -110,7 +110,7 @@ public abstract class ARequest<T, K> {
     }
 
 
-    private void parseSuccess1(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState, IResponse<K> iResponse, K response) {
+    private void parseError(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState, IResponse<K> iResponse, K response) {
         if (viewState!= null) {
             viewState.setVisibility(View.GONE);
         }
@@ -121,7 +121,7 @@ public abstract class ARequest<T, K> {
         iResponse.onSuccess(response);
     }
 
-    private void parseError1(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState,ISeatError seatError,IResponse<K> iResponse, Throwable throwable) {
+    private void parseError(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState,ISeatError seatError,IResponse<K> iResponse, Throwable throwable) {
 
         if (isLoading&&viewModel!=null)
         {
@@ -130,12 +130,12 @@ public abstract class ARequest<T, K> {
 
         if (viewState!= null) {
             seatError.onErrorView();
-            iResponse.onError("");
+            iResponse.onError(throwable.getMessage());
         }
 
     }
 
-    private void parseError1(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState,ISeatError seatError,IResponse<K> iResponse, ResponseThrowable throwable) {
+    private void parseError(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState,ISeatError seatError,IResponse<K> iResponse, ResponseThrowable throwable) {
 
         if (isLoading&&viewModel!=null)
         {
