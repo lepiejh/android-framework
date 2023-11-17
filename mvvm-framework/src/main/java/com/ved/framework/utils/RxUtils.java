@@ -82,6 +82,7 @@ public class RxUtils {
     private static class HttpResponseFunc<T> implements Function<Throwable, Observable<T>> {
         @Override
         public Observable<T> apply(Throwable t) {
+            KLog.e("--NET--","request network error : "+t.getMessage());
             return Observable.error(t);
         }
     }
