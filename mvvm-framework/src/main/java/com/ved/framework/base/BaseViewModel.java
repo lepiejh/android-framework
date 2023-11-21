@@ -305,7 +305,6 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
             if (model != null) {
                 model.onCleared();
             }
-            //ViewModel销毁时会执行，同时取消所有异步任务
             if (mCompositeDisposable != null) {
                 mCompositeDisposable.clear();
             }
