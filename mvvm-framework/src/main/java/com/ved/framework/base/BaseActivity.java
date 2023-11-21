@@ -50,16 +50,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         initViewDataBinding(savedInstanceState);
         //私有的ViewModel与View的契约事件回调逻辑
         registorUIChangeLiveDataCallBack();
-        //页面数据初始化方法
-        initData();
-        initSwipeBack();
-        if (isRegisterEventBus()) {
-            EventBusUtil.register(this);
-        }
-        //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
-        initViewObservable();
-        //注册RxBus
-        viewModel.registerRxBus();
     }
 
     private void initSwipeBack() {
@@ -222,6 +212,18 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         });
         //关闭上一层
         viewModel.getUC().getOnBackPressedEvent().observe(this, (Observer<Void>) v -> onBackPressed());
+        viewModel.getUC().getOnCreateEvent().observe(this, o -> {
+            //页面数据初始化方法
+            initData();
+            initSwipeBack();
+            if (isRegisterEventBus()) {
+                EventBusUtil.register(this);
+            }
+            //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
+            initViewObservable();
+            //注册RxBus
+            viewModel.registerRxBus();
+        });
     }
 
     public void requestPermission(IPermission iPermission,String... permissions){

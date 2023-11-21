@@ -32,7 +32,7 @@ object KViewUtils {
             val firstCompletelyVisibleItemPosition = layoutManager!!.findFirstVisibleItemPosition()
 
             // 获取第二个完全可见项的位置
-            val secondCompletelyVisibleItemPosition = layoutManager!!.findLastVisibleItemPosition()
+            val secondCompletelyVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
 
             // 判断第一个和第二个项是否可见
             return firstCompletelyVisibleItemPosition <= 1 || secondCompletelyVisibleItemPosition <= 1

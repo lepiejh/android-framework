@@ -18,7 +18,6 @@ import com.ved.framework.entity.ParameterField;
 import com.ved.framework.permission.IPermission;
 import com.ved.framework.permission.RxPermission;
 import com.ved.framework.utils.Constant;
-import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.phone.PhoneUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -63,13 +62,6 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     @Override
     public void onResume() {
         super.onResume();
-        if (menuVisibleTag&&!isLoadData)
-        {
-            isLoadData=true;
-            //页面数据初始化方法
-            initData();
-            loadData();
-        }
     }
 
     @Override
@@ -107,16 +99,6 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         initViewDataBinding();
         //私有的ViewModel与View的契约事件回调逻辑
         registorUIChangeLiveDataCallBack();
-
-        if (isRegisterEventBus()) {
-            EventBusUtil.register(this);
-        }
-        //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
-        initViewObservable();
-        //注册RxBus
-        viewModel.registerRxBus();
-        KLog.i("BaseFragment onViewCreated");
-
     }
 
 
@@ -202,6 +184,24 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         viewModel.getUC().getFinishEvent().observe(this, (Observer<Void>) v -> getActivity().finish());
         //关闭上一层
         viewModel.getUC().getOnBackPressedEvent().observe(this, (Observer<Void>) v -> getActivity().onBackPressed());
+        viewModel.getUC().getOnCreateEvent().observe(this, o -> {
+            if (isRegisterEventBus()) {
+                EventBusUtil.register(this);
+            }
+            //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
+            initViewObservable();
+            //注册RxBus
+            viewModel.registerRxBus();
+        });
+        viewModel.getUC().getOnResumeEvent().observe(this, o -> {
+            if (menuVisibleTag&&!isLoadData)
+            {
+                isLoadData=true;
+                //页面数据初始化方法
+                initData();
+                loadData();
+            }
+        });
     }
 
     public void showDialog(){

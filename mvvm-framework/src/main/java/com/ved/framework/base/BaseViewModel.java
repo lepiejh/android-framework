@@ -203,6 +203,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
     @Override
     public void onCreate() {
+        uc.onCreateEvent.call();
     }
 
     public void sendRxEvent(MessageEvent<?> messageEvent){
@@ -251,6 +252,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
     @Override
     public void onResume() {
+        uc.onResumeEvent.call();
     }
 
     @Override
@@ -307,6 +309,8 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         private SingleLiveEvent<Map<String, Object>> startActivityForResultEvent;
         private SingleLiveEvent<Void> finishEvent;
         private SingleLiveEvent<Void> onBackPressedEvent;
+        private SingleLiveEvent<Void> onCreateEvent;
+        private SingleLiveEvent<Void> onResumeEvent;
         private SingleLiveEvent<Map<String, Object>> requestPermissionEvent;
         private SingleLiveEvent<Map<String, Object>> requestCallPhoneEvent;
 
@@ -348,6 +352,14 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
         public SingleLiveEvent<Void> getOnBackPressedEvent() {
             return onBackPressedEvent = createLiveData(onBackPressedEvent);
+        }
+
+        public SingleLiveEvent<Void> getOnCreateEvent() {
+            return onCreateEvent = createLiveData(onCreateEvent);
+        }
+
+        public SingleLiveEvent<Void> getOnResumeEvent() {
+            return onResumeEvent = createLiveData(onResumeEvent);
         }
 
         private <T> SingleLiveEvent<T> createLiveData(SingleLiveEvent<T> liveData) {
