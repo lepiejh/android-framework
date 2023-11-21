@@ -301,12 +301,16 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     @Override
     protected void onCleared() {
         super.onCleared();
-        if (model != null) {
-            model.onCleared();
-        }
-        //ViewModel销毁时会执行，同时取消所有异步任务
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.clear();
+        try {
+            if (model != null) {
+                model.onCleared();
+            }
+            //ViewModel销毁时会执行，同时取消所有异步任务
+            if (mCompositeDisposable != null) {
+                mCompositeDisposable.clear();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
