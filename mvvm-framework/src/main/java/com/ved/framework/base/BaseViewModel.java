@@ -93,6 +93,9 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     }
 
     public void showDialog(String title) {
+        if (uc == null) {
+            uc = new UIChangeLiveData();
+        }
         uc.showDialogEvent.postValue(title);
     }
 
@@ -120,6 +123,9 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         params.put(ParameterField.CLASS, clz);
         if (bundle != null) {
             params.put(ParameterField.BUNDLE, bundle);
+        }
+        if (uc == null) {
+            uc = new UIChangeLiveData();
         }
         uc.startActivityEvent.postValue(params);
     }
@@ -187,6 +193,9 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
      * 关闭界面
      */
     public void finish() {
+        if (uc == null) {
+            uc = new UIChangeLiveData();
+        }
         uc.finishEvent.call();
     }
 
@@ -203,6 +212,9 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
     @Override
     public void onCreate() {
+        if (uc == null) {
+            uc = new UIChangeLiveData();
+        }
         uc.onCreateEvent.call();
     }
 
@@ -252,6 +264,9 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
     @Override
     public void onResume() {
+        if (uc == null) {
+            uc = new UIChangeLiveData();
+        }
         uc.onResumeEvent.call();
     }
 
