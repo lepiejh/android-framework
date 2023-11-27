@@ -203,7 +203,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
     @Override
     public void onCreate() {
-        getUC().onLoadEvent.call();
+        getUC().getOnLoadEvent().call();
     }
 
     public void sendRxEvent(MessageEvent<?> messageEvent){
