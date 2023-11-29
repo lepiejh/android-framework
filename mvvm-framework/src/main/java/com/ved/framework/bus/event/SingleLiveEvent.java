@@ -55,7 +55,11 @@ public class SingleLiveEvent<T> extends MutableLiveData<T> {
             @Override
             public void onChanged(@Nullable T t) {
                 if (mPending.compareAndSet(true, false)) {
-                    observer.onChanged(t);
+                    try {
+                        observer.onChanged(t);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
