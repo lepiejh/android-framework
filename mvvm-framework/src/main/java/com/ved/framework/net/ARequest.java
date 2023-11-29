@@ -9,6 +9,8 @@ import com.ved.framework.base.BaseViewModel;
 import com.ved.framework.http.ResponseThrowable;
 import com.ved.framework.utils.NetUtil;
 import com.ved.framework.utils.RxUtils;
+import com.ved.framework.utils.SPUtils;
+import com.ved.framework.utils.StringUtils;
 import com.ved.framework.utils.Utils;
 
 import androidx.annotation.Nullable;
@@ -131,7 +133,22 @@ public abstract class ARequest<T, K> {
         if (viewState!= null) {
             seatError.onErrorView();
         }
-        iResponse.onError(throwable.getMessage());
+        String error = SPUtils.getInstance("net_sp").getString("net_key","");
+        if (StringUtils.isNotEmpty(error)){
+            if (error.contains("http://") || error.contains("https://")){
+                iResponse.onError("连接服务器失败或其他异常");
+            }else {
+                if (StringUtils.isNotEmpty(throwable.getMessage())){
+                    if (throwable.getMessage().contains("http://") || throwable.getMessage().contains("https://")){
+                        iResponse.onError("连接服务器失败或其他异常");
+                    }else {
+                        iResponse.onError(error);
+                    }
+                }else {
+                    iResponse.onError(error);
+                }
+            }
+        }
     }
 
     private void parseError(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState,ISeatError seatError,IResponse<K> iResponse, ResponseThrowable throwable) {
@@ -211,7 +228,22 @@ public abstract class ARequest<T, K> {
         if (isLoading && viewModel != null) {
             viewModel.dismissDialog();
         }
-        iResponse.onError(throwable.getMessage());
+        String error = SPUtils.getInstance("net_sp").getString("net_key","");
+        if (StringUtils.isNotEmpty(error)){
+            if (error.contains("http://") || error.contains("https://")){
+                iResponse.onError("连接服务器失败或其他异常");
+            }else {
+                if (StringUtils.isNotEmpty(throwable.getMessage())){
+                    if (throwable.getMessage().contains("http://") || throwable.getMessage().contains("https://")){
+                        iResponse.onError("连接服务器失败或其他异常");
+                    }else {
+                        iResponse.onError(error);
+                    }
+                }else {
+                    iResponse.onError(error);
+                }
+            }
+        }
     }
 
     private void parseSuccess(@Nullable BaseViewModel viewModel, boolean isLoading, IResponse<K> iResponse, K response) {
