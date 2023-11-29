@@ -134,6 +134,7 @@ public abstract class ARequest<T, K> {
             seatError.onErrorView();
         }
         String error = SPUtils.getInstance("net_sp").getString("net_key","");
+        SPUtils.getInstance("net_sp").put("net_key","");
         if (StringUtils.isNotEmpty(error)){
             if (error.contains("http://") || error.contains("https://")){
                 iResponse.onError("连接服务器失败");
@@ -229,6 +230,7 @@ public abstract class ARequest<T, K> {
             viewModel.dismissDialog();
         }
         String error = SPUtils.getInstance("net_sp").getString("net_key","");
+        SPUtils.getInstance("net_sp").put("net_key","");
         if (StringUtils.isNotEmpty(error)){
             if (error.contains("http://") || error.contains("https://")){
                 iResponse.onError("连接服务器失败");
