@@ -136,11 +136,11 @@ public abstract class ARequest<T, K> {
         String error = SPUtils.getInstance("net_sp").getString("net_key","");
         if (StringUtils.isNotEmpty(error)){
             if (error.contains("http://") || error.contains("https://")){
-                iResponse.onError("连接服务器失败或其他异常");
+                iResponse.onError("连接服务器失败");
             }else {
                 if (StringUtils.isNotEmpty(throwable.getMessage())){
                     if (throwable.getMessage().contains("http://") || throwable.getMessage().contains("https://")){
-                        iResponse.onError("连接服务器失败或其他异常");
+                        iResponse.onError("连接服务器失败");
                     }else {
                         iResponse.onError(error);
                     }
@@ -231,11 +231,11 @@ public abstract class ARequest<T, K> {
         String error = SPUtils.getInstance("net_sp").getString("net_key","");
         if (StringUtils.isNotEmpty(error)){
             if (error.contains("http://") || error.contains("https://")){
-                iResponse.onError("连接服务器失败或其他异常");
+                iResponse.onError("连接服务器失败");
             }else {
                 if (StringUtils.isNotEmpty(throwable.getMessage())){
                     if (throwable.getMessage().contains("http://") || throwable.getMessage().contains("https://")){
-                        iResponse.onError("连接服务器失败或其他异常");
+                        iResponse.onError("连接服务器失败");
                     }else {
                         iResponse.onError(error);
                     }
