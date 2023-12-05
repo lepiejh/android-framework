@@ -9,6 +9,8 @@ import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.MyGson;
 import com.ved.framework.utils.Utils;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.ObjectStreamException;
 import java.net.Proxy;
@@ -44,7 +46,7 @@ class RetrofitClient {
         return RetrofitClient.getInstance();
     }
 
-    public <T> T create(final Class<T> service,int i,Map<String, String> headers) {
+    public <T> T create(final Class<T> service, int i, Map<String, String> headers, IResult iResult) {
         if (service == null) {
             throw new RuntimeException("Api service is null!");
         }
@@ -65,10 +67,18 @@ class RetrofitClient {
                             long duration = endTime - startTime;
                             MediaType mediaType = response.body().contentType();
                             String content = response.body().string();
-
                             KLog.e("Interceptor", "请求地址：| " + request);
                             KLog.e("Interceptor", "请求体返回：| Response:" + content);
                             KLog.e("Interceptor", "----------请求耗时:" + duration + "毫秒----------");
+                            try {
+                                JSONObject jsonObject = new JSONObject(content);
+                                int code = jsonObject.optInt("code");
+                                String message = jsonObject.optString("msg");
+                                iResult.onInfoResult(message,code);
+                            }catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
                             return response.newBuilder().body(okhttp3.ResponseBody.create(mediaType, content)).build();
                         }).addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
                         .connectTimeout(Constant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)

@@ -42,7 +42,8 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
         }
         if (entityResponse == null) {
             int code = StringUtils.parseInt(JsonPraise.optCode(response,"code"));
-            if (code == Configure.getCode()){
+            if (code == Configure.getCode())
+            {
                 JsonReader jsonReader = gson.newJsonReader(value.charStream());
                 try {
                     return (T) gson.getAdapter(TypeToken.get(type)).read(jsonReader);

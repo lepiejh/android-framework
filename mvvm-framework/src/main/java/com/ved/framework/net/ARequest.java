@@ -7,18 +7,15 @@ import android.view.View;
 
 import com.ved.framework.base.BaseViewModel;
 import com.ved.framework.http.ResponseThrowable;
+import com.ved.framework.utils.Configure;
 import com.ved.framework.utils.NetUtil;
 import com.ved.framework.utils.RxUtils;
-import com.ved.framework.utils.SPUtils;
-import com.ved.framework.utils.StringUtils;
 import com.ved.framework.utils.Utils;
 
 import androidx.annotation.Nullable;
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.ObservableTransformer;
-import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
 
@@ -84,25 +81,23 @@ public abstract class ARequest<T, K> {
             }
         } else {
             try {
+                final String[] msg = new String[1];
                 if (method != null) {
-                    Observable o = method.method(RetrofitClient.getInstance().create(service, 0, null));
+                    Observable o = method.method(RetrofitClient.getInstance().create(service, 0, null, (message, code) -> {
+                        if (code!=Configure.getCode())
+                        {
+                            msg[0] =message;
+                        }
+                    }));
                     if (viewModel != null) {
                         o.compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider())); // 请求与View周期同步
                     }
                     o.compose(RxUtils.schedulersTransformer())
-                            .compose(new ObservableTransformer() {
-                                @Override
-                                public ObservableSource apply(Observable observable) {
-                                    return observable
-                                            .onErrorResumeNext(new Function<Throwable, ObservableSource>() {
-                                                @Override
-                                                public ObservableSource apply(Throwable throwable) throws Throwable {
-                                                    parseError( isLoading,viewModel,view,seatError,throwable, iResponse);
-                                                    return Observable.error(throwable);
-                                                }
-                                            });
-                                }
-                            })
+                            .compose(observable -> observable
+                                    .onErrorResumeNext((Function<Throwable, ObservableSource>) throwable -> {
+                                        parseError( isLoading,viewModel,view,seatError,msg[0], iResponse);
+                                        return Observable.error(throwable);
+                                    }))
                             .subscribe((Consumer<K>) response -> parseSuccess(isLoading,viewModel,view, iResponse, response),(Consumer<ResponseThrowable>) throwable -> parseError( isLoading,viewModel,view,seatError, iResponse, throwable));
                 }
             } catch (Exception e) {
@@ -123,7 +118,7 @@ public abstract class ARequest<T, K> {
         iResponse.onSuccess(response);
     }
 
-    private void parseError(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState,ISeatError seatError,Throwable throwable,IResponse<K> iResponse) {
+    private void parseError(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState,ISeatError seatError,String msg,IResponse<K> iResponse) {
 
         if (isLoading&&viewModel!=null)
         {
@@ -133,23 +128,7 @@ public abstract class ARequest<T, K> {
         if (viewState!= null) {
             seatError.onErrorView();
         }
-        String error = SPUtils.getInstance("net_sp").getString("net_key","");
-        SPUtils.getInstance("net_sp").put("net_key","");
-        if (StringUtils.isNotEmpty(error)){
-            if (error.contains("http://") || error.contains("https://")){
-                iResponse.onError("连接服务器失败");
-            }else {
-                if (StringUtils.isNotEmpty(throwable.getMessage())){
-                    if (throwable.getMessage().contains("http://") || throwable.getMessage().contains("https://")){
-                        iResponse.onError("连接服务器失败");
-                    }else {
-                        iResponse.onError(error);
-                    }
-                }else {
-                    iResponse.onError(error);
-                }
-            }
-        }
+        iResponse.onError(msg);
     }
 
     private void parseError(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState,ISeatError seatError,IResponse<K> iResponse, ResponseThrowable throwable) {
@@ -198,25 +177,23 @@ public abstract class ARequest<T, K> {
             exceptionHandling(activity, "网络异常", -1);
         } else {
             try {
+                final String[] msg = new String[1];
                 if (method != null) {
-                    Observable o = method.method(RetrofitClient.getInstance().create(service, index, null));
+                    Observable o = method.method(RetrofitClient.getInstance().create(service, index, null, (message, code) -> {
+                        if (code!= Configure.getCode())
+                        {
+                            msg[0] =message;
+                        }
+                    }));
                     if (viewModel != null) {
                         o.compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider())); // 请求与View周期同步
                     }
                     o.compose(RxUtils.schedulersTransformer())
-                            .compose(new ObservableTransformer() {
-                                @Override
-                                public ObservableSource apply(Observable observable) {
-                                    return observable
-                                            .onErrorResumeNext(new Function<Throwable, ObservableSource>() {
-                                                @Override
-                                                public ObservableSource apply(Throwable throwable) throws Throwable {
-                                                    parseError(viewModel, isLoading,throwable, iResponse);
-                                                    return Observable.error(throwable);
-                                                }
-                                            });
-                                }
-                            })
+                            .compose(observable -> observable
+                                    .onErrorResumeNext((Function<Throwable, ObservableSource>) throwable -> {
+                                        parseError(viewModel, isLoading,msg[0], iResponse);
+                                        return Observable.error(throwable);
+                                    }))
                             .subscribe((Consumer<K>) response -> parseSuccess(viewModel, isLoading, iResponse, response),(Consumer<ResponseThrowable>) throwable -> parseError(viewModel, isLoading, iResponse, throwable, activity));
                 }
             } catch (Exception e) {
@@ -225,27 +202,11 @@ public abstract class ARequest<T, K> {
         }
     }
 
-    private void parseError(@Nullable BaseViewModel viewModel, boolean isLoading, Throwable throwable,IResponse<K> iResponse) {
+    private void parseError(@Nullable BaseViewModel viewModel, boolean isLoading, String msg,IResponse<K> iResponse) {
         if (isLoading && viewModel != null) {
             viewModel.dismissDialog();
         }
-        String error = SPUtils.getInstance("net_sp").getString("net_key","");
-        SPUtils.getInstance("net_sp").put("net_key","");
-        if (StringUtils.isNotEmpty(error)){
-            if (error.contains("http://") || error.contains("https://")){
-                iResponse.onError("连接服务器失败");
-            }else {
-                if (StringUtils.isNotEmpty(throwable.getMessage())){
-                    if (throwable.getMessage().contains("http://") || throwable.getMessage().contains("https://")){
-                        iResponse.onError("连接服务器失败");
-                    }else {
-                        iResponse.onError(error);
-                    }
-                }else {
-                    iResponse.onError(error);
-                }
-            }
-        }
+        iResponse.onError(msg);
     }
 
     private void parseSuccess(@Nullable BaseViewModel viewModel, boolean isLoading, IResponse<K> iResponse, K response) {
