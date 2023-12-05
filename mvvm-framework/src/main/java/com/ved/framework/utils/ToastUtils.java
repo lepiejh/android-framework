@@ -2,7 +2,6 @@ package com.ved.framework.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
