@@ -34,4 +34,14 @@ object CorpseUtils {
             return ""
         }
     }
+
+    fun split(s:String) : Int{
+        val str = s.split(".")
+        val ss = str.getOrNull(1)
+        return if (ss?.isNotEmpty() == true){
+            ss.length
+        }else{
+            0
+        }
+    }
 }
