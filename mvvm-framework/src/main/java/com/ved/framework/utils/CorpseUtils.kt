@@ -35,6 +35,19 @@ object CorpseUtils {
         }
     }
 
+    fun countChar(str: String, ch: Char): Int {
+        // 将字符串转换为字符数组
+        val chs = str.toCharArray()
+        // 定义变量count存储字符串出现的次数
+        var count = 0
+        for (i in chs.indices) {
+            if (chs[i] == ch) {
+                count++
+            }
+        }
+        return count
+    }
+
     fun split(s:String) : Int{
         val str = s.split(".")
         val ss = str.getOrNull(1)
