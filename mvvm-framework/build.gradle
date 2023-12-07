@@ -111,7 +111,7 @@ dependencies {
     api 'com.github.getActivity:Toaster:12.3'
     implementation 'org.apache.commons:commons-lang3:3.6'
     api 'com.github.lepiejh:android-dialog:v1.0.8'
-    api 'com.github.lepiejh:android-tablayout:v1.2.1'
+    api 'com.github.lepiejh:android-tablayout:v1.2.2'
     api 'com.github.lepiejh:android-play:v1.0.7'
     implementation 'com.github.lepiejh:android-update:v1.0.1'
     api 'com.github.lepiejh:html:v1.1.0'
