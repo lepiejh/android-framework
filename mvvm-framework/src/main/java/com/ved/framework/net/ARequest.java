@@ -63,7 +63,7 @@ public abstract class ARequest<T, K> {
 
         if (NetUtil.getNetWorkStart(Utils.getContext()) == 1) {
 
-            if (isLoading&&viewModel!=null)
+            if (viewModel!=null)
             {
                 viewModel.dismissDialog();
             }
@@ -74,7 +74,7 @@ public abstract class ARequest<T, K> {
                     //手机无网络
                     seatSuccess.onNoNetworkView();
                 }
-                if (isLoading&&viewModel!=null)
+                if (viewModel!=null)
                 {
                     viewModel.dismissDialog();
                 }
@@ -111,7 +111,7 @@ public abstract class ARequest<T, K> {
         if (viewState!= null) {
             viewState.setVisibility(View.GONE);
         }
-        if (isLoading&&viewModel!=null)
+        if (viewModel!=null)
         {
             viewModel.dismissDialog();
         }
@@ -120,7 +120,7 @@ public abstract class ARequest<T, K> {
 
     private void parseError(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState,ISeatError seatError,String msg,IResponse<K> iResponse) {
 
-        if (isLoading&&viewModel!=null)
+        if (viewModel!=null)
         {
             viewModel.dismissDialog();
         }
@@ -133,7 +133,7 @@ public abstract class ARequest<T, K> {
 
     private void parseError(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState,ISeatError seatError,IResponse<K> iResponse, ResponseThrowable throwable) {
 
-        if (isLoading&&viewModel!=null)
+        if (viewModel!=null)
         {
             viewModel.dismissDialog();
         }
@@ -168,7 +168,7 @@ public abstract class ARequest<T, K> {
             viewModel.showDialog();
         }
         if (NetUtil.getNetWorkStart(Utils.getContext()) == 1) {
-            if (isLoading && viewModel != null) {
+            if (viewModel != null) {
                 viewModel.dismissDialog();
             }
             if (iResponse != null) {
@@ -203,21 +203,21 @@ public abstract class ARequest<T, K> {
     }
 
     private void parseError(@Nullable BaseViewModel viewModel, boolean isLoading, String msg,IResponse<K> iResponse) {
-        if (isLoading && viewModel != null) {
+        if (viewModel != null) {
             viewModel.dismissDialog();
         }
         iResponse.onError(msg);
     }
 
     private void parseSuccess(@Nullable BaseViewModel viewModel, boolean isLoading, IResponse<K> iResponse, K response) {
-        if (isLoading && viewModel != null) {
+        if (viewModel != null) {
             viewModel.dismissDialog();
         }
         iResponse.onSuccess(response);
     }
 
     private void parseError(@Nullable BaseViewModel viewModel, boolean isLoading, IResponse<K> iResponse, ResponseThrowable throwable, Activity activity) {
-        if (isLoading && viewModel != null) {
+        if (viewModel != null) {
             viewModel.dismissDialog();
         }
         if (throwable.getCause() instanceof ResultException) {
