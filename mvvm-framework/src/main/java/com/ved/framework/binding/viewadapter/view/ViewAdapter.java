@@ -257,17 +257,25 @@ public class ViewAdapter {
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
     }
 
-    @BindingAdapter("layoutWidth")
-    public static void setLayoutWidth(View textView,int layoutWidth){
+    @BindingAdapter(value = {"layoutWidth", "need_as"}, requireAll = false)
+    public static void setLayoutWidth(View textView,int layoutWidth,boolean b){
         ViewGroup.LayoutParams lp = textView.getLayoutParams();
-        lp.width=DpiUtils.dip2px(textView.getContext(),layoutWidth);
+        if (b){
+            lp.width=layoutWidth;
+        }else {
+            lp.width=DpiUtils.dip2px(textView.getContext(),layoutWidth);
+        }
         textView.setLayoutParams(lp);
     }
 
-    @BindingAdapter("layoutHeight")
-    public static void setLayoutHeight(View textView,int layoutHeight){
+    @BindingAdapter(value = {"layoutHeight", "need_as"}, requireAll = false)
+    public static void setLayoutHeight(View textView,int layoutHeight,boolean b){
         ViewGroup.LayoutParams lp = textView.getLayoutParams();
-        lp.height=DpiUtils.dip2px(textView.getContext(),layoutHeight);
+        if (b){
+            lp.height=layoutHeight;
+        }else {
+            lp.height=DpiUtils.dip2px(textView.getContext(),layoutHeight);
+        }
         textView.setLayoutParams(lp);
     }
 
