@@ -310,7 +310,11 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         }
     }
 
-    public void dismissCustomDialog(){}
+    public void dismissCustomDialog(){
+        if (mmLoading != null && mmLoading.isShowing()) {
+            mmLoading.dismiss();
+        }
+    }
 
     /**
      * 跳转页面

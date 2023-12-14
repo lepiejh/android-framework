@@ -279,7 +279,11 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         }
     }
 
-    public void dismissCustomDialog(){}
+    public void dismissCustomDialog(){
+        if (mmLoading != null && mmLoading.isShowing()) {
+            mmLoading.dismiss();
+        }
+    }
 
     public void requestPermission(IPermission iPermission,String... permissions){
         RxPermission.requestPermission(this,iPermission,permissions);
