@@ -108,56 +108,68 @@ public abstract class ARequest<T, K> {
 
 
     private void parseSuccess(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState, IResponse<K> iResponse, K response) {
-        if (viewState!= null) {
-            viewState.setVisibility(View.GONE);
+        try {
+            if (viewState!= null) {
+                viewState.setVisibility(View.GONE);
+            }
+            if (viewModel!=null)
+            {
+                viewModel.dismissDialog();
+            }
+            iResponse.onSuccess(response);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        if (viewModel!=null)
-        {
-            viewModel.dismissDialog();
-        }
-        iResponse.onSuccess(response);
     }
 
     private void parseError(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState,ISeatError seatError,String msg,IResponse<K> iResponse) {
 
-        if (viewModel!=null)
-        {
-            viewModel.dismissDialog();
-        }
+        try {
+            if (viewModel!=null)
+            {
+                viewModel.dismissDialog();
+            }
 
-        if (viewState!= null) {
-            seatError.onErrorView();
+            if (viewState!= null) {
+                seatError.onErrorView();
+            }
+            iResponse.onError(msg);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        iResponse.onError(msg);
     }
 
     private void parseError(boolean isLoading,@Nullable BaseViewModel viewModel,View viewState,ISeatError seatError,IResponse<K> iResponse, ResponseThrowable throwable) {
 
-        if (viewModel!=null)
-        {
-            viewModel.dismissDialog();
-        }
-
-        if (viewState!= null) {
-            seatError.onErrorView();
-            if (throwable.getCause() instanceof ResultException)
+        try {
+            if (viewModel!=null)
             {
-                ResultException resultException = (ResultException) throwable.getCause();
-                seatError.onErrorView();
-                seatError.onErrorHandler(resultException.getErrCode());
-
-                if (TextUtils.isEmpty(resultException.getErrMsg())) {
-                    iResponse.onError(throwable.message);
-                    seatError.onEmptyView();
-                } else {
-                    iResponse.onError(resultException.getErrMsg());
-                    seatError.onEmptyView();
-                }
-            } else {
-                iResponse.onError(throwable.message);
-                seatError.onEmptyView(throwable.message);
+                viewModel.dismissDialog();
             }
 
+            if (viewState!= null) {
+                seatError.onErrorView();
+                if (throwable.getCause() instanceof ResultException)
+                {
+                    ResultException resultException = (ResultException) throwable.getCause();
+                    seatError.onErrorView();
+                    seatError.onErrorHandler(resultException.getErrCode());
+
+                    if (TextUtils.isEmpty(resultException.getErrMsg())) {
+                        iResponse.onError(throwable.message);
+                        seatError.onEmptyView();
+                    } else {
+                        iResponse.onError(resultException.getErrMsg());
+                        seatError.onEmptyView();
+                    }
+                } else {
+                    iResponse.onError(throwable.message);
+                    seatError.onEmptyView(throwable.message);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -203,33 +215,45 @@ public abstract class ARequest<T, K> {
     }
 
     private void parseError(@Nullable BaseViewModel viewModel, boolean isLoading, String msg,IResponse<K> iResponse) {
-        if (viewModel != null) {
-            viewModel.dismissDialog();
+        try {
+            if (viewModel != null) {
+                viewModel.dismissDialog();
+            }
+            iResponse.onError(msg);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        iResponse.onError(msg);
     }
 
     private void parseSuccess(@Nullable BaseViewModel viewModel, boolean isLoading, IResponse<K> iResponse, K response) {
-        if (viewModel != null) {
-            viewModel.dismissDialog();
+        try {
+            if (viewModel != null) {
+                viewModel.dismissDialog();
+            }
+            iResponse.onSuccess(response);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        iResponse.onSuccess(response);
     }
 
     private void parseError(@Nullable BaseViewModel viewModel, boolean isLoading, IResponse<K> iResponse, ResponseThrowable throwable, Activity activity) {
-        if (viewModel != null) {
-            viewModel.dismissDialog();
-        }
-        if (throwable.getCause() instanceof ResultException) {
-            ResultException resultException = (ResultException) throwable.getCause();
-            exceptionHandling(activity, resultException.getErrMsg(), resultException.getErrCode());
-            if (TextUtils.isEmpty(resultException.getErrMsg())) {
-                iResponse.onError(throwable.message);
-            } else {
-                iResponse.onError(resultException.getErrMsg());
+        try {
+            if (viewModel != null) {
+                viewModel.dismissDialog();
             }
-        } else {
-            iResponse.onError(throwable.message);
+            if (throwable.getCause() instanceof ResultException) {
+                ResultException resultException = (ResultException) throwable.getCause();
+                exceptionHandling(activity, resultException.getErrMsg(), resultException.getErrCode());
+                if (TextUtils.isEmpty(resultException.getErrMsg())) {
+                    iResponse.onError(throwable.message);
+                } else {
+                    iResponse.onError(resultException.getErrMsg());
+                }
+            } else {
+                iResponse.onError(throwable.message);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
