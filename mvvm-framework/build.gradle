@@ -116,5 +116,5 @@ dependencies {
     implementation 'com.github.lepiejh:android-update:v1.0.1'
     api 'com.github.lepiejh:html:v1.1.0'
     api 'com.github.lepiejh:android-chat:v1.0.1'
-    api 'com.github.lepiejh:android-recycleview:v1.0.0'
+    api 'com.github.lepiejh:android-recycleview:v1.0.1'
 }
