@@ -68,6 +68,9 @@ public class TimeUtils {
 
     public static long s_str_2_long(String dateString) {
         try {
+            if (StringUtils.isEmpty(dateString)){
+                return 0;
+            }
             Date d = s_format.parse(dateString);
             return d.getTime();
         } catch (ParseException e) {
@@ -103,6 +106,9 @@ public class TimeUtils {
 
     public static long stringToLong(String strTime, String formatType)
             throws ParseException {
+        if (StringUtils.isEmpty(strTime)){
+            return 0;
+        }
         Date date = stringToDate(strTime, formatType); // String类型转成date类型
         if (date == null) {
             return 0;
@@ -122,6 +128,9 @@ public class TimeUtils {
 
     public static String longToString(long currentTime, String formatType)
             throws ParseException {
+        if (currentTime == 0){
+            return "";
+        }
         Date date; // long类型转成Date类型
         if (String.valueOf(currentTime).length() == 13) {
             date = longToDate(currentTime, formatType);
@@ -142,6 +151,9 @@ public class TimeUtils {
 
     public static long f_str_2_long(String dateString) {
         try {
+            if (StringUtils.isEmpty(dateString)){
+                return 0;
+            }
             Date d = f_format.parse(dateString);
             return d.getTime() / 1000;
         } catch (ParseException e) {
@@ -152,6 +164,9 @@ public class TimeUtils {
 
     public static long f_str_2_long(String dateString, SimpleDateFormat f_format) {
         try {
+            if (StringUtils.isEmpty(dateString)){
+                return 0;
+            }
             Date d = f_format.parse(dateString);
             return d.getTime() / 1000;
         } catch (ParseException e) {
@@ -161,6 +176,9 @@ public class TimeUtils {
     }
 
     public static String ss_long_2_str(long timestamp) {
+        if (timestamp == 0){
+            return "";
+        }
         if (String.valueOf(timestamp).length() == 13) {
             return ss_format.format(new Date(timestamp));
         } else {
@@ -169,6 +187,9 @@ public class TimeUtils {
     }
 
     public static String f_str_2_12str(long timestamp, SimpleDateFormat f_format) {
+        if (timestamp == 0){
+            return "";
+        }
         if (String.valueOf(timestamp).length() == 13){
             return f_format.format(new Date(timestamp));
         }else {
@@ -177,6 +198,9 @@ public class TimeUtils {
     }
 
     public static String ss_long_2_12str(long timestamp) {
+        if (timestamp == 0){
+            return "";
+        }
         if (String.valueOf(timestamp).length() == 13){
             return f_12_format.format(new Date(timestamp));
         }else {
@@ -193,6 +217,9 @@ public class TimeUtils {
     }
 
     public static String s_long_2_str(long timestamp) {
+        if (timestamp == 0){
+            return "";
+        }
         if (String.valueOf(timestamp).length() == 13) {
             return s_format.format(new Date(timestamp));
         } else {
@@ -201,6 +228,9 @@ public class TimeUtils {
     }
 
     public static String f_long_2_str(long timestamp) {
+        if (timestamp == 0){
+            return "";
+        }
         if (String.valueOf(timestamp).length() == 13) {
             return f_format.format(new Date(timestamp));
         } else {
@@ -209,6 +239,9 @@ public class TimeUtils {
     }
 
     public static String f_long_2_str(long timestamp, SimpleDateFormat f_format) {
+        if (timestamp == 0){
+            return "";
+        }
         if (String.valueOf(timestamp).length() == 13) {
             return f_format.format(new Date(timestamp));
         } else {
@@ -400,6 +433,9 @@ public class TimeUtils {
     }
 
     public static String getTimeMMdd(long time) {
+        if (time == 0){
+            return "";
+        }
         SimpleDateFormat formater = new SimpleDateFormat("MM-dd");
         if (String.valueOf(time).length() == 13) {
             return formater.format(time);
@@ -413,6 +449,9 @@ public class TimeUtils {
     public static SimpleDateFormat friendly_format2 = new SimpleDateFormat("MM-dd HH:mm");
 
     public static String sk_time_friendly_format2(long time) {
+        if (time == 0){
+            return "";
+        }
         if (String.valueOf(time).length() == 13) {
             return friendly_format2.format(new Date(time));
         } else {
@@ -421,6 +460,9 @@ public class TimeUtils {
     }
 
     public static String sk_time_s_long_2_str(long time) {
+        if (time == 0){
+            return "";
+        }
         if (String.valueOf(time).length() == 13) {
             return s_long_2_str(time);
         } else {
@@ -430,6 +472,9 @@ public class TimeUtils {
 
 
     public static String sk_time_ss_long_2_str(long time) {
+        if (time == 0){
+            return "";
+        }
         if (String.valueOf(time).length() == 13) {
             return ss_long_2_str(time);
         } else {
@@ -438,6 +483,9 @@ public class TimeUtils {
     }
 
     public static long sk_time_s_str_2_long(String dateString) {
+        if (StringUtils.isEmpty(dateString)){
+            return 0;
+        }
         if (String.valueOf(dateString).length() == 13) {
             return s_str_2_long(dateString);
         } else {
@@ -543,6 +591,9 @@ public class TimeUtils {
 
     public static long sk_time_yMdHm_str_to_long(String time) {
         try {
+            if (StringUtils.isEmpty(time)){
+                return 0;
+            }
             return sk_format_1.parse(time).getTime() / 1000;
         } catch (ParseException e) {
             e.printStackTrace();
