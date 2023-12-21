@@ -365,4 +365,88 @@
     <attr format="boolean" name="need_as"/>
     <attr format="integer" name="layoutHeight"/>
     <attr format="integer" name="text_size"/>
+
+    <attr name="textColor" format="color|reference" />
+    <attr name="textSize" format="dimension" />
+    <attr name="textTopColor"  format="color|reference"/>
+    <attr name="textTopSize" format="dimension"/>
+    <attr name="boxWidth" format="dimension" />
+    <attr name="boxBackgroundColor" format="color|reference" />
+    <attr name="boxStrokeColor" format="color|reference" />
+    <attr name="boxStrokeWidth" format="dimension" />
+    <attr name="radius" format="dimension" />
+    <attr name="maxProgress" format="integer" />
+    <attr name="progress" format="integer" />
+    <attr name="strokeWidth" format="dimension" />
+    <attr name="progressbarColor" format="color|reference" />
+    <attr name="gradient" format="boolean" />
+    <attr name="gradientColorArray" format="reference" />
+    <attr name="ingestion_reference_type" format="string" />
+    <attr name="html_text" format="string" />
+    <attr name="audio_image_url" format="string" />
+    <attr name="audio_url" format="string" />
+    <attr name="hasWeek" format="integer" />
+    <attr name="hasBubble" format="integer" />
+    <declare-styleable name="CircularProgressBar">
+        <attr name="radius" />
+        <attr name="strokeWidth"/>
+        <attr name="progressbarBackgroundColor" format="color|reference" />
+        <attr name="progressbarColor" />
+        <attr name="maxProgress" />
+        <attr name="progress"/>
+        <attr name="text" format="string" />
+        <attr name="textColor" />
+        <attr name="textSize" />
+        <attr name="textTop" format="string" />
+        <attr name="textTopColor" />
+        <attr name="textTopSize" />
+        <attr name="gradient" />
+        <attr name="gradientColorArray" />
+    </declare-styleable>
+    <declare-styleable name="MedicationSlider">
+        <attr name="thumb_drawable" format="reference"/>
+        <attr name="progress_drawable" format="reference"/>
+    </declare-styleable>
+    <attr name="leftValue" format="string"/>
+    <attr name="rightValue" format="string"/>
+    <attr name="progressValue" format="integer"/>
+    <attr name="foodIngestion" format="string"/>
+
+    <attr name="blood_sugar_avg" format="string" />
+    <attr name="blood_sugar_proportion" format="string" />
+    <attr name="blood_sugar_fluctuate" format="string" />
+    <attr name="blood_sugar_reachts" format="string" />
+    <attr name="blood_sugar_high" format="string" />
+    <attr name="blood_sugar_low" format="string" />
+    <attr name="blood_sugar_normal" format="string" />
+
+    <attr name="sleep_length" format="string" />
+    <attr name="sleep_lie_length" format="string" />
+    <attr name="fat_values" format="string" />
+    <attr name="diet_values" format="string" />
+    <attr name="card_value" format="string" />
+    <attr name="card_unit" format="string" />
+    <attr name="card_weight" format="string" />
+    <attr name="plan_text_01" format="string" />
+    <attr name="plan_text_02" format="string" />
+    <attr name="plan_text_03" format="string" />
+    <attr name="plan_text_04" format="string" />
+    <attr name="plan_problem_01" format="string" />
+    <attr name="plan_problem_02" format="string" />
+    <attr name="plan_price" format="string" />
+    <attr name="width_run_progress" format="integer" />
+    <attr name="left_run_progress" format="integer" />
+    <attr name="rule_min_value" format="string" />
+    <attr name="rule_max_value" format="string" />
+    <attr name="rule_grid_value" format="string" />
+    <attr name="rule_value" format="string" />
+    <attr name="onValueChangeCommand" format="reference" />
+    <attr name="text_value" format="string" />
+    <attr name="text_default_value" format="string" />
+    <attr name="text_length" format="string" />
+    <attr name="web_html_text" format="string" />
+    <attr name="float_to_int" format="string" />
+    <attr name="format_to_string" format="string" />
+    <attr name="format_key" format="integer" />
+    <attr name="format_value" format="string" />
 </resources>

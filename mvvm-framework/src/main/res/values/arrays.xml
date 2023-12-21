@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gradientColor">
+        <item>#FDAA74</item>
+        <item>#FF3F02</item>
+    </string-array>
+
+    <string-array name="gradientColorStep">
+        <item>#76EAFF</item>
+        <item>#34C8E2</item>
+    </string-array>
+</resources>
