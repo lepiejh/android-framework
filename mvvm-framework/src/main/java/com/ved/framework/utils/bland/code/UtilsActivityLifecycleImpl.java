@@ -15,6 +15,7 @@ import com.tencent.mmkv.MMKV;
 import com.ved.framework.base.AppManager;
 import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.ReflectUtil;
+import com.ved.framework.utils.UIUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,7 +48,7 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
         app.registerActivityLifecycleCallbacks(this);
         if (b.INSTANCE.a()) {
             try {
-                Object o = ReflectUtil.getAccessibleField("${Utils.getContext().packageName}.BuildConfig","DEBUG").get(0);
+                Object o = ReflectUtil.getAccessibleField(com.ved.framework.utils.Utils.getContext().getPackageName()+".BuildConfig","DEBUG").get(0);
                 KLog.init((Boolean) o);
             } catch (Exception e) {
                 e.printStackTrace();
