@@ -1,5 +1,8 @@
 package com.ved.framework.base;
 
+import android.view.ViewGroup;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,5 +31,22 @@ public class BasePageAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return fragments.size();
+    }
+
+    @NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        try {
+            Field mFragments = getClass().getSuperclass().getDeclaredField("mFragments");
+            mFragments.setAccessible(true);
+            ((ArrayList) mFragments.get(this)).clear();
+
+            Field mSavedState = getClass().getSuperclass().getDeclaredField("mSavedState");
+            mSavedState.setAccessible(true);
+            ((ArrayList) mSavedState.get(this)).clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return super.instantiateItem(container, position);
     }
 }
