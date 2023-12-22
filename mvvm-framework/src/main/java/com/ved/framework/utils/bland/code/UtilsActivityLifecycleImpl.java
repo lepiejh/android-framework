@@ -13,6 +13,7 @@ import com.codbking.widget.utils.b;
 import com.hjq.toast.Toaster;
 import com.tencent.mmkv.MMKV;
 import com.ved.framework.base.AppManager;
+import com.ved.framework.utils.Configure;
 import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.ReflectUtil;
 import com.ved.framework.utils.UIUtils;
@@ -56,6 +57,12 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
             }
         } else {
             KLog.init(false);
+        }
+        try {
+            Object o = ReflectUtil.getAccessibleField(com.ved.framework.utils.Utils.getContext().getPackageName()+".BuildConfig","BASE_URL").get(0);
+            Configure.setUrl("", 200, (String) o);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         MMKV.initialize(app);
         Toaster.init(app);
