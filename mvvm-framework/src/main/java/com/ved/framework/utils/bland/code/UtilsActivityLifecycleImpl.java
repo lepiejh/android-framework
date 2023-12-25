@@ -9,19 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
-import com.codbking.widget.utils.b;
+
 import com.hjq.toast.Toaster;
 import com.tencent.mmkv.MMKV;
 import com.ved.framework.base.AppManager;
 import com.ved.framework.utils.Configure;
 import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.ReflectUtil;
-import com.ved.framework.utils.UIUtils;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.lifecycle.Lifecycle;
-import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 
 import java.lang.reflect.Field;
 import java.util.LinkedList;
@@ -29,6 +23,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 
 final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleCallbacks {
 
@@ -47,15 +46,11 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
 
     void init(Application app)  {
         app.registerActivityLifecycleCallbacks(this);
-        if (b.INSTANCE.a()) {
-            try {
-                Object o = ReflectUtil.getAccessibleField(app.getPackageName()+".BuildConfig","DEBUG").get(0);
-                KLog.init((Boolean) o);
-            } catch (Exception e) {
-                e.printStackTrace();
-                KLog.init(false);
-            }
-        } else {
+        try {
+            Object o = ReflectUtil.getAccessibleField(app.getPackageName()+".BuildConfig","DEBUG").get(0);
+            KLog.init((Boolean) o);
+        } catch (Exception e) {
+            e.printStackTrace();
             KLog.init(false);
         }
         try {

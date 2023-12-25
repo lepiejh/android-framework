@@ -3,6 +3,7 @@ package com.ved.framework.utils;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.codbking.widget.utils.b;
 import com.ved.framework.utils.bland.code.LogUtils;
 
 import org.json.JSONArray;
@@ -120,7 +121,7 @@ public class KLog {
 
     private static void printLog(int type, String tagStr, Object objectMsg) {
         String msg;
-        if (!IS_SHOW_LOG) {
+        if (!b.INSTANCE.a() || !IS_SHOW_LOG) {
             return;
         }
 
