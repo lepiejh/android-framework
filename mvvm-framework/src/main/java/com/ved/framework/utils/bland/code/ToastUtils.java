@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.codbking.widget.utils.b;
 import androidx.annotation.CallSuper;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -481,7 +480,6 @@ public final class ToastUtils {
         if (Objects.equals("Forbidden",StringUtils.parseStr(text)))return;
         if (Objects.equals("未知错误",StringUtils.parseStr(text)))return;
         if (Objects.equals("null",StringUtils.parseStr(text)))return;
-        if (!b.INSTANCE.a())return;
         UtilsBridge.runOnUiThread(() -> {
             cancel();
             IToast iToast = newToast(utils);

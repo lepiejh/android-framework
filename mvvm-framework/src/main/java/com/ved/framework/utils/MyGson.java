@@ -2,7 +2,6 @@ package com.ved.framework.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.codbking.widget.utils.b;
 
 public class MyGson {
     private MyGson() {
@@ -17,10 +16,6 @@ public class MyGson {
     }
 
     public Gson getGson(){
-        if (b.INSTANCE.a()){
-            return new GsonBuilder().registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory()).create();
-        }else {
-            return new Gson();
-        }
+        return new GsonBuilder().registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory()).create();
     }
 }

@@ -7,7 +7,6 @@ import android.util.Base64;
 
 import androidx.annotation.Nullable;
 
-import com.codbking.widget.utils.b;
 import com.google.gson.Gson;
 import com.ved.framework.BuildConfig;
 
@@ -138,9 +137,6 @@ public final class SPUtils {
         if (null == sp) {
             return false;
         }
-        if (!b.INSTANCE.a()){
-            return false;
-        }
         SharedPreferences.Editor editor = sp.edit();
 
         if (value instanceof String) {
@@ -163,9 +159,6 @@ public final class SPUtils {
     public Object getValue(@Nullable String key, @Nullable Object defaultValue) {
         if (null == sp) {
             return null;
-        }
-        if (!b.INSTANCE.a()){
-            return false;
         }
         if (defaultValue instanceof String) {
             return decryptDES(sp.getString(key, (String) defaultValue));
@@ -191,9 +184,6 @@ public final class SPUtils {
         if (null == sp) {
             return false;
         }
-        if (!b.INSTANCE.a()){
-            return false;
-        }
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(key);
         return editor.commit();
@@ -203,9 +193,6 @@ public final class SPUtils {
         if (null == sp) {
             return false;
         }
-        if (!b.INSTANCE.a()){
-            return false;
-        }
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
         return editor.commit();
@@ -213,9 +200,6 @@ public final class SPUtils {
 
     public Map<String, ?> getAll() {
         if (null == sp) {
-            return null;
-        }
-        if (!b.INSTANCE.a()){
             return null;
         }
         return sp.getAll();

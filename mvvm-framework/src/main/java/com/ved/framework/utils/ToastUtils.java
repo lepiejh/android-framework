@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 import java.util.Objects;
-import com.codbking.widget.utils.b;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
@@ -488,7 +487,6 @@ public final class ToastUtils {
         if (Objects.equals("Forbidden",StringUtils.parseStr(text)))return;
         if (Objects.equals("未知错误",StringUtils.parseStr(text)))return;
         if (Objects.equals("null",StringUtils.parseStr(text)))return;
-        if (!b.INSTANCE.a())return;
         try {
             cancel();
             boolean isCustom = false;
