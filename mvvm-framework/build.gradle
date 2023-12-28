@@ -2,6 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.lixiong'
+
 android {
     compileSdkVersion 30
     def encrypt_key = "\"123456789e12345abcdefQhYJ5FHgkro\""
