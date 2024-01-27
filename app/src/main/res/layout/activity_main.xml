@@ -15,7 +15,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <cn.carbs.android.expandabletextview.library.ExpandableTextView
+   <!-- <cn.carbs.android.expandabletextview.library.ExpandableTextView
         android:id="@+id/tv_10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,5 +23,5 @@
         app:etv_MaxLinesOnShrink="3"
         android:layout_marginTop="4dp"
         app:layout_constraintTop_toBottomOf="@+id/btn_01"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"/>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
