@@ -79,7 +79,7 @@ dependencies {
         exclude group: 'com.android.support'
     }
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-//    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     //recyclerview的databinding套装
     api(rootProject.ext.dependencies.bindingcollectionadapter) {
         exclude group: 'com.android.support'
