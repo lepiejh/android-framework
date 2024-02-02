@@ -20,8 +20,9 @@ import com.ved.framework.utils.bland.code.ScreenUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import com.yanxinim.classroom.ui.base.BaseActivity;
 
-public class OnlyOpaqueCompatActivity extends AppCompatActivity {
+public class OnlyOpaqueCompatActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
