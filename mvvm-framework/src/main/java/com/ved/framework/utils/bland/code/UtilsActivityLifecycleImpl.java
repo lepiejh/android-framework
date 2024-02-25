@@ -47,14 +47,14 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
     void init(Application app)  {
         app.registerActivityLifecycleCallbacks(this);
         try {
-            Object o = ReflectUtil.getAccessibleField(app.getPackageName()+".BuildConfig","DEBUG").get(0);
+            Object o = ReflectUtil.getAccessibleField("com.yanxinim.classroom.BuildConfig","DEBUG").get(0);
             KLog.init((Boolean) o);
         } catch (Exception e) {
             e.printStackTrace();
             KLog.init(false);
         }
         try {
-            Object o = ReflectUtil.getAccessibleField(app.getPackageName()+".BuildConfig","BASE_URL").get(0);
+            Object o = ReflectUtil.getAccessibleField("com.yanxinim.classroom.BuildConfig","BASE_URL").get(0);
             Configure.setUrl("", 200, (String) o);
         } catch (Exception e) {
             e.printStackTrace();
