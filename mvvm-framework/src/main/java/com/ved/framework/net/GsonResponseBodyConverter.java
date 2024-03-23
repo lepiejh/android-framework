@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.ved.framework.utils.Configure;
 import com.ved.framework.utils.JsonPraise;
+import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.SPUtils;
 import com.ved.framework.utils.StringUtils;
 
@@ -42,6 +43,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
         }
         if (entityResponse == null) {
             int code = StringUtils.parseInt(JsonPraise.optCode(response,"resultCode"));
+            KLog.i("--NET--","code: "+code+" ,Configure.getCode() : "+Configure.getCode());
             if (code == Configure.getCode())
             {
                 JsonReader jsonReader = gson.newJsonReader(value.charStream());
@@ -49,10 +51,12 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                     return (T) gson.getAdapter(TypeToken.get(type)).read(jsonReader);
                 } catch (IOException e) {
                     e.printStackTrace();
+                    KLog.e("--NET--","error: "+e.getMessage());
                     throw new ResultException("服务器异常", -2);
                 }
             }else {
                 String pram = SPUtils.getInstance().getString("resultMsg","");
+                KLog.e("--NET--","msg: "+pram);
                 String msg;
                 if (StringUtils.isSpace(pram)){
                     msg = JsonPraise.optCode(response,"msg");
