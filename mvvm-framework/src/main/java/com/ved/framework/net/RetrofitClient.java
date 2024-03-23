@@ -72,8 +72,8 @@ class RetrofitClient {
                             KLog.e("Interceptor", "----------请求耗时:" + duration + "毫秒----------");
                             try {
                                 JSONObject jsonObject = new JSONObject(content);
-                                int code = jsonObject.optInt("code");
-                                String message = jsonObject.optString("msg");
+                                int code = jsonObject.optInt("resultCode");
+                                String message = jsonObject.optString("resultMsg");
                                 iResult.onInfoResult(message,code);
                             }catch (Exception e)
                             {
