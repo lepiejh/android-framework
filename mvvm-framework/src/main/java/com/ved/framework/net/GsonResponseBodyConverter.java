@@ -7,7 +7,6 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.ved.framework.utils.Configure;
 import com.ved.framework.utils.JsonPraise;
-import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.SPUtils;
 import com.ved.framework.utils.StringUtils;
 
@@ -42,9 +41,8 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
             e.printStackTrace();
         }
         if (entityResponse == null) {
-            int code = StringUtils.parseInt(JsonPraise.optCode(response,"resultCode"));
-            if (code == Configure.getCode())
-            {
+            int code = StringUtils.parseInt(JsonPraise.optCode(response, "resultCode"));
+            if (code == Configure.getCode()) {
                 JsonReader jsonReader = gson.newJsonReader(value.charStream());
                 try {
                     return (T) gson.getAdapter(TypeToken.get(type)).read(jsonReader);
@@ -52,13 +50,13 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                     e.printStackTrace();
                     throw new ResultException("服务器异常", -2);
                 }
-            }else {
-                String pram = SPUtils.getInstance().getString("resultMsg","");
+            } else {
+                String pram = SPUtils.getInstance().getString("resultMsg", "");
                 String msg;
-                if (StringUtils.isSpace(pram)){
-                    msg = JsonPraise.optCode(response,"msg");
-                }else {
-                    msg = JsonPraise.optCode(response,pram);
+                if (StringUtils.isSpace(pram)) {
+                    msg = JsonPraise.optCode(response, "msg");
+                } else {
+                    msg = JsonPraise.optCode(response, pram);
                 }
                 throw new ResultException(msg, code);
             }
