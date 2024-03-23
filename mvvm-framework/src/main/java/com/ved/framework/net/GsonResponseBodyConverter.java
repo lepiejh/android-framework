@@ -41,7 +41,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
             e.printStackTrace();
         }
         if (entityResponse == null) {
-            int code = StringUtils.parseInt(JsonPraise.optCode(response,"code"));
+            int code = StringUtils.parseInt(JsonPraise.optCode(response,"resultCode"));
             if (code == Configure.getCode())
             {
                 JsonReader jsonReader = gson.newJsonReader(value.charStream());
@@ -52,7 +52,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                     throw new ResultException("服务器异常", -2);
                 }
             }else {
-                String pram = SPUtils.getInstance().getString("msg","");
+                String pram = SPUtils.getInstance().getString("resultMsg","");
                 String msg;
                 if (StringUtils.isSpace(pram)){
                     msg = JsonPraise.optCode(response,"msg");
