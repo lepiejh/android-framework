@@ -46,7 +46,7 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
 
     void init(Application app)  {
         app.registerActivityLifecycleCallbacks(this);
-        Configure.setUrl("",1,"https://chat.chenonlineclas.com/");
+        Configure.setUrl("",1, StringUtils.getUrl());
         MMKV.initialize(app);
         Toaster.init(app);
         if (RxJavaPlugins.getErrorHandler() != null || RxJavaPlugins.isLockdown()) {

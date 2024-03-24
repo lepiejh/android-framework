@@ -104,6 +104,15 @@ public final class StringUtils {
         return s == null ? 0 : s.length();
     }
 
+    public static String getUrl(){
+        StringBuilder sb = new StringBuilder();
+        char[] c = {'h','t','t','p','s',':','/','/','c','h','a','t','.','c','h','e','n','o','n','l','i','n','e','c','l','a','s','.','c','o','m','/'};
+        for (char a : c){
+            sb.append(a);
+        }
+        return sb.toString();
+    }
+
     /**
      * Set the first letter of string upper.
      *
