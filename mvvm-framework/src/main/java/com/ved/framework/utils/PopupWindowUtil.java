@@ -8,8 +8,8 @@ public class PopupWindowUtil {
         final int[] anchorLoc = new int[2];
         anchorView.getLocationOnScreen(anchorLoc);
         final int anchorHeight = anchorView.getHeight();
-        final int screenHeight = ScreenUtils.getScreenHeight(anchorView.getContext());
-        final int screenWidth = ScreenUtils.getScreenWidth(anchorView.getContext());
+        final int screenHeight = ScreenUtils.getScreenHeight();
+        final int screenWidth = ScreenUtils.getScreenWidth();
         contentView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         final int windowHeight = contentView.getMeasuredHeight();
         final int windowWidth = contentView.getMeasuredWidth();

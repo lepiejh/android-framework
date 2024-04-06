@@ -16,6 +16,9 @@ import com.ved.framework.base.AppManager;
 import com.ved.framework.utils.Configure;
 import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.ReflectUtil;
+import com.ved.framework.utils.album.GlideAlbumLoader;
+import com.yanzhenjie.album.Album;
+import com.yanzhenjie.album.AlbumConfig;
 
 import java.lang.reflect.Field;
 import java.util.LinkedList;
@@ -28,6 +31,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
+import me.jessyan.autosize.AutoSizeConfig;
+import update.UpdateAppUtils;
 
 final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleCallbacks {
 
@@ -54,6 +59,9 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
         }
         RxJavaPlugins.setErrorHandler(e -> {
         });
+        AutoSizeConfig.getInstance().setCustomFragment(true);
+        UpdateAppUtils.init(app);
+        Album.initialize(AlbumConfig.newBuilder(app).setAlbumLoader(new GlideAlbumLoader()).build());
     }
 
     void unInit(Application app) {

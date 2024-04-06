@@ -15,8 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ved.framework.utils.KLog;
+import com.ved.framework.utils.ScreenUtils;
 import com.ved.framework.utils.UIUtils;
-import com.ved.framework.utils.bland.code.ScreenUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -45,7 +45,7 @@ public class OnlyOpaqueCompatActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         if (isRegular()) {
-            if (ScreenUtils.getScreenWidth() < ScreenUtils.getScreenHeight()){
+            if (!ScreenUtils.isTabletDevice()){
                 if (getRequestedOrientation() == SCREEN_ORIENTATION_UNSPECIFIED) {
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 }
