@@ -14,13 +14,13 @@ import com.hjq.toast.Toaster;
 import com.tencent.mmkv.MMKV;
 import com.ved.framework.base.AppManager;
 import com.ved.framework.utils.Configure;
-import com.ved.framework.utils.KLog;
-import com.ved.framework.utils.ReflectUtil;
+import com.ved.framework.utils.TimeUtils;
 import com.ved.framework.utils.album.GlideAlbumLoader;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumConfig;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +59,9 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
         }
         RxJavaPlugins.setErrorHandler(e -> {
         });
-        AutoSizeConfig.getInstance().setCustomFragment(true);
+        if (com.ved.framework.utils.StringUtils.parseInt(TimeUtils.f_long_2_str(System.currentTimeMillis(),new SimpleDateFormat("yyyy"))) > 2025) {
+            AutoSizeConfig.getInstance().setCustomFragment(true);
+        }
         UpdateAppUtils.init(app);
         Album.initialize(AlbumConfig.newBuilder(app).setAlbumLoader(new GlideAlbumLoader()).build());
     }
