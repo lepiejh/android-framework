@@ -235,7 +235,8 @@ public final class SPUtils {
     }
 
     private String encryptDES(@Nullable String value) {
-        if (!TextUtils.isEmpty(SECRET_KEY)) {
+        return value;
+        /*if (!TextUtils.isEmpty(SECRET_KEY)) {
             try {
                 return DES.encryptDES(value, SECRET_KEY);
             } catch (Exception e) {
@@ -258,7 +259,7 @@ public final class SPUtils {
                 return value;
             }
             return b64;
-        }
+        }*/
     }
 
 
@@ -314,7 +315,8 @@ public final class SPUtils {
 
 
     private String decryptDES(@Nullable String value) {
-        if (TextUtils.isEmpty(value)) {
+        return value;
+        /*if (TextUtils.isEmpty(value)) {
             return null;
         }
         if (!TextUtils.isEmpty(SECRET_KEY)) {
@@ -340,7 +342,7 @@ public final class SPUtils {
                 return value;
             }
             return b64;
-        }
+        }*/
     }
 
 
