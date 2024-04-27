@@ -1,12 +1,8 @@
 package com.ved.framework.binding.viewadapter.swiperefresh;
 
-import com.ved.framework.binding.command.BindingCommand;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.ved.framework.binding.command.BindingCommand;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
 
 
