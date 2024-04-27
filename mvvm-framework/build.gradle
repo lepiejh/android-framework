@@ -93,7 +93,7 @@ dependencies {
 //    api rootProject.ext.dependencies["XUpdate"]
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     implementation 'com.github.mamumu:mmDialog:1.2.0'
-    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-28'
+    compileOnly rootProject.ext.dependencies["smartrefresh"]
     api 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10'
     implementation 'org.greenrobot:eventbus:3.2.0'
 //    api 'me.jessyan:autosize:1.2.1'
