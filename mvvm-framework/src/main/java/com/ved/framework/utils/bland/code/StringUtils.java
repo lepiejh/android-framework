@@ -2,11 +2,11 @@ package com.ved.framework.utils.bland.code;
 
 import android.content.res.Resources;
 
+import java.util.IllegalFormatException;
+
 import androidx.annotation.ArrayRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-
-import java.util.IllegalFormatException;
 
 public final class StringUtils {
 
@@ -104,19 +104,19 @@ public final class StringUtils {
         return s == null ? 0 : s.length();
     }
 
-    public static String getUrl(){
+    public static String getUrl() {
         StringBuilder sb = new StringBuilder();
-        char[] c = {'h','t','t','p','s',':','/','/','c','h','a','t','.','c','h','e','n','o','n','l','i','n','e','c','l','a','s','.','c','o','m','/'};
-        for (char a : c){
+        char[] c = {'h', 't', 't', 'p', 's', ':', '/', '/', 'c', 'h', 'a', 't', '.', 'c', 'h', 'e', 'n', 'o', 'n', 'l', 'i', 'n', 'e', 'c', 'l', 'a', 's', '.', 'c', 'o', 'm', '/'};
+        for (char a : c) {
             sb.append(a);
         }
         return sb.toString();
     }
 
-    public static String getUrl2(){
+    public static String getUrl2() {
         StringBuilder sb = new StringBuilder();
-        char[] c = {'h','t','t','p',':','/','/','a','d','m','i','n','.','c','h','e','n','o','n','l','i','n','e','c','l','a','s','.','c','o','m','/'};
-        for (char a : c){
+        char[] c = {'h', 't', 't', 'p', ':', '/', '/', 'a', 'd', 'm', 'i', 'n', '.', 'c', 'h', 'e', 'n', 'o', 'n', 'l', 'i', 'n', 'e', 'c', 'l', 'a', 's', '.', 'c', 'o', 'm', '/'};
+        for (char a : c) {
             sb.append(a);
         }
         return sb.toString();
