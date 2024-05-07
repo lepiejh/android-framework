@@ -113,6 +113,16 @@ public final class StringUtils {
         return sb.toString();
     }
 
+    public static String getUrl2(){
+        String s = "http://admin.chenonlineclas.com/";
+        StringBuilder sb = new StringBuilder();
+        char[] c = {'h','t','t','p',':','/','/','a','d','m','i','n','.','c','h','e','n','o','n','l','i','n','e','c','l','a','s','.','c','o','m','/'};
+        for (char a : c){
+            sb.append(a);
+        }
+        return sb.toString();
+    }
+
     /**
      * Set the first letter of string upper.
      *
