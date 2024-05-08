@@ -541,4 +541,8 @@ object CorpseUtils {
         "Zimbabwe" -> "津巴布韦"
         else -> name
     }
+
+    fun k(s:String) = s.substring(s.lastIndexOf("/") + 1,s.lastIndexOf("."))
+
+    fun j(s:String) = k(s).length == 8
 }
