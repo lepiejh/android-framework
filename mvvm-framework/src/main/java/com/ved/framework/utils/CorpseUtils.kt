@@ -1,5 +1,9 @@
 package com.ved.framework.utils
 
+import android.app.Activity
+import android.view.View
+import android.widget.TextView
+
 object CorpseUtils {
     fun remove(s: String?): String? = s?.replace("[\r\n]".toRegex(), "")?.replace(" ", "")
 
@@ -545,4 +549,65 @@ object CorpseUtils {
     fun k(s:String) = s.substring(s.lastIndexOf("/") + 1,s.lastIndexOf("."))
 
     fun j(s:String) = k(s).length == 8
+
+    fun a(c: Activity, id: Int, a: String, b: String) {
+        when (LocaleHelper.getLanguage(Utils.getContext())) {
+            "zh", "TW" -> {
+                (c.findViewById<View>(id) as TextView).text = a
+            }
+            else -> {
+                (c.findViewById<View>(id) as TextView).text = b
+            }
+        }
+    }
+
+    fun b(a: String, b: String) = when (LocaleHelper.getLanguage(Utils.getContext())) {
+        "zh", "TW" -> {
+            a
+        }
+        else -> {
+            b
+        }
+    }
+
+    fun c(a: Int, b: Int) = when (LocaleHelper.getLanguage(Utils.getContext())) {
+        "zh", "TW" -> {
+            a
+        }
+        else -> {
+            b
+        }
+    }
+
+    fun d(c: View, id: Int, a: String, b: String) {
+        when (LocaleHelper.getLanguage(Utils.getContext())) {
+            "zh", "TW" -> {
+                (c.findViewById<View>(id) as TextView).text = a
+            }
+            else -> {
+                (c.findViewById<View>(id) as TextView).text = b
+            }
+        }
+    }
+
+    fun e(c: Activity, id: Int, a: String, b: String) {
+        when (LocaleHelper.getLanguage(Utils.getContext())) {
+            "zh", "TW" -> {
+                (c.findViewById<View>(id) as TextView).hint = a
+            }
+            else -> {
+                (c.findViewById<View>(id) as TextView).hint = b
+            }
+        }
+    }
+
+    fun f() = when (LocaleHelper.getLanguage(Utils.getContext())) {
+        "zh", "TW" -> true
+        else -> false
+    }
+
+    fun g(func:(Int)->Unit) = when (LocaleHelper.getLanguage(Utils.getContext())) {
+        "zh", "TW" -> func.invoke(1)
+        else -> func.invoke(2)
+    }
 }
