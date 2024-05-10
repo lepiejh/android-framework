@@ -140,7 +140,8 @@ public final class SPUtils {
         SharedPreferences.Editor editor = sp.edit();
 
         if (value instanceof String) {
-            return editor.putString(key, (String) encryptDES((String) value)).commit();
+//            return editor.putString(key, (String) encryptDES((String) value)).commit();
+            return editor.putString(key, (String) value).commit();
         } else if (value instanceof Boolean) {
             return editor.putBoolean(key, (Boolean) value).commit();
         } else if (value instanceof Float) {
@@ -161,7 +162,8 @@ public final class SPUtils {
             return null;
         }
         if (defaultValue instanceof String) {
-            return decryptDES(sp.getString(key, (String) defaultValue));
+//            return decryptDES(sp.getString(key, (String) defaultValue));
+            return sp.getString(key, (String) defaultValue);
         } else if (defaultValue instanceof Boolean) {
             return sp.getBoolean(key, (Boolean) defaultValue);
         } else if (defaultValue instanceof Float) {
