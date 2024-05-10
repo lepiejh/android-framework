@@ -53,8 +53,8 @@ class RetrofitClient {
         HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory();
         return new Retrofit.Builder()
                 .client(new OkHttpClient.Builder()
-                        .cache(new Cache(new File(Utils.getContext().getCacheDir(), "ved_cache"),Constant.CACHE_TIMEOUT))
-                        .cookieJar(new CookieJarImpl(new PersistentCookieStore(Utils.getContext())))
+//                        .cache(new Cache(new File(Utils.getContext().getCacheDir(), "ved_cache"),Constant.CACHE_TIMEOUT))
+//                        .cookieJar(new CookieJarImpl(new PersistentCookieStore(Utils.getContext())))
                         .addInterceptor(new MyInterceptor(headers))
                         .addInterceptor(new CacheInterceptor(Utils.getContext()))
                         .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
