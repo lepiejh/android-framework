@@ -546,7 +546,11 @@ object CorpseUtils {
         else -> name
     }
 
-    fun k(s:String) = s.substring(s.lastIndexOf("/") + 1,s.lastIndexOf("."))
+    fun k(s:String) = if (s.contains("/") && s.contains(".")){
+        s.substring(s.lastIndexOf("/") + 1,s.lastIndexOf("."))
+    }else{
+        s
+    }
 
     fun j(s:String) = k(s).length == 8
 
