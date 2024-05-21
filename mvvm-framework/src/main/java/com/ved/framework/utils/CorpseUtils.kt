@@ -546,13 +546,21 @@ object CorpseUtils {
         else -> name
     }
 
-    fun k(s:String) = if (s.contains("/") && s.contains(".")){
-        s.substring(s.lastIndexOf("/") + 1,s.lastIndexOf("."))
-    }else{
+    fun k(s:String) = try {
+        if (s.contains("/") && s.contains(".")){
+            s.substring(s.lastIndexOf("/") + 1,s.lastIndexOf("."))
+        }else{
+            s
+        }
+    } catch (e: Exception) {
         s
     }
 
-    fun j(s:String) = k(s).length == 8
+    fun j(s:String) = try {
+        k(s).length == 8
+    } catch (e: Exception) {
+        false
+    }
 
     fun a(c: Activity, id: Int, a: String, b: String) {
         when (LocaleHelper.getLanguage(Utils.getContext())) {
