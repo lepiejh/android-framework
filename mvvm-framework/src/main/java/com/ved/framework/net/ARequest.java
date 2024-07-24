@@ -42,6 +42,10 @@ public abstract class ARequest<T, K> {
         request(activity, viewModel, method, service,index,false,iResponse);
     }
 
+    public void request(@Nullable Activity activity, @Nullable BaseViewModel viewModel, @Nullable Class<? extends T> service, @Nullable IMethod<T, K> method, String baseUrl, @Nullable IResponse<K> iResponse) {
+        request(activity, viewModel, method, service,baseUrl,false,iResponse);
+    }
+
     public void request(@Nullable Activity activity, @Nullable BaseViewModel viewModel, @Nullable Class<? extends T> service, @Nullable IMethod<T, K> method, int index, boolean isLoading, @Nullable IResponse<K> iResponse) {
         request(activity, viewModel, method, service,index,isLoading,iResponse);
     }
@@ -192,6 +196,46 @@ public abstract class ARequest<T, K> {
                 final String[] msg = new String[1];
                 if (method != null) {
                     Observable o = method.method(RetrofitClient.getInstance().create(service, index, null, (message, code) -> {
+                        if (code!= Configure.getCode())
+                        {
+                            msg[0] =message;
+                        }
+                    }));
+                    if (viewModel != null) {
+                        o.compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider())); // 请求与View周期同步
+                    }
+                    o.compose(RxUtils.schedulersTransformer())
+                            .compose(observable -> observable
+                                    .onErrorResumeNext((Function<Throwable, ObservableSource>) throwable -> {
+                                        parseError(viewModel, isLoading,msg[0], iResponse);
+                                        return Observable.error(throwable);
+                                    }))
+                            .subscribe((Consumer<K>) response -> parseSuccess(viewModel, isLoading, iResponse, response),(Consumer<ResponseThrowable>) throwable -> parseError(viewModel, isLoading, iResponse, throwable, activity));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    public void request(@Nullable Activity activity, @Nullable BaseViewModel viewModel, @Nullable IMethod<T, K> method,@Nullable Class<? extends T> service,String baseUrl,boolean isLoading, @Nullable IResponse<K> iResponse) {
+        if (isLoading && viewModel != null) {
+            viewModel.showDialog();
+        }
+        if (NetUtil.getNetWorkStart(Utils.getContext()) == 1) {
+            if (viewModel != null) {
+                viewModel.dismissDialog();
+            }
+            if (iResponse != null) {
+                iResponse.onError("网络异常");
+            }
+            exceptionHandling(activity, "网络异常", -1);
+        } else {
+            try {
+                final String[] msg = new String[1];
+                if (method != null) {
+                    Observable o = method.method(RetrofitClient.getInstance().create(service, baseUrl, null, (message, code) -> {
                         if (code!= Configure.getCode())
                         {
                             msg[0] =message;

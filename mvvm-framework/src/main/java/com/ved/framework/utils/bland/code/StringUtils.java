@@ -2,6 +2,8 @@ package com.ved.framework.utils.bland.code;
 
 import android.content.res.Resources;
 
+import com.ved.framework.utils.SPUtils;
+
 import java.util.IllegalFormatException;
 
 import androidx.annotation.ArrayRes;
@@ -105,12 +107,11 @@ public final class StringUtils {
     }
 
     public static String getUrl() {
-        StringBuilder sb = new StringBuilder();
-        char[] c = {'h', 't', 't', 'p', 's', ':', '/', '/', 'c', 'h', 'a', 't', '.', 'c', 'h', 'e', 'n', 'o', 'n', 'l', 'i', 'n', 'e', 'c', 'l', 'a', 's', '.', 'c', 'o', 'm', '/'};
-        for (char a : c) {
-            sb.append(a);
-        }
-        return sb.toString();
+        String sb = "http://" +
+                SPUtils.getInstance().getString("login_ip", "") +
+                ":" +
+                SPUtils.getInstance().getString("login_port", "");
+        return sb;
     }
 
     public static String getUrl2() {

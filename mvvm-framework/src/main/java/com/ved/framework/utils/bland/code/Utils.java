@@ -3,6 +3,7 @@ package com.ved.framework.utils.bland.code;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,13 @@ public final class Utils {
 
     private Utils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
+    }
+
+    public static Context getContext() {
+        if (sApp != null) {
+            return sApp;
+        }
+        throw new NullPointerException("should be initialized in application");
     }
 
     /**

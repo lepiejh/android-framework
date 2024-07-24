@@ -2,11 +2,15 @@ package com.ved.framework.net;
 
 import android.text.TextUtils;
 
+import com.google.gson.JsonSyntaxException;
+import com.ved.framework.mode.EntityResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import com.ved.framework.mode.Result;
 import com.ved.framework.utils.Configure;
 import com.ved.framework.utils.JsonPraise;
+import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.SPUtils;
 import com.ved.framework.utils.StringUtils;
 
@@ -34,12 +38,14 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
     @Override
     public T convert(ResponseBody value) throws IOException {
         String response = value.string();
+        KLog.i("Interceptor","接口返回的数据："+response);
         Class<?> entityResponse = null;
         try {
             entityResponse = Class.forName("com.ved.framework.mode.EntityResponse");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         if (entityResponse == null) {
             int code = StringUtils.parseInt(JsonPraise.optCode(response, "resultCode"));
             if (code == Configure.getCode()) {
@@ -61,7 +67,13 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                 throw new ResultException(msg, code);
             }
         } else {
-            Object result = gson.fromJson(response, entityResponse);
+            Object result = null;
+            try {
+                result = gson.fromJson(response, entityResponse);
+            } catch (JsonSyntaxException e) {
+                e.printStackTrace();
+                return gson.fromJson(response, type);
+            }
             Method[] allMethods = entityResponse.getDeclaredMethods();
             String methodName = "";
             String methodNameContent = "";
@@ -102,6 +114,14 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                 }
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
+            }
+
+            EntityResponse er = JsonPraise.jsonToObj(response,EntityResponse.class);
+            if (er != null){
+                Result r = JsonPraise.jsonToObj(er.getMsg(), Result.class);
+                if (r != null) {
+                    code = r.getResult();
+                }
             }
             if (code == Configure.getCode()) {
                 return gson.fromJson(response, type);

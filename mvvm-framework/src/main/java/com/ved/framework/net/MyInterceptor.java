@@ -1,6 +1,7 @@
 package com.ved.framework.net;
 
 import com.ved.framework.utils.SPUtils;
+import com.ved.framework.utils.bland.code.DeviceUtils;
 
 import androidx.annotation.NonNull;
 
@@ -34,7 +35,7 @@ class MyInterceptor implements Interceptor {
                 builder.addHeader(headerKey, Objects.requireNonNull(headers.get(headerKey))).build();
             }
         }
-        builder.addHeader("userId", SPUtils.getInstance("user_sp").getString("user_id","0"));
+        builder.addHeader("device_id", DeviceUtils.getUniqueDeviceId());
 
         List<String> headerValues = request.headers("url_name");
         if (headerValues.size() > 0) {
