@@ -2,15 +2,14 @@ package com.ved.framework.net;
 
 import android.text.TextUtils;
 
-import com.google.gson.JsonSyntaxException;
-import com.ved.framework.mode.EntityResponse;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import com.ved.framework.mode.EntityResponse;
 import com.ved.framework.mode.Result;
 import com.ved.framework.utils.Configure;
 import com.ved.framework.utils.JsonPraise;
-import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.SPUtils;
 import com.ved.framework.utils.StringUtils;
 
@@ -38,7 +37,6 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
     @Override
     public T convert(ResponseBody value) throws IOException {
         String response = value.string();
-        KLog.i("Interceptor","接口返回的数据："+response);
         Class<?> entityResponse = null;
         try {
             entityResponse = Class.forName("com.ved.framework.mode.EntityResponse");
