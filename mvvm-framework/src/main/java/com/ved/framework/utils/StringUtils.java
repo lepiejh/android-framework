@@ -354,7 +354,7 @@ public final class StringUtils {
         if (s.startsWith("0")){
             s = s.substring(1);
         }
-        return StringUtils.parseInt(s);
+        return parseInt(s);
     }
 
     public static String split(String s){
