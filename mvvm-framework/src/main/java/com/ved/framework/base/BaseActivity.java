@@ -2,7 +2,6 @@ package com.ved.framework.base;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 

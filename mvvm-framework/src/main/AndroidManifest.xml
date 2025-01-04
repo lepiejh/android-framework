@@ -24,18 +24,23 @@
         android:hardwareAccelerated="true"
         android:requestLegacyExternalStorage="true">
 
-     <!--   <meta-data
+        <!-- Android 11 -->
+        <meta-data
+            android:name="ScopedStorage"
+            android:value="true" />
+
+        <meta-data
             android:name="android.max_aspect"
             android:value="2.4" />
 
-        &lt;!&ndash;适配华为（huawei）刘海屏&ndash;&gt;
+        <!--适配华为（huawei）刘海屏-->
         <meta-data
             android:name="android.notch_support"
             android:value="true"/>
-        &lt;!&ndash;适配小米（xiaomi）刘海屏&ndash;&gt;
+        <!--适配小米（xiaomi）刘海屏-->
         <meta-data
             android:name="notch.config"
-            android:value="portrait|landscape" />-->
+            android:value="portrait|landscape" />
 
         <activity
             android:name="com.ved.framework.base.ContainerActivity"
