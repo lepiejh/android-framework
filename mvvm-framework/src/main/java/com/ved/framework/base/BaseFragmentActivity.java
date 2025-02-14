@@ -34,12 +34,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-
-/**
- * Created by ved on 2017/6/15.
- * 一个拥有DataBinding框架的基Activity
- * 这里根据项目业务可以换成你自己熟悉的BaseActivity, 但是需要继承RxAppCompatActivity,方便LifecycleProvider管理生命周期
- */
 public abstract class BaseFragmentActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends RxAppCompatFragmentActivity implements IBaseView, ViewTreeObserver.OnGlobalLayoutListener{
     protected V binding;
     protected VM viewModel;
@@ -57,16 +51,6 @@ public abstract class BaseFragmentActivity<V extends ViewDataBinding, VM extends
         initViewDataBinding(savedInstanceState);
         //私有的ViewModel与View的契约事件回调逻辑
         registorUIChangeLiveDataCallBack();
-        initStatusBar();
-        //页面数据初始化方法
-        initData();
-        if (isRegisterEventBus()) {
-            EventBusUtil.register(this);
-        }
-        //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
-        initViewObservable();
-        //注册RxBus
-        viewModel.registerRxBus();
     }
 
     public void initStatusBar() {
@@ -224,6 +208,18 @@ public abstract class BaseFragmentActivity<V extends ViewDataBinding, VM extends
         viewModel.getUC().getFinishEvent().observe(this, (Observer<Void>) v -> finish());
         //关闭上一层
         viewModel.getUC().getOnBackPressedEvent().observe(this, (Observer<Void>) v -> onBackPressed());
+        viewModel.getUC().getOnLoadEvent().observe(this, o -> {
+            initStatusBar();
+            //页面数据初始化方法
+            initData();
+            if (isRegisterEventBus()) {
+                EventBusUtil.register(this);
+            }
+            //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
+            initViewObservable();
+            //注册RxBus
+            viewModel.registerRxBus();
+        });
     }
 
     public void requestPermission(IPermission iPermission,String... permissions){
