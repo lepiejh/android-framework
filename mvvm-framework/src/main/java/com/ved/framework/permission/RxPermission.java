@@ -3,7 +3,7 @@ package com.ved.framework.permission;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
-import com.tbruyelle.rxpermissions3.RxPermissions;
+//import com.tbruyelle.rxpermissions3.RxPermissions;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +16,7 @@ import io.reactivex.rxjava3.functions.Consumer;
 public class RxPermission {
 
     public static void requestPermission(final Object object, final IPermission iPermission, final String... permission){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (object instanceof FragmentActivity){
                 if (hasAlwaysDeniedPermission((FragmentActivity) object, Arrays.asList(permission))){
                     iPermission.onGranted();
@@ -64,7 +64,7 @@ public class RxPermission {
             }
         }else {
             iPermission.onGranted();
-        }
+        }*/
     }
 
     private static boolean hasAlwaysDeniedPermission(FragmentActivity activity, List<String> asList) {
