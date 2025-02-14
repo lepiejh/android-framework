@@ -5,11 +5,10 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Base64;
 
-import androidx.annotation.Nullable;
-
 import com.google.gson.Gson;
 import com.ved.framework.BuildConfig;
 import com.ved.framework.utils.bland.code.Utils;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -17,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.Nullable;
 
 public final class SPUtils {
 
@@ -244,17 +245,17 @@ public final class SPUtils {
                 try {
                     base64 = Base64.encodeToString(value.getBytes(), Base64.DEFAULT);
                 } catch (Exception exception) {
-                    exception.printStackTrace();
+                    KLog.e(exception.getMessage());
                     return value;
                 }
                 return base64;
             }
         } else {
-            String b64 = null;
+            String b64;
             try {
                 b64 = Base64.encodeToString(value.getBytes(), Base64.DEFAULT);
             } catch (Exception e) {
-                e.printStackTrace();
+                KLog.e(e.getMessage());
                 return value;
             }
             return b64;
@@ -326,17 +327,17 @@ public final class SPUtils {
                 try {
                     base64 = new String(Base64.decode(value, Base64.DEFAULT));
                 } catch (Exception exception) {
-                    exception.printStackTrace();
+                    KLog.e(exception.getMessage());
                     return value;
                 }
                 return base64;
             }
         } else {
-            String b64 = null;
+            String b64;
             try {
                 b64 = new String(Base64.decode(value, Base64.DEFAULT));
             } catch (Exception e) {
-                e.printStackTrace();
+                KLog.e(e.getMessage());
                 return value;
             }
             return b64;

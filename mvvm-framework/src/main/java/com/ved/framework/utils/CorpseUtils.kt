@@ -1,10 +1,11 @@
 package com.ved.framework.utils
 
-import android.app.Activity
 import android.graphics.Rect
+import android.text.SpannableStringBuilder
 import android.view.TouchDelegate
 import android.view.View
-import android.widget.TextView
+import androidx.annotation.ColorInt
+import com.orhanobut.dialog.utils.DecimalUtils
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Proxy
 
@@ -34,6 +35,20 @@ object CorpseUtils {
     fun findMax(list: List<Int?>): Int? {
         return list.sortedWith(compareBy { it }).last()
     }
+
+    fun String.isSpace() = StringUtils.isSpace(this)
+
+    fun String.parseLong() = StringUtils.parseLong(this)
+
+    fun String.parseDouble() = StringUtils.parseDouble(this)
+
+    fun String.parseInt() = StringUtils.parseInt(this)
+
+    fun <T> T.parseStr(): String = StringUtils.parseStr(this)
+
+    fun String.getRepayNumBuilder(@ColorInt colorResId: Int,start: Int,end: Int) : SpannableStringBuilder = StringUtils.getRepayNumBuilder(this,colorResId,start, end)
+
+    fun String.decimalFormat() = DecimalUtils.decimalFormat(this)
 
     fun makeTime(t:Int?) : String?{
         t?.let {
@@ -68,83 +83,6 @@ object CorpseUtils {
         }else{
             0
         }
-    }
-
-    fun k(s:String) = try {
-        if (s.contains("/") && s.contains(".")){
-            s.substring(s.lastIndexOf("/") + 1,s.lastIndexOf("."))
-        }else{
-            s
-        }
-    } catch (e: Exception) {
-        s
-    }
-
-    fun j(s:String) = try {
-        k(s).length == 8
-    } catch (e: Exception) {
-        false
-    }
-
-    fun a(c: Activity, id: Int, a: String, b: String) {
-        when (LocaleHelper.getLanguage(Utils.getContext())) {
-            "zh", "TW" -> {
-                (c.findViewById<View>(id) as TextView).text = a
-            }
-            else -> {
-                (c.findViewById<View>(id) as TextView).text = b
-            }
-        }
-    }
-
-    fun b(a: String, b: String) = when (LocaleHelper.getLanguage(Utils.getContext())) {
-        "zh", "TW" -> {
-            a
-        }
-        else -> {
-            b
-        }
-    }
-
-    fun c(a: Int, b: Int) = when (LocaleHelper.getLanguage(Utils.getContext())) {
-        "zh", "TW" -> {
-            a
-        }
-        else -> {
-            b
-        }
-    }
-
-    fun d(c: View, id: Int, a: String, b: String) {
-        when (LocaleHelper.getLanguage(Utils.getContext())) {
-            "zh", "TW" -> {
-                (c.findViewById<View>(id) as TextView).text = a
-            }
-            else -> {
-                (c.findViewById<View>(id) as TextView).text = b
-            }
-        }
-    }
-
-    fun e(c: Activity, id: Int, a: String, b: String) {
-        when (LocaleHelper.getLanguage(Utils.getContext())) {
-            "zh", "TW" -> {
-                (c.findViewById<View>(id) as TextView).hint = a
-            }
-            else -> {
-                (c.findViewById<View>(id) as TextView).hint = b
-            }
-        }
-    }
-
-    fun f() = when (LocaleHelper.getLanguage(Utils.getContext())) {
-        "zh", "TW" -> true
-        else -> false
-    }
-
-    fun g(func:(Int)->Unit) = when (LocaleHelper.getLanguage(Utils.getContext())) {
-        "zh", "TW" -> func.invoke(1)
-        else -> func.invoke(2)
     }
 
     /**

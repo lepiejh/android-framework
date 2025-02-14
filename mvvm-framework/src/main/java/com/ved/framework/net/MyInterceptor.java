@@ -1,9 +1,6 @@
 package com.ved.framework.net;
 
-import com.ved.framework.utils.SPUtils;
 import com.ved.framework.utils.bland.code.DeviceUtils;
-
-import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,6 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;

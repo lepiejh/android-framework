@@ -28,7 +28,7 @@ public final class StringUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    public static boolean isSpace(CharSequence s){
+    public static boolean isSpace(String s){
         if (TextUtils.isEmpty(s)){
             return true;
         }else {
@@ -138,22 +138,6 @@ public final class StringUtils {
      */
     public static boolean isTrimEmpty(final String s) {
         return (s == null || s.trim().length() == 0);
-    }
-
-    /**
-     * 判断字符串是否为null或全为空白字符
-     *
-     * @param s 待校验字符串
-     * @return {@code true}: null或全空白字符<br> {@code false}: 不为null且不全空白字符
-     */
-    public static boolean isSpace(final String s) {
-        if (s == null) return true;
-        for (int i = 0, len = s.length(); i < len; ++i) {
-            if (!Character.isWhitespace(s.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**

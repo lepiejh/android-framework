@@ -15,6 +15,10 @@ import com.tencent.mmkv.MMKV;
 import com.ved.framework.base.AppManager;
 import com.ved.framework.utils.Configure;
 import com.ved.framework.utils.KLog;
+import com.ved.framework.utils.ReflectUtil;
+import com.ved.framework.utils.album.GlideAlbumLoader;
+import com.yanzhenjie.album.Album;
+import com.yanzhenjie.album.AlbumConfig;
 
 import java.lang.reflect.Field;
 import java.util.LinkedList;
@@ -27,6 +31,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
+import me.jessyan.autosize.AutoSizeConfig;
+import update.UpdateAppUtils;
 
 final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleCallbacks {
 
@@ -45,14 +51,43 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
 
     void init(Application app)  {
         app.registerActivityLifecycleCallbacks(this);
-        Configure.setUrl("",1, StringUtils.getUrl(),StringUtils.getUrl2());
+        try {
+            Field urlField = ReflectUtil.getAccessibleField(app.getPackageName()+".BuildConfig","BASE_URL");
+            if (urlField != null){
+                Object urlObject = urlField.get(0);
+                if (urlObject != null) {
+                    Field urlCodeField = ReflectUtil.getAccessibleField(app.getPackageName()+".BuildConfig","BASE_URL_CODE");
+                    if (urlCodeField != null){
+                        Object urlCodeObject = urlCodeField.get(0);
+                        if (urlCodeObject != null){
+                            Configure.setUrl("", (int) urlCodeObject, (String) urlObject);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            KLog.e(e.getMessage());
+        }
+        try {
+            Field logField = ReflectUtil.getAccessibleField(app.getPackageName()+".BuildConfig","DEBUG");
+            if (logField != null) {
+                Object logObject = logField.get(0);
+                if (logObject != null) {
+                    KLog.init((boolean) logObject);
+                }
+            }
+        } catch (Exception e) {
+            KLog.e(e.getMessage());
+        }
         MMKV.initialize(app);
         Toaster.init(app);
         if (RxJavaPlugins.getErrorHandler() != null || RxJavaPlugins.isLockdown()) {
             return;
         }
-        RxJavaPlugins.setErrorHandler(e -> {
-        });
+        RxJavaPlugins.setErrorHandler(e -> KLog.e(e.getMessage()));
+        AutoSizeConfig.getInstance().setCustomFragment(true);
+        UpdateAppUtils.init(app);
+        Album.initialize(AlbumConfig.newBuilder(app).setAlbumLoader(new GlideAlbumLoader()).build());
     }
 
     void unInit(Application app) {

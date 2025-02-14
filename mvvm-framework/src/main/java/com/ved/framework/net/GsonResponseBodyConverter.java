@@ -10,6 +10,7 @@ import com.ved.framework.mode.EntityResponse;
 import com.ved.framework.mode.Result;
 import com.ved.framework.utils.Configure;
 import com.ved.framework.utils.JsonPraise;
+import com.ved.framework.utils.KLog;
 import com.ved.framework.utils.SPUtils;
 import com.ved.framework.utils.StringUtils;
 
@@ -41,7 +42,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
         try {
             entityResponse = Class.forName("com.ved.framework.mode.EntityResponse");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            KLog.e(e.getMessage());
         }
 
         if (entityResponse == null) {
@@ -51,7 +52,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                 try {
                     return (T) gson.getAdapter(TypeToken.get(type)).read(jsonReader);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    KLog.e(e.getMessage());
                     throw new ResultException("服务器异常", -2);
                 }
             } else {
@@ -65,7 +66,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                 throw new ResultException(msg, code);
             }
         } else {
-            Object result = null;
+            Object result;
             try {
                 result = gson.fromJson(response, entityResponse);
             } catch (JsonSyntaxException e) {
@@ -94,7 +95,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
             try {
                 method = entityResponse.getDeclaredMethod(methodName);
             } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+                KLog.e(e.getMessage());
             }
             int code = 0;
             try {
@@ -111,7 +112,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                     }
                 }
             } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
+                KLog.e(e.getMessage());
             }
 
             EntityResponse er = JsonPraise.jsonToObj(response,EntityResponse.class);
@@ -130,7 +131,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                     try {
                         methodContent = entityResponse.getDeclaredMethod(methodNameContent);
                     } catch (NoSuchMethodException e) {
-                        e.printStackTrace();
+                        KLog.e(e.getMessage());
                     }
                     String errorMsg = null;
                     try {
@@ -147,7 +148,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                             }
                         }
                     } catch (IllegalAccessException | InvocationTargetException e) {
-                        e.printStackTrace();
+                        KLog.e(e.getMessage());
                     }
                     if (!TextUtils.isEmpty(errorMsg)) {
                         throw new ResultException(errorMsg, code);
@@ -156,7 +157,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                         try {
                             methodResult2 = entityResponse.getDeclaredMethod(methodResultStr);
                         } catch (NoSuchMethodException e) {
-                            e.printStackTrace();
+                            KLog.e(e.getMessage());
                         }
                         String errorMsg2 = null;
                         try {
@@ -173,7 +174,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                                 }
                             }
                         } catch (IllegalAccessException | InvocationTargetException e) {
-                            e.printStackTrace();
+                            KLog.e(e.getMessage());
                         }
                         throw new ResultException(errorMsg2, code);
                     } else {
@@ -201,7 +202,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody,
                             }
                         }
                     } catch (IllegalAccessException | InvocationTargetException e) {
-                        e.printStackTrace();
+                        KLog.e(e.getMessage());
                     }
                     throw new ResultException(errorMsg1, code);
                 } else {
