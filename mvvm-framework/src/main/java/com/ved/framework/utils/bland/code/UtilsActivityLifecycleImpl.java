@@ -87,7 +87,7 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
         RxJavaPlugins.setErrorHandler(e -> KLog.e(e.getMessage()));
         AutoSizeConfig.getInstance().setCustomFragment(true);
         UpdateAppUtils.init(app);
-        Album.initialize(AlbumConfig.newBuilder(app).setAlbumLoader(new GlideAlbumLoader()).build());
+//        Album.initialize(AlbumConfig.newBuilder(app).setAlbumLoader(new GlideAlbumLoader()).build());
     }
 
     void unInit(Application app) {
