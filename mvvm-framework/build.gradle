@@ -120,4 +120,5 @@ dependencies {
 //    api 'com.amplitude:android-sdk:2.23.2'
     api 'me.jessyan:retrofit-url-manager:1.4.0'
     implementation 'com.github.lepiejh:arc:v1.2.10'
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
 }
