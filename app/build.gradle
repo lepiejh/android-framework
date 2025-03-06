@@ -43,7 +43,7 @@ repositories {
     flatDir {
         dirs 'libs'
     }
-}
+}getIPAddress
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar","*.aar"])

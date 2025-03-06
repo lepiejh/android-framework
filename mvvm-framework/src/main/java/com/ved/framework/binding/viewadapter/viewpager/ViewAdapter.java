@@ -4,6 +4,8 @@ import com.ved.framework.binding.command.BindingCommand;
 import com.ved.framework.entity.ViewPagerDataWrapper;
 
 import androidx.databinding.BindingAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 /**
@@ -27,6 +29,19 @@ public class ViewAdapter {
 
             @Override
             public void onPageSelected(int position) {
+                PagerAdapter pagerAdapter = viewPager.getAdapter();
+                if (pagerAdapter != null){
+                    Fragment fragment = (Fragment) pagerAdapter.instantiateItem(viewPager, position);
+                    fragment.setMenuVisibility(true); // 使当前 Fragment 的菜单可见
+
+                    // 设置其他 Fragment 的菜单不可见
+                    for (int i = 0; i < viewPager.getAdapter().getCount(); i++) {
+                        if (i != position) {
+                            Fragment otherFragment = (Fragment) viewPager.getAdapter().instantiateItem(viewPager, i);
+                            otherFragment.setMenuVisibility(false); // 使其他 Fragment 的菜单不可见
+                        }
+                    }
+                }
                 if (onPageSelectedCommand != null) {
                     onPageSelectedCommand.execute(position);
                 }
