@@ -1,6 +1,7 @@
 package com.ved.framework.utils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * @author: Lyb
@@ -168,5 +169,9 @@ public class BigDecimalUtils {
         BigDecimal b1 = value1;
         BigDecimal b2 = value2;
         return b1.divide(b2, scale).doubleValue();
+    }
+
+    public static double round(double d, int i) {
+        return new BigDecimal(d).setScale(i, RoundingMode.UP).doubleValue();
     }
 }
