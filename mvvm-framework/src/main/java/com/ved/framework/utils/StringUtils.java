@@ -469,4 +469,12 @@ public final class StringUtils {
         }
         return new String(cArr);
     }
+
+    public int getIntValue(String str,int i){
+        return Integer.valueOf(str, i).intValue();
+    }
+
+    public String intToInt(int i,String n){
+        return String.format("%0"+n, new Object[]{Integer.valueOf(i)});
+    }
 }
