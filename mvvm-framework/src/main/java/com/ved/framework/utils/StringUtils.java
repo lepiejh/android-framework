@@ -438,4 +438,35 @@ public final class StringUtils {
             }
         }
     }
+
+    public static byte[] hexStringToByteArray(String str) {
+        int length = str.length();
+        byte[] bArr = new byte[(length / 2)];
+        for (int i = 0; i < length; i += 2) {
+            bArr[i / 2] = (byte) ((Character.digit(str.charAt(i), 16) << 4) + Character.digit(str.charAt(i + 1), 16));
+        }
+        return bArr;
+    }
+
+    public static String byteArrayToHexString(char[] hexArray,byte[] bArr) {
+        char[] cArr = new char[(bArr.length * 2)];
+        for (int i = 0; i < bArr.length; i++) {
+            int i2 = bArr[i] & 255;
+            int i3 = i * 2;
+            cArr[i3] = hexArray[i2 >>> 4];
+            cArr[i3 + 1] = hexArray[i2 & 15];
+        }
+        return new String(cArr);
+    }
+
+    public static String byteArrayToHexString(char[] hexArray,byte[] bArr, int i) {
+        char[] cArr = new char[(bArr.length * 2)];
+        for (int i2 = 0; i2 < i; i2++) {
+            int i3 = bArr[i2] & 255;
+            int i4 = i2 * 2;
+            cArr[i4] = hexArray[i3 >>> 4];
+            cArr[i4 + 1] = hexArray[i3 & 15];
+        }
+        return new String(cArr);
+    }
 }
