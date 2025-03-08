@@ -477,4 +477,14 @@ public final class StringUtils {
     public String intToInt(int i,String n){
         return String.format("%0"+n, new Object[]{Integer.valueOf(i)});
     }
+
+    public String parseDataByIndex(String str, int i) {
+        i = ((i - 1) * 4) + 6;
+        try {
+            return str.substring(i, i + 4);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "0";
+        }
+    }
 }
