@@ -490,7 +490,7 @@ public final class StringUtils {
         }
     }
 
-    private String getCRC(String s) {
+    public static String getCRC(String s) {
         int[] str = getByteArrayFromString(s);
         @SuppressLint("RestrictedApi")
         int i = SupportMenu.USER_MASK;
@@ -506,7 +506,7 @@ public final class StringUtils {
         return s + String.format("%02x%02x", new Object[]{Integer.valueOf(i % 256), Integer.valueOf(i / 256)});
     }
 
-    private int[] getByteArrayFromString(String s) {
+    public static int[] getByteArrayFromString(String s) {
         String[] str = splitByNumber(s, 2);
         int[] iArr = new int[str.length];
         int length = str.length;
@@ -520,7 +520,7 @@ public final class StringUtils {
         return iArr;
     }
 
-    private String[] splitByNumber(String str, int i) {
+    public static String[] splitByNumber(String str, int i) {
         int length = (str.length() / i) + (str.length() % i == 0 ? 0 : 1);
         String[] strArr = new String[length];
         String str2 = str;
