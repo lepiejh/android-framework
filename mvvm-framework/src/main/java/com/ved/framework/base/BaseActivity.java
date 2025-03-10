@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.blankj.swipepanel.SwipePanel;
 import com.mumu.dialog.MMLoading;
+import com.orhanobut.dialog.manager.DialogManager;
 import com.ved.framework.BR;
 import com.ved.framework.R;
 import com.ved.framework.bus.Messenger;
@@ -18,6 +19,7 @@ import com.ved.framework.permission.RxPermission;
 import com.ved.framework.utils.Constant;
 import com.ved.framework.utils.DpiUtils;
 import com.ved.framework.utils.SoftKeyboardUtil;
+import com.ved.framework.utils.StringUtils;
 import com.ved.framework.utils.phone.PhoneUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -27,6 +29,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.FragmentActivity;
@@ -71,6 +74,10 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     }
 
     public boolean customDialog(){
+        return false;
+    }
+
+    public boolean mvvmDialog(){
         return false;
     }
 
@@ -260,19 +267,23 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 
     protected void requestCallPhone(boolean denied){}
 
-    public void showDialog(){
+    public void showDialog(@Nullable String title){
         if (customDialog()) {
             showCustomDialog();
         } else {
-            showDialog("加载中...",true);
-        }
-    }
-
-    public void showDialog(String title){
-        if (customDialog()) {
-            showCustomDialog();
-        } else {
-            showDialog(title,true);
+            if (mvvmDialog()) {
+                if (StringUtils.isSpace(title)){
+                    showDialog("加载中...",true);
+                }else {
+                    showDialog(title,true);
+                }
+            } else {
+                if (StringUtils.isSpace(title)){
+                    DialogManager.Companion.getInstance().showProgressDialog(this,"加载中...");
+                }else {
+                    DialogManager.Companion.getInstance().showProgressDialog(this,title);
+                }
+            }
         }
     }
 
@@ -303,17 +314,17 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         if (customDialog()) {
             dismissCustomDialog();
         } else {
-            if (mmLoading != null && mmLoading.isShowing()) {
-                mmLoading.dismiss();
+            if (mvvmDialog()) {
+                if (mmLoading != null && mmLoading.isShowing()) {
+                    mmLoading.dismiss();
+                }
+            }else {
+                DialogManager.Companion.getInstance().dismiss();
             }
         }
     }
 
-    public void dismissCustomDialog(){
-        if (mmLoading != null && mmLoading.isShowing()) {
-            mmLoading.dismiss();
-        }
-    }
+    public void dismissCustomDialog(){}
 
     /**
      * 跳转页面

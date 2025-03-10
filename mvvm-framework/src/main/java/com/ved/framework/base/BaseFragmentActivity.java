@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.FragmentActivity;
@@ -16,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.mumu.dialog.MMLoading;
+import com.orhanobut.dialog.manager.DialogManager;
 import com.ved.framework.BR;
 import com.ved.framework.R;
 import com.ved.framework.bus.Messenger;
@@ -25,6 +27,7 @@ import com.ved.framework.entity.ParameterField;
 import com.ved.framework.permission.IPermission;
 import com.ved.framework.permission.RxPermission;
 import com.ved.framework.utils.Constant;
+import com.ved.framework.utils.StringUtils;
 import com.ved.framework.utils.phone.PhoneUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -256,15 +259,23 @@ public abstract class BaseFragmentActivity<V extends ViewDataBinding, VM extends
 
     protected void requestCallPhone(boolean denied){}
 
-    public void showDialog(){
-        showDialog("加载中...",true);
-    }
-
-    public void showDialog(String title){
+    public void showDialog(@Nullable String title){
         if (customDialog()) {
             showCustomDialog();
         } else {
-            showDialog(title,true);
+            if (mvvmDialog()) {
+                if (StringUtils.isSpace(title)){
+                    showDialog("加载中...",true);
+                }else {
+                    showDialog(title,true);
+                }
+            } else {
+                if (StringUtils.isSpace(title)){
+                    DialogManager.Companion.getInstance().showProgressDialog(this,"加载中...");
+                }else {
+                    DialogManager.Companion.getInstance().showProgressDialog(this,title);
+                }
+            }
         }
     }
 
@@ -295,8 +306,12 @@ public abstract class BaseFragmentActivity<V extends ViewDataBinding, VM extends
         if (customDialog()) {
             dismissCustomDialog();
         } else {
-            if (mmLoading != null && mmLoading.isShowing()) {
-                mmLoading.dismiss();
+            if (mvvmDialog()) {
+                if (mmLoading != null && mmLoading.isShowing()) {
+                    mmLoading.dismiss();
+                }
+            }else {
+                DialogManager.Companion.getInstance().dismiss();
             }
         }
     }
@@ -366,6 +381,10 @@ public abstract class BaseFragmentActivity<V extends ViewDataBinding, VM extends
     }
 
     public boolean customDialog(){
+        return false;
+    }
+
+    public boolean mvvmDialog(){
         return false;
     }
 

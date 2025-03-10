@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mumu.dialog.MMLoading;
+import com.orhanobut.dialog.manager.DialogManager;
 import com.trello.rxlifecycle4.components.support.RxFragment;
 import com.ved.framework.BR;
 import com.ved.framework.bus.Messenger;
@@ -18,6 +19,7 @@ import com.ved.framework.entity.ParameterField;
 import com.ved.framework.permission.IPermission;
 import com.ved.framework.permission.RxPermission;
 import com.ved.framework.utils.Constant;
+import com.ved.framework.utils.StringUtils;
 import com.ved.framework.utils.phone.PhoneUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -141,6 +143,10 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         return false;
     }
 
+    public boolean mvvmDialog(){
+        return false;
+    }
+
     /**
      * =====================================================================
      **/
@@ -201,15 +207,23 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         });
     }
 
-    public void showDialog(){
-        showDialog("加载中...",true);
-    }
-
-    public void showDialog(String title){
+    public void showDialog(@Nullable String title){
         if (customDialog()) {
             showCustomDialog();
         } else {
-            showDialog(title,true);
+            if (mvvmDialog()) {
+                if (StringUtils.isSpace(title)){
+                    showDialog("加载中...",true);
+                }else {
+                    showDialog(title,true);
+                }
+            } else {
+                if (StringUtils.isSpace(title)){
+                    DialogManager.Companion.getInstance().showProgressDialog(getContext(),"加载中...");
+                }else {
+                    DialogManager.Companion.getInstance().showProgressDialog(getContext(),title);
+                }
+            }
         }
     }
 
@@ -270,16 +284,17 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         if (customDialog()) {
             dismissCustomDialog();
         } else {
-            if (mmLoading != null && mmLoading.isShowing()) {
-                mmLoading.dismiss();
+            if (mvvmDialog()) {
+                if (mmLoading != null && mmLoading.isShowing()) {
+                    mmLoading.dismiss();
+                }
+            }else {
+                DialogManager.Companion.getInstance().dismiss();
             }
         }
     }
 
     public void dismissCustomDialog(){
-        if (mmLoading != null && mmLoading.isShowing()) {
-            mmLoading.dismiss();
-        }
     }
 
     public void requestPermission(IPermission iPermission,String... permissions){
