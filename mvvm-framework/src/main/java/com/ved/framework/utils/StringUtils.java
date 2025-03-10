@@ -1,5 +1,6 @@
 package com.ved.framework.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.ColorInt;
+import androidx.core.internal.view.SupportMenu;
 
 /**
  * Created by ved on 2017/5/14.
@@ -486,5 +488,46 @@ public final class StringUtils {
             e.printStackTrace();
             return "0";
         }
+    }
+
+    private String getCRC(String s) {
+        int[] str = getByteArrayFromString(s);
+        @SuppressLint("RestrictedApi")
+        int i = SupportMenu.USER_MASK;
+        int i2 = 0;
+        while (i2 < str.length) {
+            int i3 = i ^ str[i2];
+            for (i = 0; i < 8; i++) {
+                i3 = (i3 & 1) == 1 ? (i3 >> 1) ^ 40961 : i3 >> 1;
+            }
+            i2++;
+            i = i3;
+        }
+        return s + String.format("%02x%02x", new Object[]{Integer.valueOf(i % 256), Integer.valueOf(i / 256)});
+    }
+
+    private int[] getByteArrayFromString(String s) {
+        String[] str = splitByNumber(s, 2);
+        int[] iArr = new int[str.length];
+        int length = str.length;
+        int i = 0;
+        int i2 = 0;
+        while (i < length) {
+            iArr[i2] = Integer.valueOf(str[i], 16).intValue();
+            i2++;
+            i++;
+        }
+        return iArr;
+    }
+
+    private String[] splitByNumber(String str, int i) {
+        int length = (str.length() / i) + (str.length() % i == 0 ? 0 : 1);
+        String[] strArr = new String[length];
+        String str2 = str;
+        for (int y = 0; y < length; y++) {
+            strArr[y] = str2.substring(0, i);
+            str2 = str2.substring(i);
+        }
+        return strArr;
     }
 }
