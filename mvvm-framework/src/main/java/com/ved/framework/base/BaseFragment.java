@@ -207,6 +207,10 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         });
     }
 
+    public void showDialog(){
+        showDialog("");
+    }
+
     public void showDialog(@Nullable String title){
         if (customDialog()) {
             showCustomDialog();

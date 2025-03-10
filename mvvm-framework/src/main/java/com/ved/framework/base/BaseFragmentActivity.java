@@ -259,6 +259,10 @@ public abstract class BaseFragmentActivity<V extends ViewDataBinding, VM extends
 
     protected void requestCallPhone(boolean denied){}
 
+    public void showDialog(){
+        showDialog("");
+    }
+
     public void showDialog(@Nullable String title){
         if (customDialog()) {
             showCustomDialog();
