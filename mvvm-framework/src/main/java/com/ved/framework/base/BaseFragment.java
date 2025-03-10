@@ -208,25 +208,17 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     }
 
     public void showDialog(){
-        showDialog("");
+        showDialog("加载中...");
     }
 
-    public void showDialog(@Nullable String title){
+    public void showDialog(String title){
         if (customDialog()) {
             showCustomDialog();
         } else {
             if (mvvmDialog()) {
-                if (StringUtils.isSpace(title)){
-                    showDialog("加载中...",true);
-                }else {
-                    showDialog(title,true);
-                }
+                showDialog(title,true);
             } else {
-                if (StringUtils.isSpace(title)){
-                    DialogManager.Companion.getInstance().showProgressDialog(getContext(),"加载中...");
-                }else {
-                    DialogManager.Companion.getInstance().showProgressDialog(getContext(),title);
-                }
+                DialogManager.Companion.getInstance().showProgressDialog(getContext(),title);
             }
         }
     }

@@ -268,25 +268,17 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected void requestCallPhone(boolean denied){}
 
     public void showDialog(){
-        showDialog("");
+        showDialog("加载中...");
     }
 
-    public void showDialog(@Nullable String title){
+    public void showDialog(String title){
         if (customDialog()) {
             showCustomDialog();
         } else {
             if (mvvmDialog()) {
-                if (StringUtils.isSpace(title)){
-                    showDialog("加载中...",true);
-                }else {
-                    showDialog(title,true);
-                }
+                showDialog(title,true);
             } else {
-                if (StringUtils.isSpace(title)){
-                    DialogManager.Companion.getInstance().showProgressDialog(this,"加载中...");
-                }else {
-                    DialogManager.Companion.getInstance().showProgressDialog(this,title);
-                }
+                DialogManager.Companion.getInstance().showProgressDialog(this,title);
             }
         }
     }
