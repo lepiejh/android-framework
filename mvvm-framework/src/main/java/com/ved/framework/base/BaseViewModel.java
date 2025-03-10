@@ -39,7 +39,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     //管理RxJava，主要针对RxJava异步操作造成的内存泄漏
     private CompositeDisposable mCompositeDisposable;
     private Disposable mEventSubscription;
-    protected int variableId = BR.viewModel;
+    public int variableId = BR.viewModel;
 
     public BaseViewModel(@NonNull Application application) {
         this(application, null);
