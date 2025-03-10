@@ -1,5 +1,7 @@
 package com.ved.framework.utils;
 
+import com.ved.framework.BR;
+
 public class Constant {
     public static final String PERMISSION = "PERMISSION";
     public static final String PERMISSION_NAME = "PERMISSION_NAME";
@@ -15,4 +17,5 @@ public class Constant {
     public static final int CACHE_TIMEOUT = 10 * 1024 * 1024;
     public static final int ITEM_FOOT = 1;
     public static final int ITEM_LAYOUT = 2;
+    public static final int variableId = BR.viewModel;
 }

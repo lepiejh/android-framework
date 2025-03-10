@@ -3,14 +3,7 @@ package com.ved.framework.base;
 import android.app.Application;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-
 import com.trello.rxlifecycle4.LifecycleProvider;
-import com.ved.framework.BR;
 import com.ved.framework.bus.RxBus;
 import com.ved.framework.bus.RxSubscriptions;
 import com.ved.framework.bus.event.SingleLiveEvent;
@@ -24,6 +17,11 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -39,7 +37,6 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     //管理RxJava，主要针对RxJava异步操作造成的内存泄漏
     private CompositeDisposable mCompositeDisposable;
     private Disposable mEventSubscription;
-    public int variableId = BR.viewModel;
 
     public BaseViewModel(@NonNull Application application) {
         this(application, null);
