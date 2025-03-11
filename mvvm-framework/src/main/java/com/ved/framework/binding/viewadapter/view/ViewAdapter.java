@@ -34,7 +34,7 @@ public class ViewAdapter {
      */
     @SuppressLint("CheckResult")
     @BindingAdapter(value = {"onClickCommand", "isThrottleFirst","countThrottle"}, requireAll = false)
-    public static void onClickCommand(View view, final BindingCommand<Void> clickCommand, int countThrottle,final boolean isThrottleFirst) {
+    public static void onClickCommand(View view, final BindingCommand<Void> clickCommand, final boolean isThrottleFirst,int countThrottle) {
         if (isThrottleFirst) {
             RxView.clicks(view)
                     .subscribe(unit -> {
