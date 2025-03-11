@@ -98,6 +98,18 @@ public final class StringUtils {
         return String.valueOf(o);
     }
 
+    public static int parseInt(Object o){
+        return parseInt(parseStr(o));
+    }
+
+    public static long parseLong(Object o){
+        return parseLong(parseStr(o));
+    }
+
+    public static double parseDouble(Object o){
+        return parseDouble(parseStr(o));
+    }
+
     /**
      * 判断是否为正数
      * @return   true  正数   false   负数
