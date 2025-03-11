@@ -535,6 +535,10 @@ public final class StringUtils {
         return countThrottle;
     }
 
+    public static long minus(Object a,Object b){
+        return parseLong(parseStr(a)) - parseLong(parseStr(b));
+    }
+
     public static String appendCRC(String str) {
         return str + getCRC(str);
     }
