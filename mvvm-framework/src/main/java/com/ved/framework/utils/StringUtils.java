@@ -472,6 +472,17 @@ public final class StringUtils {
         return new String(cArr);
     }
 
+    public static int getIntValue(int i){
+        int i2 = 4;
+        for (int i3 = 0; i3 < 5; i3++) {
+            if ((i & i2) == i2) {
+                return i3 + 1;
+            }
+            i2 <<= 1;
+        }
+        return 0;
+    }
+
     public static int getIntValue(String str,int i){
         return Integer.valueOf(str, i).intValue();
     }
