@@ -252,30 +252,22 @@ public class ViewAdapter {
                 DpiUtils.dip2px(view.getContext(),padding));
     }
 
-    @BindingAdapter("text_size")
+    @BindingAdapter("android:textSize")
     public static void setTextSize(TextView textView,int textSize){
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
     }
 
-    @BindingAdapter(value = {"layoutWidth", "need_as"}, requireAll = false)
-    public static void setLayoutWidth(View textView,int layoutWidth,boolean b){
+    @BindingAdapter("android:layout_width")
+    public static void setLayoutWidth(View textView,int layoutWidth){
         ViewGroup.LayoutParams lp = textView.getLayoutParams();
-        if (b){
-            lp.width=layoutWidth;
-        }else {
-            lp.width=DpiUtils.dip2px(textView.getContext(),layoutWidth);
-        }
+        lp.width=DpiUtils.dip2px(textView.getContext(),layoutWidth);
         textView.setLayoutParams(lp);
     }
 
-    @BindingAdapter(value = {"layoutHeight", "need_as"}, requireAll = false)
-    public static void setLayoutHeight(View textView,int layoutHeight,boolean b){
+    @BindingAdapter("android:layout_height")
+    public static void setLayoutHeight(View textView,int layoutHeight){
         ViewGroup.LayoutParams lp = textView.getLayoutParams();
-        if (b){
-            lp.height=layoutHeight;
-        }else {
-            lp.height=DpiUtils.dip2px(textView.getContext(),layoutHeight);
-        }
+        lp.height=DpiUtils.dip2px(textView.getContext(),layoutHeight);
         textView.setLayoutParams(lp);
     }
 
