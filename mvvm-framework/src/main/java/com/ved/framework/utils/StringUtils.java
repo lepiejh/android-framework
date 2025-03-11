@@ -506,7 +506,12 @@ public final class StringUtils {
     }
 
     public static int getIntValue(String str,int i){
-        return Integer.valueOf(str, i).intValue();
+        try {
+            return Integer.valueOf(str, i).intValue();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     public static String intToInt(int i,String n){
@@ -546,7 +551,7 @@ public final class StringUtils {
         int i = 0;
         int i2 = 0;
         while (i < length) {
-            iArr[i2] = Integer.valueOf(str[i], 16).intValue();
+            iArr[i2] = getIntValue(str[i], 16);
             i2++;
             i++;
         }
