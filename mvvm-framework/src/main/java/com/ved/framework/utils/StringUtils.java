@@ -110,6 +110,16 @@ public final class StringUtils {
         return parseDouble(parseStr(o));
     }
 
+    public static int parseOneRadix(int radix){
+        if ((radix & 1) == 1) {
+            return 1;
+        } else if ((radix & 2) == 2) {
+            return 2;
+        } else {
+            return 0;
+        }
+    }
+
     /**
      * 判断是否为正数
      * @return   true  正数   false   负数
