@@ -42,7 +42,7 @@ public class ViewAdapter {
                     });
         } else {
             RxView.clicks(view)
-                    .throttleFirst(StringUtils.getThrottle(countThrottle), TimeUnit.SECONDS)//1秒钟内只允许点击1次
+                    .throttleFirst(StringUtils.getThrottle(countThrottle), TimeUnit.SECONDS)
                     .subscribe(unit -> {
                         if (clickCommand != null) clickCommand.execute();
                     });
