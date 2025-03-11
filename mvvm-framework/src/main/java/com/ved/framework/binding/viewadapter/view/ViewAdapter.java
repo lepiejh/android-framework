@@ -33,8 +33,8 @@ public class ViewAdapter {
      * isThrottleFirst 是否开启防止过快点击
      */
     @SuppressLint("CheckResult")
-    @BindingAdapter(value = {"onClickCommand", "isThrottleFirst"}, requireAll = false)
-    public static void onClickCommand(View view, final BindingCommand<Void> clickCommand, final boolean isThrottleFirst) {
+    @BindingAdapter(value = {"onClickCommand", "isThrottleFirst","countThrottle"}, requireAll = false)
+    public static void onClickCommand(View view, final BindingCommand<Void> clickCommand, int countThrottle,final boolean isThrottleFirst) {
         if (isThrottleFirst) {
             RxView.clicks(view)
                     .subscribe(unit -> {
@@ -42,7 +42,7 @@ public class ViewAdapter {
                     });
         } else {
             RxView.clicks(view)
-                    .throttleFirst(Constant.CLICK_INTERVAL, TimeUnit.SECONDS)//1秒钟内只允许点击1次
+                    .throttleFirst(StringUtils.getThrottle(countThrottle), TimeUnit.SECONDS)//1秒钟内只允许点击1次
                     .subscribe(unit -> {
                         if (clickCommand != null) clickCommand.execute();
                     });

@@ -528,6 +528,13 @@ public final class StringUtils {
         }
     }
 
+    public static int getThrottle(int countThrottle){
+        if (isSpace(parseStr(countThrottle)) || countThrottle == 0){
+            return Constant.CLICK_INTERVAL;
+        }
+        return countThrottle;
+    }
+
     public static String appendCRC(String str) {
         return str + getCRC(str);
     }
