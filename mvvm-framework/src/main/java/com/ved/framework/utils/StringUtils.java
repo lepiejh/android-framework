@@ -528,42 +528,42 @@ public final class StringUtils {
         }
     }
 
-    public static String getCRC(String s) {
-        int[] str = getByteArrayFromString(s);
-        @SuppressLint("RestrictedApi")
-        int i = SupportMenu.USER_MASK;
+    public static String appendCRC(String str) {
+        return str + getCRC(str);
+    }
+
+    private static String getCRC(String str) {
+        int[] byteArrayFromString = getByteArrayFromString(str);
+        int i = 65535;
         int i2 = 0;
-        while (i2 < str.length) {
-            int i3 = i ^ str[i2];
-            for (i = 0; i < 8; i++) {
+        while (i2 < byteArrayFromString.length) {
+            int i3 = i ^ byteArrayFromString[i2];
+            for (int i4 = 0; i4 < 8; i4++) {
                 i3 = (i3 & 1) == 1 ? (i3 >> 1) ^ 40961 : i3 >> 1;
             }
             i2++;
             i = i3;
         }
-        return s + String.format("%02x%02x", new Object[]{Integer.valueOf(i % 256), Integer.valueOf(i / 256)});
+        return String.format("%02x%02x", Integer.valueOf(i % 256), Integer.valueOf(i / 256));
     }
 
-    public static int[] getByteArrayFromString(String s) {
-        String[] str = splitByNumber(s, 2);
-        int[] iArr = new int[str.length];
-        int length = str.length;
+    private static int[] getByteArrayFromString(String str) {
+        String[] splitByNumber = splitByNumber(str, 2);
+        int[] iArr = new int[splitByNumber.length];
         int i = 0;
-        int i2 = 0;
-        while (i < length) {
-            iArr[i2] = getIntValue(str[i], 16);
-            i2++;
+        for (String str2 : splitByNumber) {
+            iArr[i] = getIntValue(str2,16);
             i++;
         }
         return iArr;
     }
 
-    public static String[] splitByNumber(String str, int i) {
+    private static String[] splitByNumber(String str, int i) {
         int length = (str.length() / i) + (str.length() % i == 0 ? 0 : 1);
         String[] strArr = new String[length];
         String str2 = str;
-        for (int y = 0; y < length; y++) {
-            strArr[y] = str2.substring(0, i);
+        for (int i2 = 0; i2 < length; i2++) {
+            strArr[i2] = str2.substring(0, i);
             str2 = str2.substring(i);
         }
         return strArr;
