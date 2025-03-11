@@ -7,14 +7,6 @@ import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProviders;
-
 import com.gyf.immersionbar.ImmersionBar;
 import com.mumu.dialog.MMLoading;
 import com.orhanobut.dialog.manager.DialogManager;
@@ -27,7 +19,6 @@ import com.ved.framework.entity.ParameterField;
 import com.ved.framework.permission.IPermission;
 import com.ved.framework.permission.RxPermission;
 import com.ved.framework.utils.Constant;
-import com.ved.framework.utils.StringUtils;
 import com.ved.framework.utils.phone.PhoneUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -36,6 +27,13 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProviders;
 
 public abstract class BaseFragmentActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends RxAppCompatFragmentActivity implements IBaseView, ViewTreeObserver.OnGlobalLayoutListener{
     protected V binding;

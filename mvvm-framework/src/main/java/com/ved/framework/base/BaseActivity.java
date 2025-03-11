@@ -19,7 +19,6 @@ import com.ved.framework.permission.RxPermission;
 import com.ved.framework.utils.Constant;
 import com.ved.framework.utils.DpiUtils;
 import com.ved.framework.utils.SoftKeyboardUtil;
-import com.ved.framework.utils.StringUtils;
 import com.ved.framework.utils.phone.PhoneUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -29,7 +28,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.FragmentActivity;
