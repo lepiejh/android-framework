@@ -17,6 +17,8 @@
     <attr format="reference" name="onStartTrackingTouch"/>
     <attr format="reference" name="onStopTrackingTouch"/>
     <attr format="integer" name="inputType"/>
+    <attr format="integer" name="currentItem"/>
+    <attr format="integer" name="offscreenPageLimit"/>
     <attr format="reference" name="currentView"/>
     <attr format="string" name="decimal_tow"/>
     <attr format="string" name="time_format"/>
