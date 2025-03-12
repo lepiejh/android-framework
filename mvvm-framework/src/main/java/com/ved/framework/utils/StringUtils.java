@@ -30,6 +30,15 @@ public final class StringUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
+    // 将字节数组转换为十六进制字符串
+    public static String bytesToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02X ", b));
+        }
+        return sb.toString();
+    }
+
     public static boolean isSpace(String s){
         if (TextUtils.isEmpty(s)){
             return true;
@@ -545,7 +554,7 @@ public final class StringUtils {
 
     private static String getCRC(String str) {
         int[] byteArrayFromString = getByteArrayFromString(str);
-        int i = 65535;
+        int i = SupportMenu.USER_MASK;
         int i2 = 0;
         while (i2 < byteArrayFromString.length) {
             int i3 = i ^ byteArrayFromString[i2];

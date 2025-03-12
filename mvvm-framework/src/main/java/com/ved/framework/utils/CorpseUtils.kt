@@ -12,6 +12,8 @@ import java.lang.reflect.Proxy
 object CorpseUtils {
     fun remove(s: String?): String? = s?.replace("[\r\n]".toRegex(), "")?.replace(" ", "")
 
+    fun bytesToHex(s: String?): String? = StringUtils.bytesToHex(s?.toByteArray(Charsets.UTF_8))
+
     fun first(s:String?) : String{
         s?.let {
             if (it.contains(".")){
