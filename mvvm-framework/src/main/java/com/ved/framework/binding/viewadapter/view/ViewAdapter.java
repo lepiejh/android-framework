@@ -205,11 +205,27 @@ public class ViewAdapter {
         view.setLayoutParams(layoutParams);
     }
 
+    @BindingAdapter("android:layout_marginStart")
+    public static void setStartMargin(View view, int startMargin) {
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+        layoutParams.setMargins(DpiUtils.dip2px(view.getContext(),startMargin), layoutParams.topMargin,
+                layoutParams.rightMargin,layoutParams.bottomMargin);
+        view.setLayoutParams(layoutParams);
+    }
+
     @BindingAdapter("android:layout_marginRight")
     public static void setRightMargin(View view, int rightMargin) {
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
         layoutParams.setMargins(layoutParams.leftMargin, layoutParams.topMargin,
                 DpiUtils.dip2px(view.getContext(),rightMargin),layoutParams.bottomMargin);
+        view.setLayoutParams(layoutParams);
+    }
+
+    @BindingAdapter("android:layout_marginEnd")
+    public static void setEndMargin(View view, int endMargin) {
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+        layoutParams.setMargins(layoutParams.leftMargin, layoutParams.topMargin,
+                DpiUtils.dip2px(view.getContext(),endMargin),layoutParams.bottomMargin);
         view.setLayoutParams(layoutParams);
     }
 
@@ -229,11 +245,27 @@ public class ViewAdapter {
                 view.getPaddingBottom());
     }
 
+    @BindingAdapter("android:paddingStart")
+    public static void setPaddingStart(View view, int paddingStart) {
+        view.setPadding(DpiUtils.dip2px(view.getContext(),paddingStart),
+                view.getPaddingTop(),
+                view.getPaddingRight(),
+                view.getPaddingBottom());
+    }
+
     @BindingAdapter("android:paddingRight")
     public static void setPaddingRight(View view, int paddingRight) {
         view.setPadding(view.getPaddingLeft(),
                 view.getPaddingTop(),
                 DpiUtils.dip2px(view.getContext(),paddingRight),
+                view.getPaddingBottom());
+    }
+
+    @BindingAdapter("android:paddingEnd")
+    public static void setPaddingEnd(View view, int paddingEnd) {
+        view.setPadding(view.getPaddingLeft(),
+                view.getPaddingTop(),
+                DpiUtils.dip2px(view.getContext(),paddingEnd),
                 view.getPaddingBottom());
     }
 
