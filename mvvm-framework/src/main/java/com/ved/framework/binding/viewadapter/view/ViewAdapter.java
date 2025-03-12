@@ -16,6 +16,8 @@ import com.ved.framework.binding.command.BindingCommand;
 import com.ved.framework.listener.OnViewGlobalLayoutListener;
 import com.ved.framework.utils.CalendarUtil;
 import com.ved.framework.utils.Constant;
+import com.ved.framework.utils.CorpseUtils;
+import com.ved.framework.utils.DisplayUtil;
 import com.ved.framework.utils.DpiUtils;
 import com.ved.framework.utils.StringUtils;
 import com.ved.framework.utils.TimeUtils;
@@ -33,8 +35,15 @@ public class ViewAdapter {
      * isThrottleFirst 是否开启防止过快点击
      */
     @SuppressLint("CheckResult")
-    @BindingAdapter(value = {"onClickCommand", "isThrottleFirst","countThrottle"}, requireAll = false)
-    public static void onClickCommand(View view, final BindingCommand<Void> clickCommand, final boolean isThrottleFirst,int countThrottle) {
+    @BindingAdapter(value = {"onClickCommand", "isThrottleFirst","countThrottle","isExpand","expandSize"}, requireAll = false)
+    public static void onClickCommand(View view, final BindingCommand<Void> clickCommand, final boolean isThrottleFirst,int countThrottle,boolean isExpand,int expandSize) {
+        if (isExpand){
+            if (StringUtils.parseInt(StringUtils.parseStr(expandSize)) == 0){
+                CorpseUtils.INSTANCE.expandTouchView(view, DisplayUtil.dip2px(Utils.getContext(),10f));
+            }else {
+                CorpseUtils.INSTANCE.expandTouchView(view,expandSize);
+            }
+        }
         if (isThrottleFirst) {
             RxView.clicks(view)
                     .subscribe(unit -> {

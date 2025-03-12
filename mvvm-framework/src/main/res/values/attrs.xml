@@ -20,6 +20,8 @@
     <attr format="integer" name="currentItem"/>
     <attr format="integer" name="offscreenPageLimit"/>
     <attr format="integer" name="countThrottle"/>
+    <attr format="boolean" name="isExpand"/>
+    <attr format="integer" name="expandSize"/>
     <attr format="reference" name="currentView"/>
     <attr format="string" name="decimal_tow"/>
     <attr format="string" name="time_format"/>
