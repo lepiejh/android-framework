@@ -515,13 +515,13 @@ public final class StringUtils {
     }
 
     public static String intToInt(int i,String n){
-        return String.format("%0"+n, new Object[]{Integer.valueOf(i)});
+        return String.format("%0"+n, Integer.valueOf(i));
     }
 
     public static String parseDataByIndex(String str, int i) {
-        i = ((i - 1) * 4) + 6;
+        int i2 = ((i - 1) * 4) + 6;
         try {
-            return str.substring(i, i + 4);
+            return str.substring(i2, i2 + 4);
         } catch (Exception e) {
             e.printStackTrace();
             return "0";
