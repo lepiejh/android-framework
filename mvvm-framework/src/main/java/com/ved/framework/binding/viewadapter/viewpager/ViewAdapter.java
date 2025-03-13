@@ -12,14 +12,12 @@ import androidx.viewpager.widget.ViewPager;
  * Created by ved on 2017/6/18.
  */
 public class ViewAdapter {
-    @BindingAdapter(value = {"onPageScrolledCommand", "onPageSelectedCommand", "onPageScrollStateChangedCommand","currentItem","offscreenPageLimit"}, requireAll = false)
+    @BindingAdapter(value = {"onPageScrolledCommand", "onPageSelectedCommand", "onPageScrollStateChangedCommand"}, requireAll = false)
     public static void onScrollChangeCommand(final ViewPager viewPager,
                                              final BindingCommand<ViewPagerDataWrapper> onPageScrolledCommand,
                                              final BindingCommand<Integer> onPageSelectedCommand,
-                                             final BindingCommand<Integer> onPageScrollStateChangedCommand,
-                                             final int currentItem,
-                                             final int offscreenPageLimit) {
-        ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+                                             final BindingCommand<Integer> onPageScrollStateChangedCommand) {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             private int state;
 
             @Override
@@ -56,10 +54,6 @@ public class ViewAdapter {
                     onPageScrollStateChangedCommand.execute(state);
                 }
             }
-        };
-        viewPager.addOnPageChangeListener(onPageChangeListener);
-        viewPager.setCurrentItem(currentItem);
-        viewPager.setOffscreenPageLimit(offscreenPageLimit);
-        viewPager.post(() -> onPageChangeListener.onPageSelected(currentItem));
+        });
     }
 }
