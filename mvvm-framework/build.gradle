@@ -123,5 +123,5 @@ dependencies {
     implementation 'com.github.lepiejh:arc:v1.2.10'
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3"
-    api "androidx.viewpager2:viewpager2:1.0.0"
+//    api "androidx.viewpager2:viewpager2:1.0.0"
 }
