@@ -188,7 +188,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
             //注册RxBus
             viewModel.registerRxBus();
         });
-        viewModel.getUC().getOnLoadEvent().observe(this, o -> {
+        viewModel.getUC().getOnResumeEvent().observe(this, o -> {
             if (!isLoadData) {
                 isLoadData = true;
                 //页面数据初始化方法
