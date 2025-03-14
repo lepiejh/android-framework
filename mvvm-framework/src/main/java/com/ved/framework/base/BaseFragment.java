@@ -42,7 +42,6 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     private int viewModelId;
     //    private MaterialDialog dialog;
     private MMLoading mmLoading;
-    protected boolean isLoadData = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -188,13 +187,10 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
             //注册RxBus
             viewModel.registerRxBus();
         });
-        viewModel.getUC().getOnResumeEvent().observe(this, o -> {
-            if (!isLoadData) {
-                isLoadData = true;
-                //页面数据初始化方法
-                initData();
-                loadData();
-            }
+        viewModel.getUC().getOnLoadEvent().observe(this, o -> {
+            //页面数据初始化方法
+            initData();
+            loadData();
         });
     }
 
