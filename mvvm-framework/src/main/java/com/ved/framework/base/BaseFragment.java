@@ -42,8 +42,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     private int viewModelId;
     //    private MaterialDialog dialog;
     private MMLoading mmLoading;
-    protected boolean isLoadData =false;
-    protected boolean menuVisibleTag =false;
+    protected boolean isLoadData = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,12 +81,6 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         if (binding != null) {
             binding.unbind();
         }
-    }
-
-    @Override
-    public void setMenuVisibility(boolean menuVisible) {
-        super.setMenuVisibility(menuVisible);
-        menuVisibleTag = menuVisible;
     }
 
     @Override
@@ -196,7 +189,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
             viewModel.registerRxBus();
         });
         viewModel.getUC().getOnResumeEvent().observe(this, o -> {
-            if (menuVisibleTag && !isLoadData) {
+            if (!isLoadData) {
                 isLoadData = true;
                 //页面数据初始化方法
                 initData();
