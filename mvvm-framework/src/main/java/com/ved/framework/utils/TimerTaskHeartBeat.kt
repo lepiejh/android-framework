@@ -2,32 +2,38 @@ package com.ved.framework.utils
 
 import java.util.*
 
-class TimerTaskHelper private constructor(){
+class TimerTaskHeartBeat private constructor(){
     private var timerTask: TimerTask? = null
+    private var heartbeatTimer: Timer? = null
 
     companion object {
-        val INSTANCE: TimerTaskHelper by lazy { Holder.INSTANCE }
+        val INSTANCE: TimerTaskHeartBeat by lazy { Holder.INSTANCE }
     }
 
     private object Holder {
-        val INSTANCE = TimerTaskHelper()
+        val INSTANCE = TimerTaskHeartBeat()
     }
 
     fun startTimer(period: Int = 5,callBack: () -> Unit) {
         timerTask?.cancel()
-        this.timerTask = object : TimerTask() {
+        heartbeatTimer = Timer()
+        timerTask = object : TimerTask() {
             override fun run() {
                 callBack.invoke()
             }
         }
         val i = period * 1000L
-        Timer().schedule(timerTask, i, i)
+        heartbeatTimer?.schedule(timerTask, i, i)
     }
 
     fun stopTimer() {
         if (timerTask != null) {
             timerTask?.cancel()
-            this.timerTask = null
+            timerTask = null
+        }
+        if (heartbeatTimer != null) {
+            heartbeatTimer?.cancel()
+            heartbeatTimer = null
         }
     }
 }
