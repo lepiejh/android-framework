@@ -38,19 +38,23 @@ object CorpseUtils {
         return list.sortedWith(compareBy { it }).last()
     }
 
-    fun String.isSpace() = StringUtils.isSpace(this)
+    fun <T> T.parseOneRadix() = StringUtils.parseOneRadix(parseInt())
 
-    fun String.parseLong() = StringUtils.parseLong(this)
+    fun <T> T.minus(a: Any?) = StringUtils.minus(this,a)
 
-    fun String.parseDouble() = StringUtils.parseDouble(this)
+    fun <T> T.isSpace() = StringUtils.isSpace(parseStr())
 
-    fun String.parseInt() = StringUtils.parseInt(this)
+    fun <T> T.parseLong() = StringUtils.parseLong(this)
+
+    fun <T> T.parseDouble() = StringUtils.parseDouble(this)
+
+    fun <T> T.parseInt() = StringUtils.parseInt(this)
 
     fun <T> T.parseStr(): String = StringUtils.parseStr(this)
 
     fun String.getRepayNumBuilder(@ColorInt colorResId: Int,start: Int,end: Int) : SpannableStringBuilder = StringUtils.getRepayNumBuilder(this,colorResId,start, end)
 
-    fun String.decimalFormat() = DecimalUtils.decimalFormat(this)
+    fun <T> T.decimalFormat() = DecimalUtils.decimalFormat(parseStr())
 
     fun makeTime(t:Int?) : String?{
         t?.let {
