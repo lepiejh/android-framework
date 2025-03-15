@@ -5,7 +5,6 @@ import android.text.SpannableStringBuilder
 import android.view.TouchDelegate
 import android.view.View
 import androidx.annotation.ColorInt
-import com.orhanobut.dialog.utils.DecimalUtils
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Proxy
 
@@ -38,21 +37,7 @@ object CorpseUtils {
         return list.sortedWith(compareBy { it }).last()
     }
 
-    fun <T> T.minus(a: Any?) = StringUtils.minus(this,a)
-
-    fun <T> T.isSpace() = StringUtils.isSpace(parseStr())
-
-    fun <T> T.parseLong() = StringUtils.parseLong(this)
-
-    fun <T> T.parseDouble() = StringUtils.parseDouble(this)
-
-    fun <T> T.parseInt() = StringUtils.parseInt(this)
-
-    fun <T> T.parseStr(): String = StringUtils.parseStr(this)
-
     fun String.getRepayNumBuilder(@ColorInt colorResId: Int,start: Int,end: Int) : SpannableStringBuilder = StringUtils.getRepayNumBuilder(this,colorResId,start, end)
-
-    fun <T> T.decimalFormat() = DecimalUtils.decimalFormat(parseStr())
 
     fun makeTime(t:Int?) : String?{
         t?.let {
