@@ -9,13 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.databinding.BindingAdapter;
-
 import com.jakewharton.rxbinding4.view.RxView;
 import com.ved.framework.binding.command.BindingCommand;
 import com.ved.framework.listener.OnViewGlobalLayoutListener;
 import com.ved.framework.utils.CalendarUtil;
-import com.ved.framework.utils.Constant;
 import com.ved.framework.utils.CorpseUtils;
 import com.ved.framework.utils.DisplayUtil;
 import com.ved.framework.utils.DpiUtils;
@@ -25,6 +22,8 @@ import com.ved.framework.utils.Utils;
 
 import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
+
+import androidx.databinding.BindingAdapter;
 
 public class ViewAdapter {
 
