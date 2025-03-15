@@ -38,8 +38,6 @@ object CorpseUtils {
         return list.sortedWith(compareBy { it }).last()
     }
 
-    fun <T> T.parseOneRadix() = StringUtils.parseOneRadix(parseInt())
-
     fun <T> T.minus(a: Any?) = StringUtils.minus(this,a)
 
     fun <T> T.isSpace() = StringUtils.isSpace(parseStr())
