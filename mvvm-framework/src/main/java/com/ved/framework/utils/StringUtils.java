@@ -76,6 +76,19 @@ public final class StringUtils {
         }
     }
 
+    public static double parseFloat(String s){
+        if (isSpace(s)){
+            return 0.0f;
+        }else {
+            try {
+                return Float.parseFloat(s);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                return 0.0f;
+            }
+        }
+    }
+
     public static double parseDouble(String s){
         if (isSpace(s)){
             return 0.0d;
@@ -116,6 +129,10 @@ public final class StringUtils {
 
     public static double parseDouble(Object o){
         return parseDouble(parseStr(o));
+    }
+
+    public static double parseFloat(Object o){
+        return parseFloat(parseStr(o));
     }
 
     public static int parseOneRadix(int radix){

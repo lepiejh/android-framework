@@ -36,12 +36,12 @@ public class ViewAdapter {
      */
     @SuppressLint("CheckResult")
     @BindingAdapter(value = {"onClickCommand", "isThrottleFirst","countThrottle","isExpand","expandSize"}, requireAll = false)
-    public static void onClickCommand(View view, final BindingCommand<Void> clickCommand, final boolean isThrottleFirst,int countThrottle,boolean isExpand,int expandSize) {
+    public static void onClickCommand(View view, final BindingCommand<Void> clickCommand, final boolean isThrottleFirst,int countThrottle,boolean isExpand,float expandSize) {
         if (isExpand){
-            if (StringUtils.parseInt(StringUtils.parseStr(expandSize)) == 0){
+            if (StringUtils.parseFloat(StringUtils.parseStr(expandSize)) == 0f){
                 CorpseUtils.INSTANCE.expandTouchView(view, DisplayUtil.dip2px(Utils.getContext(),10f));
             }else {
-                CorpseUtils.INSTANCE.expandTouchView(view,expandSize);
+                CorpseUtils.INSTANCE.expandTouchView(view,DisplayUtil.dip2px(Utils.getContext(),expandSize));
             }
         }
         if (isThrottleFirst) {
