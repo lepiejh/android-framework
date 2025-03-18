@@ -332,6 +332,15 @@ public class ViewAdapter {
         }
     }
 
+    @BindingAdapter("android:drawableEnd")
+    public static void setDrawableEnd(TextView textView, Drawable drawable){
+        if (drawable != null) {
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(),
+                    drawable.getMinimumHeight());
+            textView.setCompoundDrawables(null, null, drawable, null);
+        }
+    }
+
     @BindingAdapter("android:drawablePadding")
     public static void setDrawablePadding(TextView textView, float value){
         int paddingPx = (int) TypedValue.applyDimension(
@@ -341,6 +350,15 @@ public class ViewAdapter {
 
     @BindingAdapter("android:drawableLeft")
     public static void setDrawableLeft(TextView textView, Drawable drawable){
+        if (drawable != null) {
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(),
+                    drawable.getMinimumHeight());
+            textView.setCompoundDrawables(drawable, null, null, null);
+        }
+    }
+
+    @BindingAdapter("android:drawableStart")
+    public static void setDrawableStart(TextView textView, Drawable drawable){
         if (drawable != null) {
             drawable.setBounds(0, 0, drawable.getMinimumWidth(),
                     drawable.getMinimumHeight());
