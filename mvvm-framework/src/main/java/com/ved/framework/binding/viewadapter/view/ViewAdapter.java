@@ -332,6 +332,13 @@ public class ViewAdapter {
         }
     }
 
+    @BindingAdapter("android:drawablePadding")
+    public static void setDrawablePadding(TextView textView, float value){
+        int paddingPx = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, value, textView.getResources().getDisplayMetrics());
+        textView.setCompoundDrawablePadding(paddingPx);
+    }
+
     @BindingAdapter("android:drawableLeft")
     public static void setDrawableLeft(TextView textView, Drawable drawable){
         if (drawable != null) {
