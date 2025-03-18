@@ -7,6 +7,7 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding4.view.RxView;
@@ -290,6 +291,17 @@ public class ViewAdapter {
                 DpiUtils.dip2px(view.getContext(),padding),
                 DpiUtils.dip2px(view.getContext(),padding),
                 DpiUtils.dip2px(view.getContext(),padding));
+    }
+
+    @BindingAdapter("android:gravity")
+    public static void setGravity(TextView textView,int gravity){
+        textView.setGravity(gravity);
+    }
+    @BindingAdapter("android:layout_gravity")
+    public static void setLayoutGravity(View view,int gravity){
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+        params.gravity = gravity;
+        view.setLayoutParams(params);
     }
 
     @BindingAdapter("android:textSize")
