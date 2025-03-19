@@ -297,6 +297,7 @@ public class ViewAdapter {
     public static void setGravity(TextView textView,int gravity){
         textView.setGravity(gravity);
     }
+
     @BindingAdapter("android:layout_gravity")
     public static void setLayoutGravity(View view,int gravity){
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
@@ -312,14 +313,22 @@ public class ViewAdapter {
     @BindingAdapter("android:layout_width")
     public static void setLayoutWidth(View textView,int layoutWidth){
         ViewGroup.LayoutParams lp = textView.getLayoutParams();
-        lp.width=DpiUtils.dip2px(textView.getContext(),layoutWidth);
+        if (layoutWidth == ViewGroup.LayoutParams.MATCH_PARENT || layoutWidth == ViewGroup.LayoutParams.WRAP_CONTENT){
+            lp.width = layoutWidth;
+        }else {
+            lp.width=DpiUtils.dip2px(textView.getContext(),layoutWidth);
+        }
         textView.setLayoutParams(lp);
     }
 
     @BindingAdapter("android:layout_height")
     public static void setLayoutHeight(View textView,int layoutHeight){
         ViewGroup.LayoutParams lp = textView.getLayoutParams();
-        lp.height=DpiUtils.dip2px(textView.getContext(),layoutHeight);
+        if (layoutHeight == ViewGroup.LayoutParams.MATCH_PARENT || layoutHeight == ViewGroup.LayoutParams.WRAP_CONTENT){
+            lp.height = layoutHeight;
+        }else {
+            lp.height=DpiUtils.dip2px(textView.getContext(),layoutHeight);
+        }
         textView.setLayoutParams(lp);
     }
 
