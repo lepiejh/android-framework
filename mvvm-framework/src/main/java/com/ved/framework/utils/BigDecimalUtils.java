@@ -171,7 +171,11 @@ public class BigDecimalUtils {
         return b1.divide(b2, scale).doubleValue();
     }
 
-    public static double round(double d, int i) {
-        return new BigDecimal(d).setScale(i, RoundingMode.UP).doubleValue();
+    public static double round(double d, int i, RoundingMode roundingMode) {
+        return new BigDecimal(d).setScale(i, roundingMode).doubleValue();
+    }
+
+    public static double round(double d, int i, int roundingMode) {
+        return new BigDecimal(d).setScale(i, roundingMode).doubleValue();
     }
 }
