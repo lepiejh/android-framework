@@ -18,18 +18,28 @@ class TimerTaskHeartBeat private constructor(){
     }
 
     fun startTimer(period: Long = 5,callBack: () -> Unit) {
-        heartbeatTimer = Executors.newScheduledThreadPool(1)
-        timerTask = object : TimerTask() {
-            override fun run() {
-                KLog.i("Task executed!")
-                try {
-                    callBack.invoke()
-                } catch (e: Exception) {
-                    KLog.e(e.message)
+        try {
+            val isShutdown = heartbeatTimer?.isShutdown == false && heartbeatTimer?.isTerminated == false
+            if (!isShutdown){
+                heartbeatTimer = Executors.newScheduledThreadPool(5)
+            }
+            if (timerTask == null) {
+                timerTask = object : TimerTask() {
+                    override fun run() {
+                        KLog.i("Task executed!")
+                        try {
+                            callBack.invoke()
+                        } catch (e: Exception) {
+                            KLog.e(e.message)
+                        }
+                    }
                 }
             }
+            heartbeatTimer?.scheduleAtFixedRate(timerTask, 0, period, TimeUnit.SECONDS)
+        } catch (e: Exception) {
+            KLog.i("Task stop : ${e.message}")
+            stopTimer()
         }
-        heartbeatTimer?.scheduleAtFixedRate(timerTask, 0, period, TimeUnit.SECONDS)
     }
 
     fun stopTimer() {
