@@ -5,17 +5,9 @@ import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
-class TimerTaskHeartBeat private constructor(){
+class TimerTaskHeartBeat{
     private var timerTask: TimerTask? = null
     private var heartbeatTimer: ScheduledExecutorService? = null
-
-    companion object {
-        val INSTANCE: TimerTaskHeartBeat by lazy { Holder.INSTANCE }
-    }
-
-    private object Holder {
-        val INSTANCE = TimerTaskHeartBeat()
-    }
 
     fun startTimer(period: Long = 5,callBack: () -> Unit) {
         try {
