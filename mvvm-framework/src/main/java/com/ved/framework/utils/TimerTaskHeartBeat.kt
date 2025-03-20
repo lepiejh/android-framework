@@ -19,8 +19,7 @@ class TimerTaskHeartBeat private constructor(){
 
     fun startTimer(period: Long = 5,callBack: () -> Unit) {
         try {
-            val isShutdown = heartbeatTimer?.isShutdown == false && heartbeatTimer?.isTerminated == false
-            if (!isShutdown){
+            if (heartbeatTimer == null || !(heartbeatTimer?.isShutdown == false && heartbeatTimer?.isTerminated == false)){
                 heartbeatTimer = Executors.newScheduledThreadPool(5)
             }
             if (timerTask == null) {
