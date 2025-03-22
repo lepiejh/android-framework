@@ -26,6 +26,13 @@ object CorpseUtils {
     }
 
     /**
+     * 当 B 不为空时，将 B 的值赋给 A
+     */
+    inline fun <T> T.assignIfNotNull(source: T?, action: (T) -> Unit) {
+        source?.let { action(it) }
+    }
+
+    /**
      * 移除字符串中  最后一个字符
      */
     fun String.modifiedString() = takeUnless { isNullOrEmpty() }?.substring(0,length -1) ?: ""
