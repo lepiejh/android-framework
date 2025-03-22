@@ -26,7 +26,7 @@ object CorpseUtils {
     }
 
     /**
-     * 当 B 不为空时，将 B 的值赋给 A
+     * 当B不为空时，将B值赋给A
      */
     inline fun <T> T.assignIfNotNull(source: T?, action: (T) -> Unit) {
         source?.let { action(it) }
