@@ -29,7 +29,11 @@ object CorpseUtils {
      * 当B不为空时，将B值赋给A
      */
     inline fun <T> T.assignIfNotNull(source: T?, action: (T) -> Unit) {
-        source?.let { action(it) }
+        source?.let {
+            if (StringUtils.isNotEmpty(it)){
+                action(it)
+            }
+        }
     }
 
     /**
